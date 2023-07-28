@@ -20,4 +20,5 @@
         <item name="windowSplashScreenAnimationDuration">500</item>
         <item name="postSplashScreenTheme">@style/Theme.CookIt</item>
     </style>
+
 </resources>

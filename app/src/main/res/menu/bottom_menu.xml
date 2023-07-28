@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/btnHome"
+        android:title="Inicio"
+        android:icon="@drawable/ic_home" />
+    <item
+        android:id="@+id/btnSearch"
+        android:title="Buscar"
+        android:icon="@drawable/ic_search" />
+    <item
+        android:id="@+id/btnAccount"
+        android:title="Cuenta"
+        android:icon="@drawable/ic_account" />
+</menu>
