@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/btnHome"
-        android:title="Inicio"
+        android:title="@string/btnHome"
         android:icon="@drawable/ic_home" />
     <item
         android:id="@+id/btnSearch"
-        android:title="Buscar"
+        android:title="@string/btnSearch"
         android:icon="@drawable/ic_search" />
     <item
         android:id="@+id/btnAccount"
-        android:title="Cuenta"
+        android:title="@string/btnAccount"
         android:icon="@drawable/ic_account" />
 </menu>

@@ -1,14 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.LoginFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/topGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.06" />
 
-</FrameLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottomGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.94" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/leftGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.08" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/rightGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.92" />
+
+    <TextView
+        android:id="@+id/loginHeader"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/loginHeader"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@id/loginImage"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+        app:layout_constraintTop_toTopOf="@id/topGuideline" />
+
+    <ImageView
+        android:id="@+id/loginImage"
+        android:layout_width="250dp"
+        android:layout_height="200dp"
+        android:src="@drawable/ic_account"
+        app:layout_constraintBottom_toTopOf="@id/usrEt"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@id/loginHeader" />
+
+    <EditText
+        android:id="@+id/usrEt"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/usrEmail"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@id/passwordEt"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@id/loginImage" />
+
+    <EditText
+        android:id="@+id/passwordEt"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="15dp"
+        android:hint="@string/userPassword"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="@id/recoverPassword"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@id/usrEt" />
+
+    <TextView
+        android:id="@+id/recoverPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/recoverPassword"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@id/btnLogin"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@id/passwordEt" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnLogin"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@id/recoverPassword"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintBottom_toBottomOf="@id/divider" />
+    
+    <View
+        android:id="@+id/divider"
+        android:layout_width="300dp"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        android:layout_marginBottom="23dp"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@id/btnLogin"
+        app:layout_constraintBottom_toBottomOf="@id/btnSignUp"/>
+
+    <Button
+        android:id="@+id/btnSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnSignUp"
+        android:layout_marginBottom="25dp"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
