@@ -1,17 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_700"
     tools:context=".fragments.AccountFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Account"
-        android:textSize="36sp"
-        android:gravity="center"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/topGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.06" />
 
-</FrameLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottomGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.94" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/leftGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.08" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/rightGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.92" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/accountDiv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/profilePhoto"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/buttonDiv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/addBox"/>
+
+    <ImageView
+        android:id="@+id/profilePhoto"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/ic_account"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toTopOf="@id/topGuideline"/>
+
+    <TextView
+        android:id="@+id/profileUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="USUARIO"
+        app:layout_constraintStart_toEndOf="@id/profilePhoto"
+        app:layout_constraintTop_toTopOf="@id/topGuideline"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintBottom_toTopOf="@id/profileCrationDate"/>
+
+    <TextView
+        android:id="@+id/profileCrationDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SE UNIÓ EL: XX/XX/XXXX"
+        app:layout_constraintStart_toEndOf="@id/profilePhoto"
+        app:layout_constraintTop_toBottomOf="@id/profileUsername"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintBottom_toTopOf="@id/profileInterests"/>
+
+    <TextView
+        android:id="@+id/profileInterests"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Intereses..."
+        app:layout_constraintStart_toEndOf="@id/profilePhoto"
+        app:layout_constraintTop_toBottomOf="@id/profileCrationDate"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintBottom_toTopOf="@id/accountDiv"/>
+
+    <ImageButton
+        android:id="@+id/addBox"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        android:src="@drawable/ic_add_box"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toTopOf="@id/accountDiv"
+        app:layout_constraintEnd_toStartOf="@id/friends"/>
+
+    <ImageButton
+        android:id="@+id/friends"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        android:src="@drawable/ic_people"
+        app:layout_constraintStart_toEndOf="@id/addBox"
+        app:layout_constraintTop_toTopOf="@id/accountDiv"
+        app:layout_constraintEnd_toStartOf="@id/favourites"/>
+
+    <ImageButton
+        android:id="@+id/favourites"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        android:src="@drawable/ic_star"
+        app:layout_constraintStart_toEndOf="@id/friends"
+        app:layout_constraintTop_toTopOf="@id/accountDiv"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Recycler View de recetas"
+        android:gravity="center"
+        android:textSize="40dp"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintTop_toTopOf="@id/buttonDiv"
+        app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

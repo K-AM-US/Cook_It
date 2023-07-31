@@ -25,4 +25,7 @@
     <string name="signUp">Registrarse</string>
     <string name="googleSignUp">Iniciar sesión con Google</string>
 
+    <!-- Account Settings -->
+    <string name="phoneNumber">Teléfono</string>
+
 </resources>
