@@ -37,9 +37,14 @@
 
     <ImageButton
         android:id="@+id/searchFood"
-        android:layout_width="260dp"
-        android:layout_height="260dp"
+        android:layout_width="190dp"
+        android:layout_height="190dp"
         android:src="@drawable/ic_food"
+        android:scaleType="fitCenter"
+        android:padding="40dp"
+
+        android:background="@drawable/rounded_button_shape"
+        app:tint="@color/letter"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintTop_toTopOf="@id/topGuideline"
@@ -47,9 +52,13 @@
 
     <ImageButton
         android:id="@+id/searchFriends"
-        android:layout_width="260dp"
-        android:layout_height="260dp"
+        android:layout_width="190dp"
+        android:layout_height="190dp"
         android:src="@drawable/ic_people"
+        android:scaleType="fitCenter"
+        android:padding="40dp"
+        android:background="@drawable/rounded_button_shape"
+        app:tint="@color/letter"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintTop_toBottomOf="@id/searchFood"

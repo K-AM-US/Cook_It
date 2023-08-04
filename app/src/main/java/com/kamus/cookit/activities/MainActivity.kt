@@ -2,6 +2,8 @@ package com.kamus.cookit.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import android.window.OnBackInvokedDispatcher
 import androidx.fragment.app.Fragment
 import com.kamus.cookit.R
 import com.kamus.cookit.databinding.ActivityMainBinding
@@ -38,7 +40,10 @@ class MainActivity : AppCompatActivity() {
         replaceFragment(HomeFragment.newInstance())
     }
 
+
+    
     private fun replaceFragment(fragment: Fragment){
+        supportFragmentManager.popBackStack()
         supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).commit()
     }
 }

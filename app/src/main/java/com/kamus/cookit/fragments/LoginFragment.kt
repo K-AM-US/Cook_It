@@ -6,15 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.kamus.cookit.R
+import com.kamus.cookit.databinding.FragmentLoginBinding
 
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment(R.layout.fragment_login) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
+    private lateinit var binding: FragmentLoginBinding
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentLoginBinding.bind(view)
+
+        binding.btnSignUp.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, SignUpFragment.newInstance())
+                .addToBackStack("SignUpFragment")
+                .commit()
+        }
+
     }
 
     companion object {

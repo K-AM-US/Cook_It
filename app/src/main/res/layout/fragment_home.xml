@@ -51,9 +51,12 @@
 
     <ImageButton
         android:id="@+id/loginIcon"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="fitCenter"
+        android:background="@null"
         android:src="@drawable/ic_account"
+        app:tint="@color/blue_1"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintTop_toTopOf="@id/topGuideline" />
 
@@ -80,10 +83,14 @@
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"/>
 
     <ImageButton
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:id="@+id/btnAddRecipe"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:src="@drawable/ic_add_box"
         android:layout_marginBottom="10dp"
+        android:scaleType="fitCenter"
+        android:background="@null"
+        app:tint="@color/blue_1"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"/>
 

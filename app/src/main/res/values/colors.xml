@@ -7,4 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- App colors -->
+    <color name="blue_1">#73A5FE</color>
+    <color name="blue_2">#A9BEE1</color>
+    <color name="blue_3">#638FDB</color>
+    <color name="blue_4">#454D5C</color>
+    <color name="letter">#FFF0D4</color>
+
 </resources>

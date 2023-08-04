@@ -49,12 +49,25 @@
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/addBox"/>
 
+
     <ImageView
         android:id="@+id/profilePhoto"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:src="@drawable/ic_account"
+        app:tint="@color/blue_1"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toTopOf="@id/topGuideline"/>
+
+    <ImageButton
+        android:id="@+id/settinggIcon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:scaleType="fitCenter"
+        android:background="@null"
+        android:src="@drawable/ic_settings"
+        app:tint="@color/blue_1"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintTop_toTopOf="@id/topGuideline"/>
 
     <TextView
@@ -89,27 +102,36 @@
 
     <ImageButton
         android:id="@+id/addBox"
-        android:layout_width="100dp"
-        android:layout_height="70dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:src="@drawable/ic_add_box"
+        android:scaleType="fitCenter"
+        android:background="@null"
+        app:tint="@color/blue_1"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintTop_toTopOf="@id/accountDiv"
         app:layout_constraintEnd_toStartOf="@id/friends"/>
 
     <ImageButton
         android:id="@+id/friends"
-        android:layout_width="100dp"
-        android:layout_height="70dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:src="@drawable/ic_people"
+        android:scaleType="fitCenter"
+        android:background="@null"
+        app:tint="@color/blue_1"
         app:layout_constraintStart_toEndOf="@id/addBox"
         app:layout_constraintTop_toTopOf="@id/accountDiv"
         app:layout_constraintEnd_toStartOf="@id/favourites"/>
 
     <ImageButton
         android:id="@+id/favourites"
-        android:layout_width="100dp"
-        android:layout_height="70dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:src="@drawable/ic_star"
+        android:scaleType="fitCenter"
+        android:background="@null"
+        app:tint="@color/blue_1"
         app:layout_constraintStart_toEndOf="@id/friends"
         app:layout_constraintTop_toTopOf="@id/accountDiv"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"/>

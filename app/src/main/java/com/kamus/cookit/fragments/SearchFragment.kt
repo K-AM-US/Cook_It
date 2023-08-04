@@ -6,14 +6,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.kamus.cookit.R
+import com.kamus.cookit.databinding.FragmentSearchBinding
 
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(R.layout.fragment_search) {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false)
+    private lateinit var binding: FragmentSearchBinding
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentSearchBinding.bind(view)
+
+
+        binding.searchFood.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, SearchFoodFragment.newInstance())
+                .addToBackStack("SearchFoodFragment")
+                .commit()
+        }
+
+        binding.searchFriends.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, SearchPeopleFragment.newInstance())
+                .addToBackStack("SearchPeopleFragment")
+                .commit()
+        }
     }
+
+
 
     companion object {
         @JvmStatic fun newInstance() = SearchFragment()
