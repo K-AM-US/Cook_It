@@ -9,7 +9,7 @@
 
     <!-- Login fragment -->
     <string name="loginHeader">¿Listo para\nCocinar?</string>
-    <string name="usrEmail">Usuario/Contraseña</string>
+    <string name="usrEmail">Usuario</string>
     <string name="userPassword">Contraseña</string>
     <string name="btnLogin">Iniciar Sesión</string>
     <string name="btnSignUp">¿Eres nuevo?\nRegístrate</string>
