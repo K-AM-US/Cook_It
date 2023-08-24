@@ -59,6 +59,7 @@
         android:padding="40dp"
         android:background="@drawable/rounded_button_shape"
         app:tint="@color/letter"
+        android:layout_marginBottom="20dp"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintTop_toBottomOf="@id/searchFood"

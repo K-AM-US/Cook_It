@@ -1,148 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.SignUpFragment">
+    android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/topGuideline"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.06"/>
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".fragments.SignUpFragment">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/bottomGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.94" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/topGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.06"/>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/leftGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.08" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bottomGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.94" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/rightGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.92" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/leftGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.08" />
 
-    <ImageView
-        android:id="@+id/signUpLogo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/ic_account"
-        android:layout_marginBottom="5dp"
-        app:layout_constraintVertical_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-        app:layout_constraintTop_toTopOf="@id/topGuideline"
-        app:layout_constraintBottom_toTopOf="@id/signUpMsg" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/rightGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.92" />
 
-    <TextView
-        android:id="@+id/signUpMsg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/msg"
-        android:textAlignment="center"
-        app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-        app:layout_constraintTop_toBottomOf="@id/signUpLogo"
-        app:layout_constraintBottom_toTopOf="@id/name"/>
+        <ImageView
+            android:id="@+id/signUpLogo"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/ic_account"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintVertical_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintTop_toTopOf="@id/topGuideline"
+            app:layout_constraintBottom_toTopOf="@id/signUpMsg" />
 
-    <EditText
-        android:id="@+id/name"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:hint="@string/name"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-        app:layout_constraintTop_toBottomOf="@id/signUpMsg"
-        app:layout_constraintBottom_toTopOf="@id/lastname"/>
+        <TextView
+            android:id="@+id/signUpMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/msg"
+            android:textAlignment="center"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintTop_toBottomOf="@id/signUpLogo"
+            app:layout_constraintBottom_toTopOf="@id/name"/>
 
-    <EditText
-        android:id="@+id/lastname"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:hint="@string/lastname"
-        app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-        app:layout_constraintTop_toBottomOf="@id/name"
-        app:layout_constraintBottom_toTopOf="@id/userName"/>
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="@string/name"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintTop_toBottomOf="@id/signUpMsg"
+            app:layout_constraintBottom_toTopOf="@id/lastname"/>
 
-    <EditText
-        android:id="@+id/userName"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/userName"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-        app:layout_constraintTop_toBottomOf="@id/lastname"
-        app:layout_constraintBottom_toTopOf="@id/email"/>
+        <EditText
+            android:id="@+id/lastname"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="@string/lastname"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintTop_toBottomOf="@id/name"
+            app:layout_constraintBottom_toTopOf="@id/userName"/>
 
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-        app:layout_constraintTop_toBottomOf="@id/userName"
-        app:layout_constraintBottom_toTopOf="@id/password"/>
+        <EditText
+            android:id="@+id/userName"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/userName"
+            android:inputType="text"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintTop_toBottomOf="@id/lastname"
+            app:layout_constraintBottom_toTopOf="@id/email"/>
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/userPassword"
-        android:layout_marginVertical="10dp"
-        android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-        app:layout_constraintTop_toBottomOf="@id/email"
-        app:layout_constraintBottom_toTopOf="@id/confirmPassword"/>
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintTop_toBottomOf="@id/userName"
+            app:layout_constraintBottom_toTopOf="@id/password"/>
 
-    <EditText
-        android:id="@+id/confirmPassword"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/confirmPassword"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@id/btnSend"
-        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-        app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@id/password" />
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/userPassword"
+            android:layout_marginVertical="10dp"
+            android:inputType="textPassword"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintTop_toBottomOf="@id/email"
+            app:layout_constraintBottom_toTopOf="@id/confirmPassword"/>
 
-    <Button
-        android:id="@+id/btnSend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/signUp"
-        app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-        app:layout_constraintTop_toBottomOf="@id/confirmPassword"
-        app:layout_constraintBottom_toTopOf="@id/googleSignUp"/>
+        <EditText
+            android:id="@+id/confirmPassword"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/confirmPassword"
+            android:inputType="textPassword"
+            app:layout_constraintBottom_toTopOf="@id/btnSend"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintTop_toBottomOf="@id/password" />
 
-    <Button
-        android:id="@+id/googleSignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/googleSignUp"
-        app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-        app:layout_constraintTop_toBottomOf="@id/btnSend"
-        app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"/>
+        <Button
+            android:id="@+id/btnSend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/signUp"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintTop_toBottomOf="@id/confirmPassword"
+            app:layout_constraintBottom_toTopOf="@id/googleSignUp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/googleSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/googleSignUp"
+            android:layout_marginBottom="25dp"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintTop_toBottomOf="@id/btnSend"
+            app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

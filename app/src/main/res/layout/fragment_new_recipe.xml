@@ -1,109 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<ScrollView
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.NewRecipeFragment">
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/topGuideline"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.06" />
+        tools:context=".fragments.NewRecipeFragment">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/bottomGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.94" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/topGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.06" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/leftGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.08" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bottomGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.94" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/rightGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.92" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/leftGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.08" />
 
-    <TextView
-        android:id="@+id/recipeTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TITULO DE LE RECETA"
-        android:layout_marginTop="15dp"
-        android:textSize="24dp"
-        app:layout_constraintTop_toTopOf="@id/topGuideline"
-        app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-        app:layout_constraintBottom_toTopOf="@id/recipeImage"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/rightGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.92" />
 
-    <ImageView
-        android:id="@+id/recipeImage"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:src="@mipmap/ic_cookit_logo"
-        app:layout_constraintTop_toBottomOf="@id/recipeTitle"
-        app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-        app:layout_constraintBottom_toTopOf="@id/ingredients"/>
+        <TextView
+            android:id="@+id/recipeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TITULO DE LE RECETA"
+            android:layout_marginTop="15dp"
+            android:textSize="24dp"
+            app:layout_constraintTop_toTopOf="@id/topGuideline"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintBottom_toTopOf="@id/recipeImage"/>
 
-    <TextView
-        android:id="@+id/ingredients"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="INGREDIENTES"
-        app:layout_constraintTop_toBottomOf="@id/recipeImage"
-        app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintBottom_toTopOf="@id/ingredientsList"/>
+        <ImageView
+            android:id="@+id/recipeImage"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:src="@mipmap/ic_cookit_logo"
+            app:layout_constraintTop_toBottomOf="@id/recipeTitle"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintBottom_toTopOf="@id/ingredients"/>
 
-    <TextView
-        android:id="@+id/ingredientsList"
-        android:layout_width="0dp"
-        android:layout_height="120dp"
-        android:text="Aqui van los ingredientes"
-        android:gravity="center"
-        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@id/ingredients"
-        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-        app:layout_constraintBottom_toTopOf="@id/process"/>
+        <TextView
+            android:id="@+id/ingredients"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="INGREDIENTES"
+            app:layout_constraintTop_toBottomOf="@id/recipeImage"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintBottom_toTopOf="@id/ingredientsList"/>
 
-    <TextView
-        android:id="@+id/process"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="PROCESS"
-        app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@id/ingredientsList"
-        app:layout_constraintBottom_toTopOf="@id/processList" />
+        <TextView
+            android:id="@+id/ingredientsList"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:text="Aqui van los ingredientes"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+            app:layout_constraintTop_toBottomOf="@id/ingredients"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintBottom_toTopOf="@id/process"/>
 
-    <TextView
-        android:id="@+id/processList"
-        android:layout_width="0dp"
-        android:layout_height="120dp"
-        android:text="Aqui va la preparación"
-        android:gravity="center"
-        app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-        app:layout_constraintTop_toBottomOf="@id/process"
-        app:layout_constraintBottom_toTopOf="@id/btnCreate"/>
+        <TextView
+            android:id="@+id/process"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PROCESS"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintTop_toBottomOf="@id/ingredientsList"
+            app:layout_constraintBottom_toTopOf="@id/processList" />
 
-    <Button
-        android:id="@+id/btnCreate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Crear Receta"
-        app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-        app:layout_constraintTop_toBottomOf="@id/processList"
-        app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/processList"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:text="Aqui va la preparación"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintTop_toBottomOf="@id/process"
+            app:layout_constraintBottom_toTopOf="@id/btnCreate"/>
+
+        <Button
+            android:id="@+id/btnCreate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Crear Receta"
+            android:layout_marginBottom="25dp"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintTop_toBottomOf="@id/processList"
+            app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
