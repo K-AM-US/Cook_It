@@ -1,98 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.HomeFragment">
+    android:layout_height="match_parent">
+    
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragments.HomeFragment">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/topGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.06" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/topGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.06" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/bottomGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.94" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bottomGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.94" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/leftGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.08" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/leftGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.08" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/rightGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.92" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/rightGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.92" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/loginIconDiv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/loginIcon"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/loginIconDiv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/loginIcon"/>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/galleryDiv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.45"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/galleryDiv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.45"/>
 
-    <ImageButton
-        android:id="@+id/loginIcon"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:scaleType="fitCenter"
-        android:background="@null"
-        android:src="@drawable/ic_account"
-        app:tint="@color/blue_1"
-        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-        app:layout_constraintTop_toTopOf="@id/topGuideline" />
+        <ImageButton
+            android:id="@+id/loginIcon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="fitCenter"
+            android:background="@null"
+            android:src="@drawable/ic_account"
+            app:tint="@color/blue_1"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintTop_toTopOf="@id/topGuideline" />
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="Gallery"
-        android:gravity="center"
-        android:textSize="40sp"
-        app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintTop_toTopOf="@id/loginIconDiv"
-        app:layout_constraintBottom_toBottomOf="@id/galleryDiv"
-        app:layout_constraintEnd_toEndOf="@id/rightGuideline"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="Gallery"
+            android:gravity="center"
+            android:textSize="40sp"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintTop_toTopOf="@id/loginIconDiv"
+            app:layout_constraintBottom_toBottomOf="@id/galleryDiv"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"/>
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="Recycler View Recetas"
-        android:gravity="center"
-        android:textSize="40sp"
-        app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintTop_toTopOf="@id/galleryDiv"
-        app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"
-        app:layout_constraintEnd_toEndOf="@id/rightGuideline"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="Recycler View Recetas"
+            android:gravity="center"
+            android:textSize="40sp"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintTop_toTopOf="@id/galleryDiv"
+            app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"/>
 
-    <ImageButton
+        <!--<ImageButton
+            android:id="@+id/btnAddRecipe"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_add_box"
+            android:layout_marginBottom="10dp"
+            android:scaleType="fitCenter"
+            android:background="@null"
+            android:paddingBottom="15dp"
+            app:tint="@color/blue_1"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"/>
+        -->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAddRecipe"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/ic_add_box"
-        android:layout_marginBottom="10dp"
-        android:scaleType="fitCenter"
-        android:background="@null"
-        android:paddingBottom="15dp"
-        app:tint="@color/blue_1"
-        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-        app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="60dp"
+        android:layout_marginEnd="35dp"
+        android:backgroundTint="@color/blue_1"
+        app:srcCompat="@drawable/ic_add"
+        app:tint="@android:color/white"
+        app:maxImageSize="60dp"
+        app:shapeAppearanceOverlay="@style/fab_square"/>
+    
+</androidx.coordinatorlayout.widget.CoordinatorLayout>   

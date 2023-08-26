@@ -10,6 +10,7 @@ import com.kamus.cookit.databinding.ActivityMainBinding
 import com.kamus.cookit.fragments.AccountFragment
 import com.kamus.cookit.fragments.HomeFragment
 import com.kamus.cookit.fragments.SearchFragment
+import java.util.Objects
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,6 +20,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        Objects.requireNonNull(supportActionBar)?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setIcon(R.mipmap.ic_cookit)
 
         binding.bottomMenu.setOnItemSelectedListener { item ->
             when(item.itemId){
