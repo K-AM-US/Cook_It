@@ -13,11 +13,11 @@
         android:theme="@style/Theme.CookIt"
         tools:targetApi="31">
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:exported="false"
             android:theme="@style/Theme.CookIt"/>
         <activity
-            android:name=".activities.SplashScreen"
+            android:name=".ui.activities.SplashScreen"
             android:exported="true"
             android:theme="@style/Theme.App.Starting">
             <intent-filter>

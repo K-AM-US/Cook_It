@@ -11,7 +11,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".fragments.NewRecipeFragment">
+        tools:context=".ui.fragments.NewRecipeFragment">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/topGuideline"

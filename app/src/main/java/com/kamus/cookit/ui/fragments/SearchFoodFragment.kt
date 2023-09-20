@@ -1,4 +1,4 @@
-package com.kamus.cookit.fragments
+package com.kamus.cookit.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,20 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import com.kamus.cookit.R
 
-class AccountSettingsFragment : Fragment() {
-
+class SearchFoodFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_account_settings, container, false)
+        return inflater.inflate(R.layout.fragment_search_food, container, false)
     }
 
     companion object {
-
         @JvmStatic
-        fun newInstance() = AccountSettingsFragment()
+        fun newInstance() = SearchFoodFragment()
     }
 }

@@ -1,4 +1,4 @@
-package com.kamus.cookit.activities
+package com.kamus.cookit.ui.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

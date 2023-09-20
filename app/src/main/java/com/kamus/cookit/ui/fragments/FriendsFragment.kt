@@ -1,4 +1,4 @@
-package com.kamus.cookit.fragments
+package com.kamus.cookit.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.kamus.cookit.R
 
-
-class FavouritesFragments : Fragment() {
+class FriendsFragment : Fragment() {
 
 
     override fun onCreateView(
@@ -16,12 +15,12 @@ class FavouritesFragments : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favourites_fragments, container, false)
+        return inflater.inflate(R.layout.fragment_friends, container, false)
     }
 
     companion object {
 
         @JvmStatic
-        fun newInstance() = FavouritesFragments()
+        fun newInstance() = FriendsFragment()
     }
 }

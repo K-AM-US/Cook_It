@@ -1,4 +1,4 @@
-package com.kamus.cookit.activities
+package com.kamus.cookit.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,9 +7,9 @@ import android.window.OnBackInvokedDispatcher
 import androidx.fragment.app.Fragment
 import com.kamus.cookit.R
 import com.kamus.cookit.databinding.ActivityMainBinding
-import com.kamus.cookit.fragments.AccountFragment
-import com.kamus.cookit.fragments.HomeFragment
-import com.kamus.cookit.fragments.SearchFragment
+import com.kamus.cookit.ui.fragments.AccountFragment
+import com.kamus.cookit.ui.fragments.HomeFragment
+import com.kamus.cookit.ui.fragments.SearchFragment
 import java.util.Objects
 
 class MainActivity : AppCompatActivity() {
