@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name=".application.CookItApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -15,7 +16,7 @@
         <activity
             android:name=".ui.activities.MainActivity"
             android:exported="false"
-            android:theme="@style/Theme.CookIt"/>
+            android:theme="@style/Theme.CookIt" />
         <activity
             android:name=".ui.activities.SplashScreen"
             android:exported="true"

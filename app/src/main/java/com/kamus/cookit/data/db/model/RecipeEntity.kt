@@ -9,14 +9,14 @@ import com.kamus.cookit.utils.Constants
 data class RecipeEntity(
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "recipe_id")
-    val id: Long,
+    var id: Long,
 
     @ColumnInfo(name = "recipe_title")
-    val title: String,
+    var title: String,
 
     @ColumnInfo(name = "recipe_ingredients")
-    val ingredients: String,
+    var ingredients: String,
 
     @ColumnInfo(name = "recipe_process")
-    val process: String
+    var process: String
 )

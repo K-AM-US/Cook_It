@@ -137,15 +137,26 @@
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"/>
 
     <TextView
+        android:id="@+id/noRecipesMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SIN REGISTROS, CREA UNA RECETA"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="@id/buttonDiv"
+        app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRecipes"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="Recycler View de recetas"
-        android:gravity="center"
-        android:textSize="40dp"
-        app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintTop_toTopOf="@id/buttonDiv"
-        app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"/>
-
+        android:layout_marginTop="15dp"
+        android:background="@color/blue_4"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
