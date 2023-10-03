@@ -77,16 +77,15 @@
             app:layout_constraintBottom_toBottomOf="@id/galleryDiv"
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"/>
 
-        <TextView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvHomeRecipes"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:text="Recycler View Recetas"
-            android:gravity="center"
-            android:textSize="40sp"
-            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            android:layout_marginBottom="15dp"
             app:layout_constraintTop_toTopOf="@id/galleryDiv"
-            app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"
-            app:layout_constraintEnd_toEndOf="@id/rightGuideline"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     

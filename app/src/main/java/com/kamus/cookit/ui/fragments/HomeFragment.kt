@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.kamus.cookit.R
 import com.kamus.cookit.application.CookItApp
 import com.kamus.cookit.data.AppRepository
@@ -16,6 +17,7 @@ import com.kamus.cookit.data.remote.RetrofitHelper
 import com.kamus.cookit.data.remote.model.CategoriesDto
 import com.kamus.cookit.data.remote.model.RecipeDto
 import com.kamus.cookit.databinding.FragmentHomeBinding
+import com.kamus.cookit.ui.adapters.HomeRecipesVerticalAdapter
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -28,12 +30,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val binding get() = _binding!!
     private lateinit var repository: AppRepository
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _binding = FragmentHomeBinding.inflate(requireActivity().layoutInflater)
-        repository = (requireActivity().application as CookItApp).repository
 
+        repository = (requireActivity().application as CookItApp).repository
 
         binding.loginIcon.setOnClickListener {
             parentFragmentManager.beginTransaction()
@@ -49,6 +58,28 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 .commit()
         }
 
+        lifecycleScope.launch {
+            val call: Call<List<RecipeDto>> = repository.getHomeRecipes()
+            call.enqueue(object: Callback<List<RecipeDto>>{
+                override fun onResponse(
+                    call: Call<List<RecipeDto>>,
+                    response: Response<List<RecipeDto>>
+                ) {
+                    Log.d("LOGS", "recipes: ${response.body()}")
+                    response.body()?.let { recipes ->
+                        binding.rvHomeRecipes.apply {
+                            layoutManager = LinearLayoutManager(requireContext())
+                            adapter = HomeRecipesVerticalAdapter(recipes)
+                            Log.d("LOGS", "Adapter: $adapter.")
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<List<RecipeDto>>, t: Throwable) {
+                    Log.d("LOGS", "ERROOOOOOOOR")
+                }
+            })
+        }
     }
 
     override fun onDestroy() {

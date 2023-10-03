@@ -21,19 +21,17 @@ class HomeRecipesVerticalAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ElementRecipeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+        ViewHolder(ElementRecipeBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+
 
     override fun getItemCount(): Int = recipes.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val recipe = recipes[position]
-        holder.bind(recipe)
+        holder.bind(recipes[position])
 
         Glide.with(holder.itemView.context)
-            .load(recipe.img)
+            .load(recipes[position].img)
             .into(holder.recipeImage)
     }
 }
