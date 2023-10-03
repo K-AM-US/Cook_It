@@ -88,20 +88,6 @@
             app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"/>
 
-        <!--<ImageButton
-            android:id="@+id/btnAddRecipe"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/ic_add_box"
-            android:layout_marginBottom="10dp"
-            android:scaleType="fitCenter"
-            android:background="@null"
-            android:paddingBottom="15dp"
-            app:tint="@color/blue_1"
-            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-            app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"/>
-        -->
-
     </androidx.constraintlayout.widget.ConstraintLayout>
     
     <com.google.android.material.floatingactionbutton.FloatingActionButton

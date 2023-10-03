@@ -47,6 +47,9 @@ dependencies {
     val roomVersion: String = "2.6.0-beta01"
     val splashScreenVersion: String = "1.0.1"
     val lifecycleVersion: String = "2.6.2"
+    val retrofitVersion: String = "2.9.0"
+    val glideVersion: String = "4.15.1"
+    val roundedImagesVersion: String = "2.3.0"
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -62,6 +65,16 @@ dependencies {
 
     // Lifecycle
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
+
+    // Retrofit, Gson
+    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+
+    // Glide
+    implementation("com.github.bumptech.glide:glide:$glideVersion")
+
+    // Rounded images
+    implementation("com.makeramen:roundedimageview:$roundedImagesVersion")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
