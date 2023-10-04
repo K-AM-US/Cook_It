@@ -50,6 +50,7 @@ dependencies {
     val retrofitVersion: String = "2.9.0"
     val glideVersion: String = "4.15.1"
     val roundedImagesVersion: String = "2.3.0"
+    val carouselRecyclerViewVersion: String = "1.2.6"
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -75,6 +76,9 @@ dependencies {
 
     // Rounded images
     implementation("com.makeramen:roundedimageview:$roundedImagesVersion")
+
+    // Carousel recyclerview
+    implementation("com.github.sparrow007:carouselrecyclerview:$carouselRecyclerViewVersion")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

@@ -65,6 +65,31 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     call: Call<List<RecipeDto>>,
                     response: Response<List<RecipeDto>>
                 ) {
+                    response.body()?.reversed().let { recipes ->
+                        binding.rvCarousel.apply {
+                            adapter = recipes?.let {
+                                HomeRecipesVerticalAdapter(it)
+                            }
+                            set3DItem(true)
+                            setAlpha(true)
+                            setInfinite(true)
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<List<RecipeDto>>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+            })
+        }
+
+        lifecycleScope.launch {
+            val call: Call<List<RecipeDto>> = repository.getHomeRecipes()
+            call.enqueue(object: Callback<List<RecipeDto>>{
+                override fun onResponse(
+                    call: Call<List<RecipeDto>>,
+                    response: Response<List<RecipeDto>>
+                ) {
                     Log.d("LOGS", "recipes: ${response.body()}")
                     response.body()?.let { recipes ->
                         binding.rvHomeRecipes.apply {
