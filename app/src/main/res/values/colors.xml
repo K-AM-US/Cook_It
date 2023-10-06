@@ -14,5 +14,7 @@
     <color name="blue_3">#638FDB</color>
     <color name="blue_4">#454D5C</color>
     <color name="letter">#FFF0D4</color>
+    <color name="addIngredient">#4CAF50</color>
+    <color name="removeIngredient">#FF0000</color>
 
 </resources>

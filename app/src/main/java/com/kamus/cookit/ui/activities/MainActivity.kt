@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import android.window.OnBackInvokedDispatcher
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.kamus.cookit.R
 import com.kamus.cookit.databinding.ActivityMainBinding
 import com.kamus.cookit.ui.fragments.AccountFragment
@@ -14,7 +15,7 @@ import java.util.Objects
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +49,9 @@ class MainActivity : AppCompatActivity() {
     
     private fun replaceFragment(fragment: Fragment){
         supportFragmentManager.popBackStack()
-        supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 }

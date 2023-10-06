@@ -1,11 +1,17 @@
 package com.kamus.cookit.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.core.view.children
+import androidx.core.view.forEach
+import androidx.core.view.get
 import androidx.lifecycle.lifecycleScope
 import com.kamus.cookit.R
 import com.kamus.cookit.application.CookItApp
@@ -24,8 +30,8 @@ class NewRecipeFragment(
     private var recipe: RecipeEntity = RecipeEntity(
         id = 0,
         title = "lala",
-        ingredients = "",
-        process = ""
+        ingredients = ArrayList<String>(),
+        process = ArrayList<String>()
     )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,8 +41,16 @@ class NewRecipeFragment(
         binding.btnCreate.setOnClickListener {
             recipe.id = (1..100).random().toLong()
             recipe.title = binding.recipeTitle.text.toString()
-            recipe.ingredients = binding.ingredientsList.text.toString()
-            recipe.process = binding.processList.text.toString()
+
+            for(item in 0 until binding.linearLayoutIngredients.childCount){
+                val tmpEditText = binding.linearLayoutIngredients.getChildAt(item) as EditText
+                recipe.ingredients.add(tmpEditText.text.toString())
+            }
+
+            for(item in 0 until binding.linearLayoutProcess.childCount){
+                val tmpEditText = binding.linearLayoutProcess.getChildAt(item) as EditText
+                recipe.process.add(tmpEditText.text.toString())
+            }
 
             try {
                 lifecycleScope.launch {
@@ -49,6 +63,30 @@ class NewRecipeFragment(
             } catch (e: IOException) {
                 e.printStackTrace()
                 Toast.makeText(requireActivity(), "Receta error", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        binding.apply {
+            addIngredient.setOnClickListener{
+                val newEditText = EditText(requireActivity())
+                newEditText.hint = "Ingrediente"
+                linearLayoutIngredients.addView(newEditText)
+            }
+
+            removeIngredients.setOnClickListener {
+                if(linearLayoutIngredients.childCount > 0)
+                    linearLayoutIngredients.removeViewAt(linearLayoutIngredients.childCount - 1)
+            }
+
+            addProcess.setOnClickListener{
+                val newEditText = EditText(requireActivity())
+                newEditText.hint = "Ingrediente"
+                linearLayoutProcess.addView(newEditText)
+            }
+
+            removeProcess.setOnClickListener {
+                if(linearLayoutProcess.childCount > 0)
+                    linearLayoutProcess.removeViewAt(linearLayoutProcess.childCount - 1)
             }
         }
     }

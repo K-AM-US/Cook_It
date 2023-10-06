@@ -71,38 +71,93 @@
             android:text="INGREDIENTES"
             app:layout_constraintTop_toBottomOf="@id/recipeImage"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
-            app:layout_constraintBottom_toTopOf="@id/ingredientsList"/>
+            app:layout_constraintBottom_toTopOf="@id/linearLayoutIngredients"/>
 
-        <EditText
-            android:id="@+id/ingredientsList"
+
+        <LinearLayout
+            android:id="@+id/linearLayoutIngredients"
             android:layout_width="0dp"
-            android:layout_height="120dp"
-            android:hint="Ingredientes"
-            android:gravity="center"
-            app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/ingredients"
-            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintBottom_toTopOf="@id/addIngredient"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline">
+
+        </LinearLayout>
+
+        <!-- Botón para agregar -->
+        <Button
+            android:id="@+id/addIngredient"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:layout_marginLeft="10dp"
+            android:backgroundTint="@color/addIngredient"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutIngredients"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
             app:layout_constraintBottom_toTopOf="@id/process"/>
+
+        <!-- Botón para quitar. Solo aparece cuando hay más de un ingrediente -->
+
+        <Button
+            android:id="@+id/removeIngredients"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:layout_marginLeft="30dp"
+            android:backgroundTint="@color/removeIngredient"
+            app:layout_constraintStart_toEndOf="@id/addIngredient"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutIngredients"/>
+            <!--app:layout_constraintTop_toBottomOf="@id/ingredientsList"-->
 
         <TextView
             android:id="@+id/process"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="PROCESS"
+            android:layout_marginTop="30dp"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
-            app:layout_constraintTop_toBottomOf="@id/ingredientsList"
-            app:layout_constraintBottom_toTopOf="@id/processList" />
+            app:layout_constraintTop_toBottomOf="@id/addIngredient"
+            app:layout_constraintBottom_toTopOf="@id/linearLayoutProcess" />
 
-        <EditText
-            android:id="@+id/processList"
+
+        <LinearLayout
+            android:id="@+id/linearLayoutProcess"
             android:layout_width="0dp"
-            android:layout_height="120dp"
-            android:hint="Proceso"
-            android:gravity="center"
-            app:layout_constraintStart_toStartOf="@id/leftGuideline"
-            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/process"
+            app:layout_constraintBottom_toTopOf="@id/addProcess"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline">
+
+        </LinearLayout>
+
+        <!-- Botón para agregar -->
+        <Button
+            android:id="@+id/addProcess"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/addIngredient"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutProcess"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
             app:layout_constraintBottom_toTopOf="@id/btnCreate"/>
+
+        <!-- Botón para quitar. Solo aparece cuando hay más de un ingrediente -->
+
+        <Button
+            android:id="@+id/removeProcess"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:layout_marginLeft="30dp"
+            android:backgroundTint="@color/removeIngredient"
+            app:layout_constraintStart_toEndOf="@id/addProcess"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutProcess"/>
 
         <Button
             android:id="@+id/btnCreate"
@@ -112,7 +167,7 @@
             android:layout_marginBottom="25dp"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-            app:layout_constraintTop_toBottomOf="@id/processList"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutProcess"
             app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@ import com.kamus.cookit.data.db.model.RecipeEntity
 import com.kamus.cookit.data.remote.model.CategoriesDto
 import com.kamus.cookit.data.remote.RecipeApi
 import com.kamus.cookit.data.remote.model.RecipeDto
+import com.kamus.cookit.data.remote.model.UserDto
 import retrofit2.Call
 import retrofit2.Retrofit
 
@@ -34,4 +35,7 @@ class AppRepository(private val recipeDao: RecipeDao, private val retrofit: Retr
 
     fun getHomeRecipes(): Call<List<RecipeDto>> =
         recipeApi.getHomeRecipes()
+
+    fun getUsers(): Call<List<UserDto>> =
+        recipeApi.getUsers()
 }
