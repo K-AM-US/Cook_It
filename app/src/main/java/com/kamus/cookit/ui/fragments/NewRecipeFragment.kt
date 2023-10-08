@@ -44,25 +44,32 @@ class NewRecipeFragment(
 
             for(item in 0 until binding.linearLayoutIngredients.childCount){
                 val tmpEditText = binding.linearLayoutIngredients.getChildAt(item) as EditText
-                recipe.ingredients.add(tmpEditText.text.toString())
+                if(tmpEditText.text.toString() != "")
+                    recipe.ingredients.add(tmpEditText.text.toString())
             }
 
             for(item in 0 until binding.linearLayoutProcess.childCount){
                 val tmpEditText = binding.linearLayoutProcess.getChildAt(item) as EditText
-                recipe.process.add(tmpEditText.text.toString())
+                if(tmpEditText.text.toString() != "")
+                    recipe.process.add(tmpEditText.text.toString())
             }
 
-            try {
-                lifecycleScope.launch {
-                    repository.insertRecipe(recipe)
+            /* TODO: falta validar que no hayan cadenas vacías y que no estén vacios los arreglos */
+            if(recipe.title.isNotEmpty()) {
+                try {
+                    lifecycleScope.launch {
+                        repository.insertRecipe(recipe)
+                    }
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainer, AccountFragment.newInstance())
+                        .commit()
+                    updateUI()
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                    Toast.makeText(requireActivity(), "Receta error", Toast.LENGTH_SHORT).show()
                 }
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainer, AccountFragment.newInstance())
-                    .commit()
-                updateUI()
-            } catch (e: IOException) {
-                e.printStackTrace()
-                Toast.makeText(requireActivity(), "Receta error", Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(requireActivity(), "Faltan datos en la receta", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -80,7 +87,7 @@ class NewRecipeFragment(
 
             addProcess.setOnClickListener{
                 val newEditText = EditText(requireActivity())
-                newEditText.hint = "Ingrediente"
+                newEditText.hint = "Proceso"
                 linearLayoutProcess.addView(newEditText)
             }
 

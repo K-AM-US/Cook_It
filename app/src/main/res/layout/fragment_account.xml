@@ -59,7 +59,7 @@
         app:tint="@color/blue_1" />
 
     <ImageButton
-        android:id="@+id/settinggIcon"
+        android:id="@+id/settingIcon"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:background="@null"

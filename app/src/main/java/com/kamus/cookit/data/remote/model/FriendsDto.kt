@@ -2,11 +2,11 @@ package com.kamus.cookit.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 
-data class UserDto(
+data class FriendsDto(
     @SerializedName("id")
-    val id: String,
+    var id: String,
     @SerializedName("username")
-    var userName: String,
+    var username: String,
     @SerializedName("first_name")
     var firstName: String,
     @SerializedName("last_name")

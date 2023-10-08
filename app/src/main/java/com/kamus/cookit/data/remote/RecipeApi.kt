@@ -1,6 +1,7 @@
 package com.kamus.cookit.data.remote
 
 import com.kamus.cookit.data.remote.model.CategoriesDto
+import com.kamus.cookit.data.remote.model.FriendsDto
 import com.kamus.cookit.data.remote.model.RecipeDto
 import com.kamus.cookit.data.remote.model.UserDto
 import retrofit2.Call
@@ -16,6 +17,6 @@ interface RecipeApi {
     @GET("/users")
     fun getUsers(): Call<List<UserDto>>
 
-    /*@GET("/friends")
-    fun getFriends(): Call<List>*/
+    @GET("/friends")
+    fun getFriends(): Call<List<FriendsDto>>
 }

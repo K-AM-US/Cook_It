@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kamus.cookit.data.db.model.RecipeEntity
 import com.kamus.cookit.databinding.ElementRecipeBinding
 
-class ProfileRecipesAdapter(private val onClickedRecipe: (RecipeEntity) -> Unit): RecyclerView.Adapter<ProfileRecipesAdapter.ViewHolder>() {
+class ProfileRecipesAdapter(
+    private val onClickedRecipe: (RecipeEntity) -> Unit
+): RecyclerView.Adapter<ProfileRecipesAdapter.ViewHolder>() {
 
     private var recipes: List<RecipeEntity> = emptyList()
 

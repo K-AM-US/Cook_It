@@ -54,14 +54,14 @@
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintTop_toTopOf="@id/topGuideline" />
 
-    <TextView
-        android:text="RECYCLER VIEW"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvUsers"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:textSize="40sp"
-        android:gravity="center"
-        app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        android:layout_marginTop="10dp"
         app:layout_constraintTop_toTopOf="@id/searchDiv"
-        app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"/>
+        app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
