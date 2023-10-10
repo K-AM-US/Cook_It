@@ -47,7 +47,7 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
             onClickedRecipe(recipe)
         }
 
-        binding.settinggIcon.setOnClickListener {
+        binding.settingIcon.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, AccountSettingsFragment.newInstance())
                 .addToBackStack("AccountSettingsFragment")

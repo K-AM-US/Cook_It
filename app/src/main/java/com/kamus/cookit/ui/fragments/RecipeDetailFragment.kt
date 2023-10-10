@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.kamus.cookit.R
 import com.kamus.cookit.databinding.FragmentRecipeDetailBinding
 
@@ -24,16 +25,17 @@ class RecipeDetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentRecipeDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    /* TODO: hacer query para consultas por id */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        Toast.makeText(requireActivity(), "id de la receta: ", Toast.LENGTH_SHORT).show()
         arguments?.apply {
-            binding.text.text = this.getString(RECIPE_ID, " no hay ")
+
         }
     }
 

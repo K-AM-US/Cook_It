@@ -55,7 +55,7 @@ class SearchPeopleFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<List<UserDto>>, t: Throwable) {
-                    Log.d("LOGS", "error")
+                    Log.d("LOGS", "error en los usuarios")
                 }
             })
         }

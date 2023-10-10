@@ -27,7 +27,7 @@
 
     <!-- Account Settings -->
     <string name="phoneNumber">Teléfono</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- Search User -->
+    <string name="fullName">%1s %2s</string>
 </resources>
