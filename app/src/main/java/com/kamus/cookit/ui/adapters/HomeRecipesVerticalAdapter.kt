@@ -8,7 +8,7 @@ import com.kamus.cookit.data.remote.model.RecipeDto
 import com.kamus.cookit.databinding.ElementRecipeBinding
 
 class HomeRecipesVerticalAdapter(
-    private val recipes: List<RecipeDto>
+    private var recipes: List<RecipeDto>
 ): RecyclerView.Adapter<HomeRecipesVerticalAdapter.ViewHolder>(
 ) {
     class ViewHolder(private val binding: ElementRecipeBinding): RecyclerView.ViewHolder(binding.root) {
@@ -33,5 +33,10 @@ class HomeRecipesVerticalAdapter(
         Glide.with(holder.itemView.context)
             .load(recipes[position].img)
             .into(holder.recipeImage)
+    }
+
+    fun filteredRecipes(recipes: List<RecipeDto>) {
+        this.recipes = recipes
+        notifyDataSetChanged()
     }
 }

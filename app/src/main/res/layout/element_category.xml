@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="40dp"
-    android:layout_margin="10dp"
+    android:layout_marginHorizontal="5dp"
+    android:layout_marginVertical="3dp"
     android:backgroundTint="#D3D3D3"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -16,8 +17,8 @@
 
         <ImageView
             android:id="@+id/categoryImage"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_gravity="center"/>
 
         <TextView
