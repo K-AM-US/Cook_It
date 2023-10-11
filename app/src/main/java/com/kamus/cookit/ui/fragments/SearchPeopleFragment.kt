@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kamus.cookit.R
@@ -25,12 +26,18 @@ class SearchPeopleFragment : Fragment() {
     private var _binding: FragmentSearchPeopleBinding? = null
     private val binding get() = _binding!!
     private lateinit var repository: AppRepository
+    private var peopleListTemp: List<UserDto> = emptyList()
+    private lateinit var adapter: UsersAdapter
+    private lateinit var linearLayoutM: LinearLayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSearchPeopleBinding.inflate(inflater, container, false)
+        linearLayoutM = LinearLayoutManager(requireActivity())
+        initRecyclerView()
+
         return binding.root
     }
 
@@ -47,10 +54,9 @@ class SearchPeopleFragment : Fragment() {
                     response: Response<List<UserDto>>
                 ) {
                     response.body()?.let { users ->
-                        binding.rvUsers.apply {
-                            layoutManager = LinearLayoutManager(requireContext())
-                            adapter = UsersAdapter(users)
-                        }
+                        peopleListTemp = users
+                        adapter.filteredUsers(peopleListTemp)
+                        Log.d("LOGS", "${response.body()}")
                     }
                 }
 
@@ -59,11 +65,24 @@ class SearchPeopleFragment : Fragment() {
                 }
             })
         }
+
+        binding.searchBox.addTextChangedListener { userFilter ->
+            val filteredUsers = peopleListTemp.filter { user ->
+                user.userName.contains(userFilter.toString())
+            }
+            adapter.filteredUsers(filteredUsers)
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    private fun initRecyclerView(){
+        adapter = UsersAdapter(peopleListTemp)
+        binding.rvUsers.layoutManager = linearLayoutM
+        binding.rvUsers.adapter = adapter
     }
 
     companion object {

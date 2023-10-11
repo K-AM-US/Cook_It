@@ -1,5 +1,10 @@
 package com.kamus.cookit.data.remote.model
 
+import com.google.gson.annotations.SerializedName
+
 data class CategoriesDto(
-    val categories: ArrayList<String>
+    @SerializedName("category")
+    val category: String,
+    @SerializedName("category_icon")
+    val icon: String
 )

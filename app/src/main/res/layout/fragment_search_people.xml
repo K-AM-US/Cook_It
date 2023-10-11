@@ -48,6 +48,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
+        android:singleLine="true"
+        android:maxLines="1"
         android:hint="@string/btnSearch"
         android:drawableLeft="@drawable/ic_search"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
