@@ -47,13 +47,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.38"/>
+        app:layout_constraintGuide_percent="0.33"/>
 
     <EditText
         android:id="@+id/searchFood"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
         android:hint="@string/btnSearch"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintHorizontal_bias="0.3"
@@ -64,7 +63,6 @@
         android:id="@+id/filterFood"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_marginTop="28dp"
         android:src="@drawable/ic_filter"
         app:layout_constraintStart_toEndOf="@id/searchFood"
         app:layout_constraintTop_toTopOf="@id/topGuideline"/>

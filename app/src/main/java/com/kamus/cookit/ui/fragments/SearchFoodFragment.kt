@@ -14,7 +14,6 @@ import com.kamus.cookit.application.CookItApp
 import com.kamus.cookit.data.AppRepository
 import com.kamus.cookit.data.remote.model.CategoriesDto
 import com.kamus.cookit.data.remote.model.RecipeDto
-import com.kamus.cookit.data.remote.model.UserDto
 import com.kamus.cookit.databinding.FragmentSearchFoodBinding
 import com.kamus.cookit.ui.adapters.CategoryAdapter
 import com.kamus.cookit.ui.adapters.HomeRecipesVerticalAdapter
@@ -56,7 +55,9 @@ class SearchFoodFragment : Fragment() {
                     response.body()?.let { categories ->
                         binding.rvCategories.apply {
                             layoutManager = GridLayoutManager(requireContext(), 2)
-                            adapter = CategoryAdapter(categories)
+                            adapter = CategoryAdapter(categories){ category ->
+                                categoryFilterClick(category)
+                            }
                         }
                     }
                 }
@@ -89,8 +90,9 @@ class SearchFoodFragment : Fragment() {
 
         binding.searchFood.addTextChangedListener { recipeFilter ->
             val filteredRecipes = recipesTemp.filter { recipe ->
-                recipe.title.contains(recipeFilter.toString()) ||
-                        recipe.tags.contains(recipeFilter.toString())
+                recipe.title.contains(recipeFilter.toString().trim(), true) ||
+                        recipe.tags.contains(recipeFilter.toString().trim().lowercase()) ||
+                        recipe.type.contains(recipeFilter.toString().trim(), true)
             }
             recipesAdapter.filteredRecipes(filteredRecipes)
         }
@@ -110,5 +112,14 @@ class SearchFoodFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() = SearchFoodFragment()
+    }
+
+    private fun categoryFilterClick(category: CategoriesDto) {
+        val filteredRecipes = recipesTemp.filter { recipe ->
+            recipe.type.contains(category.category)
+        }
+
+        Log.d("categorias", "calor recibido: ${category.category} y recetas: ${recipesTemp[2].type}")
+        recipesAdapter.filteredRecipes(filteredRecipes)
     }
 }

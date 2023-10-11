@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.kamus.cookit.R
 import com.kamus.cookit.data.remote.model.CategoriesDto
 import com.kamus.cookit.databinding.ElementCategoryBinding
 
 class CategoryAdapter(
-    private val categories: List<CategoriesDto>
+    private val categories: List<CategoriesDto>,
+    private val categoryFilterClick: (CategoriesDto) -> Unit
 ): RecyclerView.Adapter<CategoryAdapter.ViewHolder>(
 
 ) {
@@ -33,5 +33,10 @@ class CategoryAdapter(
         Glide.with(holder.itemView.context)
             .load(categories[position].icon)
             .into(holder.categoryIcon)
+
+        holder.itemView.setOnClickListener {
+            /*Log.d("category","${category.category}")*/
+            categoryFilterClick(categories[position])
+        }
     }
 }

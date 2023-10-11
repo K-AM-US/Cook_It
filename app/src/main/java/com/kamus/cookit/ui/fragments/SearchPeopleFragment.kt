@@ -9,11 +9,9 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kamus.cookit.R
 import com.kamus.cookit.application.CookItApp
 import com.kamus.cookit.data.AppRepository
 import com.kamus.cookit.data.remote.model.UserDto
-import com.kamus.cookit.databinding.FragmentSearchBinding
 import com.kamus.cookit.databinding.FragmentSearchPeopleBinding
 import com.kamus.cookit.ui.adapters.UsersAdapter
 import kotlinx.coroutines.launch
@@ -68,7 +66,9 @@ class SearchPeopleFragment : Fragment() {
 
         binding.searchBox.addTextChangedListener { userFilter ->
             val filteredUsers = peopleListTemp.filter { user ->
-                user.userName.contains(userFilter.toString())
+                user.userName.contains(userFilter.toString().trim(), true) ||
+                        user.firstName.contains(userFilter.toString().trim(), true) ||
+                        user.lastName.contains(userFilter.toString().trim(), true)
             }
             adapter.filteredUsers(filteredUsers)
         }
