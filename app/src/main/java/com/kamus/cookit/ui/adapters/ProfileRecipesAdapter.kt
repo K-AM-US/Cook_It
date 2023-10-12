@@ -4,11 +4,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.kamus.cookit.data.AppRepository
 import com.kamus.cookit.data.db.model.RecipeEntity
 import com.kamus.cookit.databinding.ElementRecipeBinding
 
 class ProfileRecipesAdapter(
-    private val onClickedRecipe: (RecipeEntity) -> Unit
+    private val onClickedRecipe: (RecipeEntity) -> Unit,
+    private val favouriteOnClick: (RecipeEntity) -> Unit
 ): RecyclerView.Adapter<ProfileRecipesAdapter.ViewHolder>() {
 
     private var recipes: List<RecipeEntity> = emptyList()
@@ -18,11 +20,9 @@ class ProfileRecipesAdapter(
         val star = binding.btnFavourite
         val comment = binding.btnComment
         val share = binding.btnShare
-        val detail = binding.recipeImage
         val title = binding.cardRecipeTitle
 
         fun bind(recipe: RecipeEntity){
-            Log.d("LOGS", "recipe $recipe.title")
             binding.apply {
                 cardRecipeTitle.text = recipe.title
             }
@@ -39,7 +39,7 @@ class ProfileRecipesAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(recipes[position])
 
-        holder.detail.setOnClickListener {
+        holder.itemView.setOnClickListener {
             onClickedRecipe(recipes[position])
         }
 
@@ -48,7 +48,7 @@ class ProfileRecipesAdapter(
         }
 
         holder.star.setOnClickListener {
-            Log.d("LOGS", "click en favorito")
+            favouriteOnClick(recipes[position])
         }
 
         holder.comment.setOnClickListener {

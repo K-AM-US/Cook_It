@@ -6,11 +6,12 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.kamus.cookit.data.db.model.ArrayListConverter
+import com.kamus.cookit.data.db.model.FavouriteRecipeEntity
 import com.kamus.cookit.data.db.model.RecipeEntity
 import com.kamus.cookit.utils.Constants
 
 @Database(
-    entities = [RecipeEntity::class],
+    entities = [RecipeEntity::class, FavouriteRecipeEntity::class],
     version = 1,
     exportSchema = true
 )
@@ -20,6 +21,7 @@ import com.kamus.cookit.utils.Constants
 abstract class RecipeDatabase: RoomDatabase() {
 
     abstract fun recipeDao(): RecipeDao
+    abstract fun favouriteDao(): FavouriteRecipeDao
 
     companion object{
         @Volatile

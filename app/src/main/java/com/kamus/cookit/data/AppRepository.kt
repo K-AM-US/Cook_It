@@ -1,6 +1,8 @@
 package com.kamus.cookit.data
 
+import com.kamus.cookit.data.db.FavouriteRecipeDao
 import com.kamus.cookit.data.db.RecipeDao
+import com.kamus.cookit.data.db.model.FavouriteRecipeEntity
 import com.kamus.cookit.data.db.model.RecipeEntity
 import com.kamus.cookit.data.remote.model.CategoriesDto
 import com.kamus.cookit.data.remote.RecipeApi
@@ -11,7 +13,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 
 /* TODO: add friend Dao */
-class AppRepository(private val recipeDao: RecipeDao, private val retrofit: Retrofit) {
+class AppRepository(private val recipeDao: RecipeDao, private val favouriteRecipeDao: FavouriteRecipeDao, private val retrofit: Retrofit) {
 
     private val recipeApi: RecipeApi = retrofit.create(RecipeApi::class.java)
 
@@ -30,6 +32,14 @@ class AppRepository(private val recipeDao: RecipeDao, private val retrofit: Retr
     suspend fun deleteRecipe(recipe: RecipeEntity){
         recipeDao.deleteRecipe(recipe)
     }
+
+    /* Favourite Recipe */
+    suspend fun insertFavouriteRecipe(recipe: FavouriteRecipeEntity){
+        favouriteRecipeDao.insertFavouriteRecipe(recipe)
+    }
+
+    suspend fun getFavouriteRecipes(): List<FavouriteRecipeEntity> =
+        favouriteRecipeDao.getFavouriteRecipes()
 
 
     // Retrofit

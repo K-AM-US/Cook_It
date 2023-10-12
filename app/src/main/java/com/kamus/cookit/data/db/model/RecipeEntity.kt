@@ -18,10 +18,10 @@ data class RecipeEntity(
     var title: String,
     @ColumnInfo(name = "recipe_ingredients")
     @TypeConverters(ArrayListConverter::class)
-    var ingredients: ArrayList<String>, /*cambiar por arrayString*/
+    var ingredients: ArrayList<String>,
     @ColumnInfo(name = "recipe_process")
     @TypeConverters(ArrayListConverter::class)
-    var process: ArrayList<String>, /*cambiar por arrayString*/
+    var process: ArrayList<String>,
     /*@ColumnInfo(name = "type")
     var type: String,
     @ColumnInfo(name = "tags")

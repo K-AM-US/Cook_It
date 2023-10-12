@@ -16,6 +16,6 @@ class CookItApp: Application() {
     }
 
     val repository by lazy {
-        AppRepository(database.recipeDao(), retrofit)
+        AppRepository(database.recipeDao(), database.favouriteDao(), retrofit)
     }
 }

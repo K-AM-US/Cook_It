@@ -27,4 +27,5 @@ interface RecipeDao {
     /* DELETE */
     @Delete
     suspend fun deleteRecipe(recipe: RecipeEntity)
+
 }

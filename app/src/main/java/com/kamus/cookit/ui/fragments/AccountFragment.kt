@@ -5,11 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kamus.cookit.R
 import com.kamus.cookit.application.CookItApp
 import com.kamus.cookit.data.AppRepository
+import com.kamus.cookit.data.db.model.FavouriteRecipeEntity
 import com.kamus.cookit.data.db.model.RecipeEntity
 import com.kamus.cookit.databinding.FragmentAccountBinding
 import com.kamus.cookit.ui.adapters.ProfileRecipesAdapter
@@ -21,7 +23,7 @@ import kotlinx.coroutines.launch
 *   2. Click en comentarios, dialog con comentarios
 *   3. Click en share, copia link a la receta */
 
-class AccountFragment : Fragment(R.layout.fragment_account) {
+class AccountFragment : Fragment() {
 
     private var _binding: FragmentAccountBinding? = null
     private val binding get() = _binding!!
@@ -43,9 +45,11 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
         super.onViewCreated(view, savedInstanceState)
 
         repository = (requireActivity().application as CookItApp).repository
-        recipeAdapter = ProfileRecipesAdapter(){ recipe ->
-            onClickedRecipe(recipe)
-        }
+        recipeAdapter = ProfileRecipesAdapter(onClickedRecipe = {
+            onClickedRecipe(it)
+        },favouriteOnClick = {
+            favouriteOnClick(it)
+        })
 
         binding.settingIcon.setOnClickListener {
             parentFragmentManager.beginTransaction()
@@ -96,11 +100,17 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
         }
     }
     
-    private fun onClickedRecipe(recipe: RecipeEntity){
+    private fun onClickedRecipe(recipe: RecipeEntity) {
         parentFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, RecipeDetailFragment.newInstance(recipe.id.toString()))
             .addToBackStack(null)
             .commit()
+    }
+
+    private fun favouriteOnClick(recipe: RecipeEntity) {
+        lifecycleScope.launch {
+            repository.insertFavouriteRecipe(FavouriteRecipeEntity(recipe.id, recipe.title, recipe.ingredients, recipe.process))
+        }
     }
 
     companion object {
