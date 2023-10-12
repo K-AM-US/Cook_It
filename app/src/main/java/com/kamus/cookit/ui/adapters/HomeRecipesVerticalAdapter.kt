@@ -6,13 +6,15 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.kamus.cookit.data.db.model.FavouriteRecipeEntity
 import com.kamus.cookit.data.db.model.RecipeEntity
 import com.kamus.cookit.data.remote.model.RecipeDto
 import com.kamus.cookit.databinding.ElementRecipeBinding
 
 class HomeRecipesVerticalAdapter(
     private var recipes: List<RecipeDto>,
-    private val onClickRecipe: (RecipeDto) -> Unit
+    private val onClickRecipe: (RecipeDto) -> Unit,
+    private val favouriteOnClick: (RecipeDto) -> Unit
 ): RecyclerView.Adapter<HomeRecipesVerticalAdapter.ViewHolder>(
 ) {
     class ViewHolder(private val binding: ElementRecipeBinding): RecyclerView.ViewHolder(binding.root) {
@@ -48,7 +50,7 @@ class HomeRecipesVerticalAdapter(
             onClickRecipe(recipes[position])
         }
         holder.favouriteButton.setOnClickListener {
-            Log.d("CLICK", "click en receta: ${recipes[position].title} es favorita")
+            favouriteOnClick(recipes[position])
         }
         holder.commentButton.setOnClickListener {
             Log.d("CLICK", "click en receta: ${recipes[position].title} se comenta")

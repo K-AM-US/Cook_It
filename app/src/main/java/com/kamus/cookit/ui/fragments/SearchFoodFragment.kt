@@ -13,7 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kamus.cookit.R
 import com.kamus.cookit.application.CookItApp
 import com.kamus.cookit.data.AppRepository
+import com.kamus.cookit.data.db.model.FavouriteRecipeEntity
+import com.kamus.cookit.data.db.model.RecipeEntity
 import com.kamus.cookit.data.remote.model.CategoriesDto
+import com.kamus.cookit.data.remote.model.RecipeDetailDto
 import com.kamus.cookit.data.remote.model.RecipeDto
 import com.kamus.cookit.databinding.FragmentSearchFoodBinding
 import com.kamus.cookit.ui.adapters.CategoryAdapter
@@ -100,9 +103,11 @@ class SearchFoodFragment : Fragment() {
     }
 
     private fun initRecyclerView(){
-        recipesAdapter = HomeRecipesVerticalAdapter(recipesTemp){
+        recipesAdapter = HomeRecipesVerticalAdapter(recipesTemp, onClickRecipe = {
             onClickedRecipe(it)
-        }
+        }, favouriteOnClick = {
+            favouriteOnClick(it)
+        })
         binding.rvRecipes.layoutManager = linearLayoutM
         binding.rvRecipes.adapter = recipesAdapter
     }
@@ -122,6 +127,28 @@ class SearchFoodFragment : Fragment() {
             .replace(R.id.fragmentContainer, RecipeDetailFragment.newInstance(recipe.id))
             .addToBackStack(null)
             .commit()
+    }
+
+    private fun favouriteOnClick(recipe: RecipeDto) {
+        lifecycleScope.launch {
+            val call: Call<RecipeDetailDto> = repository.getRecipeDetail(recipe.id)
+            call.enqueue(object: Callback<RecipeDetailDto>{
+                override fun onResponse(
+                    call: Call<RecipeDetailDto>,
+                    response: Response<RecipeDetailDto>
+                ) {
+                    lifecycleScope.launch {
+                        response.body()?.let { FavouriteRecipeEntity(recipe.id.toLong(), response.body()!!.title, response.body()!!.ingredients, it.process) }
+                            ?.let { repository.insertFavouriteRecipe(it) }
+                    }
+
+                }
+
+                override fun onFailure(call: Call<RecipeDetailDto>, t: Throwable) {
+                    Log.d("FAVOURITES", "error añadiendo favoritas")
+                }
+            })
+        }
     }
 
     private fun categoryFilterClick(category: CategoriesDto) {

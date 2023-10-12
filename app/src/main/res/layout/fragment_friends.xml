@@ -34,6 +34,13 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.92" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/searchDiv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/searchBox"/>
+
     <EditText
         android:id="@+id/searchBox"
         android:layout_width="250dp"
@@ -44,19 +51,13 @@
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"/>
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFriends"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="Lista de amigos"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/searchBox"
-        app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintTop_toTopOf="@id/searchDiv"
         app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"
-        />
-
-
-
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
