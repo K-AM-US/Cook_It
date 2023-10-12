@@ -54,7 +54,6 @@ class SearchPeopleFragment : Fragment() {
                     response.body()?.let { users ->
                         peopleListTemp = users
                         adapter.filteredUsers(peopleListTemp)
-                        Log.d("LOGS", "${response.body()}")
                     }
                 }
 

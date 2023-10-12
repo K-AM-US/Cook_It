@@ -10,6 +10,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.kamus.cookit.R
 import com.kamus.cookit.application.CookItApp
 import com.kamus.cookit.data.AppRepository
 import com.kamus.cookit.data.remote.model.CategoriesDto
@@ -99,7 +100,9 @@ class SearchFoodFragment : Fragment() {
     }
 
     private fun initRecyclerView(){
-        recipesAdapter = HomeRecipesVerticalAdapter(recipesTemp)
+        recipesAdapter = HomeRecipesVerticalAdapter(recipesTemp){
+            onClickedRecipe(it)
+        }
         binding.rvRecipes.layoutManager = linearLayoutM
         binding.rvRecipes.adapter = recipesAdapter
     }
@@ -112,6 +115,13 @@ class SearchFoodFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() = SearchFoodFragment()
+    }
+
+    private fun onClickedRecipe(recipe: RecipeDto) {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, RecipeDetailFragment.newInstance(recipe.id))
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun categoryFilterClick(category: CategoriesDto) {

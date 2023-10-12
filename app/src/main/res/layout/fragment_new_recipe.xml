@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:fillViewport="true"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:fillViewport="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,44 +43,44 @@
             android:id="@+id/recipeTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Título de la receta"
             android:layout_marginTop="15dp"
+            android:hint="Título de la receta"
             android:textSize="24dp"
-            app:layout_constraintTop_toTopOf="@id/topGuideline"
-            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintBottom_toTopOf="@id/recipeImage"
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-            app:layout_constraintBottom_toTopOf="@id/recipeImage"/>
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintTop_toTopOf="@id/topGuideline" />
 
         <ImageView
             android:id="@+id/recipeImage"
             android:layout_width="0dp"
             android:layout_height="200dp"
-            android:src="@mipmap/ic_cookit_logo"
             android:layout_marginVertical="15dp"
-            app:layout_constraintTop_toBottomOf="@id/recipeTitle"
-            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            android:src="@mipmap/ic_cookit_logo"
+            app:layout_constraintBottom_toTopOf="@id/ingredients"
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-            app:layout_constraintBottom_toTopOf="@id/ingredients"/>
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintTop_toBottomOf="@id/recipeTitle" />
 
         <TextView
             android:id="@+id/ingredients"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="INGREDIENTES"
-            app:layout_constraintTop_toBottomOf="@id/recipeImage"
+            app:layout_constraintBottom_toTopOf="@id/linearLayoutIngredients"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
-            app:layout_constraintBottom_toTopOf="@id/linearLayoutIngredients"/>
+            app:layout_constraintTop_toBottomOf="@id/recipeImage" />
 
 
         <LinearLayout
             android:id="@+id/linearLayoutIngredients"
             android:layout_width="0dp"
-            android:orientation="vertical"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/ingredients"
+            android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@id/addIngredient"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
-            app:layout_constraintEnd_toEndOf="@id/rightGuideline">
+            app:layout_constraintTop_toBottomOf="@id/ingredients">
 
         </LinearLayout>
 
@@ -91,12 +89,12 @@
             android:id="@+id/addIngredient"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:text="+"
             android:layout_marginLeft="10dp"
             android:backgroundTint="@color/addIngredient"
-            app:layout_constraintTop_toBottomOf="@id/linearLayoutIngredients"
+            android:text="+"
+            app:layout_constraintBottom_toTopOf="@id/process"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
-            app:layout_constraintBottom_toTopOf="@id/process"/>
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutIngredients" />
 
         <!-- Botón para quitar. Solo aparece cuando hay más de un ingrediente -->
 
@@ -104,33 +102,33 @@
             android:id="@+id/removeIngredients"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:text="-"
             android:layout_marginLeft="30dp"
             android:backgroundTint="@color/removeIngredient"
+            android:text="-"
             app:layout_constraintStart_toEndOf="@id/addIngredient"
-            app:layout_constraintTop_toBottomOf="@id/linearLayoutIngredients"/>
-            <!--app:layout_constraintTop_toBottomOf="@id/ingredientsList"-->
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutIngredients" />
+        <!--app:layout_constraintTop_toBottomOf="@id/ingredientsList"-->
 
         <TextView
             android:id="@+id/process"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PROCESS"
             android:layout_marginTop="30dp"
+            android:text="PROCESS"
+            app:layout_constraintBottom_toTopOf="@id/linearLayoutProcess"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
-            app:layout_constraintTop_toBottomOf="@id/addIngredient"
-            app:layout_constraintBottom_toTopOf="@id/linearLayoutProcess" />
+            app:layout_constraintTop_toBottomOf="@id/addIngredient" />
 
 
         <LinearLayout
             android:id="@+id/linearLayoutProcess"
             android:layout_width="0dp"
-            android:orientation="vertical"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/process"
+            android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@id/addProcess"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
-            app:layout_constraintEnd_toEndOf="@id/rightGuideline">
+            app:layout_constraintTop_toBottomOf="@id/process">
 
         </LinearLayout>
 
@@ -139,13 +137,13 @@
             android:id="@+id/addProcess"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:text="+"
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="20dp"
             android:backgroundTint="@color/addIngredient"
-            app:layout_constraintTop_toBottomOf="@id/linearLayoutProcess"
+            android:text="+"
+            app:layout_constraintBottom_toTopOf="@id/btnCreate"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
-            app:layout_constraintBottom_toTopOf="@id/btnCreate"/>
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutProcess" />
 
         <!-- Botón para quitar. Solo aparece cuando hay más de un ingrediente -->
 
@@ -153,22 +151,22 @@
             android:id="@+id/removeProcess"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:text="-"
             android:layout_marginLeft="30dp"
             android:backgroundTint="@color/removeIngredient"
+            android:text="-"
             app:layout_constraintStart_toEndOf="@id/addProcess"
-            app:layout_constraintTop_toBottomOf="@id/linearLayoutProcess"/>
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutProcess" />
 
         <Button
             android:id="@+id/btnCreate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Crear Receta"
             android:layout_marginBottom="25dp"
-            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            android:text="Crear Receta"
+            app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-            app:layout_constraintTop_toBottomOf="@id/linearLayoutProcess"
-            app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"/>
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutProcess" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

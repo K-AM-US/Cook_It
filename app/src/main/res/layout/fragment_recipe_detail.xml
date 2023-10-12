@@ -1,9 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.RecipeDetailFragment">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/topGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.06" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bottomGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.94" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/leftGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.08" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/rightGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.92" />
+
+        <TextView
+            android:id="@+id/recipeDetailTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            app:layout_constraintTop_toTopOf="@id/topGuideline"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintBottom_toTopOf="@id/recipeDetailImage"
+            tools:text="TITULO DE LA RECETA"/>
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/recipeDetailImage"
+            android:layout_width="250dp"
+            android:layout_height="150dp"
+            android:src="@mipmap/ic_cookit_logo"
+            app:riv_corner_radius="15dp"
+            android:layout_marginVertical="15dp"
+            app:layout_constraintTop_toBottomOf="@id/recipeDetailTitle"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintBottom_toTopOf="@id/recipeDetailIngredients"/>
+
+        <TextView
+            android:id="@+id/recipeDetailIngredients"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text="INGREDIENTES"
+            app:layout_constraintTop_toBottomOf="@id/recipeDetailImage"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintBottom_toTopOf="@id/recipeDetailIngredientsList"/>
+
+        <LinearLayout
+            android:id="@+id/recipeDetailIngredientsList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="20dp"
+            app:layout_constraintTop_toBottomOf="@id/recipeDetailIngredients"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintBottom_toTopOf="@id/recipeDetailProcess">
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/recipeDetailProcess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:text="PROCESO"
+            app:layout_constraintTop_toBottomOf="@id/recipeDetailIngredientsList"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintBottom_toTopOf="@id/recipeDetailProcessList"/>
+
+        <LinearLayout
+            android:id="@+id/recipeDetailProcessList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintTop_toBottomOf="@id/recipeDetailProcess"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintBottom_toBottomOf="@id/bottomGuideline">
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

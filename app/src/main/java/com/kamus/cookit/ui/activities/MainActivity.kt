@@ -2,10 +2,7 @@ package com.kamus.cookit.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import android.window.OnBackInvokedDispatcher
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.kamus.cookit.R
 import com.kamus.cookit.databinding.ActivityMainBinding
 import com.kamus.cookit.ui.fragments.AccountFragment

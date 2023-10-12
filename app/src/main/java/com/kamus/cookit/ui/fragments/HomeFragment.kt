@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kamus.cookit.R
 import com.kamus.cookit.application.CookItApp
 import com.kamus.cookit.data.AppRepository
+import com.kamus.cookit.data.db.model.RecipeEntity
 import com.kamus.cookit.data.remote.model.RecipeDto
 import com.kamus.cookit.databinding.FragmentHomeBinding
 import com.kamus.cookit.ui.adapters.HomeRecipesVerticalAdapter
@@ -64,7 +65,9 @@ class HomeFragment : Fragment() {
                     response.body()?.reversed().let { recipes ->
                         binding.rvCarousel.apply {
                             adapter = recipes?.let {
-                                HomeRecipesVerticalAdapter(it)
+                                HomeRecipesVerticalAdapter(it){
+                                    onClickedRecipe(it)
+                                }
                             }
                             set3DItem(true)
                             setAlpha(true)
@@ -90,7 +93,9 @@ class HomeFragment : Fragment() {
                     response.body()?.let { recipes ->
                         binding.rvHomeRecipes.apply {
                             layoutManager = LinearLayoutManager(requireContext())
-                            adapter = HomeRecipesVerticalAdapter(recipes)
+                            adapter = HomeRecipesVerticalAdapter(recipes){
+                                onClickedRecipe(it)
+                            }
                             Log.d("LOGS", "Adapter: $adapter.")
                         }
                     }
@@ -101,6 +106,13 @@ class HomeFragment : Fragment() {
                 }
             })
         }
+    }
+
+    private fun onClickedRecipe(recipe: RecipeDto) {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, RecipeDetailFragment.newInstance(recipe.id))
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun onDestroy() {

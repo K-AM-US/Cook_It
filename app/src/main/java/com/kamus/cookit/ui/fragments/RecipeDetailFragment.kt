@@ -1,13 +1,22 @@
 package com.kamus.cookit.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
-import com.kamus.cookit.R
+import com.bumptech.glide.Glide
+import com.kamus.cookit.application.CookItApp
+import com.kamus.cookit.data.AppRepository
+import com.kamus.cookit.data.remote.model.RecipeDetailDto
 import com.kamus.cookit.databinding.FragmentRecipeDetailBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 private const val RECIPE_ID = "recipe_id"
 
@@ -17,6 +26,7 @@ class RecipeDetailFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var recipeId: String? = null
+    private lateinit var repository: AppRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,10 +42,42 @@ class RecipeDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        arguments?.let {
+            recipeId = it.getString(RECIPE_ID)
+            repository = (requireActivity().application as CookItApp).repository
 
-        Toast.makeText(requireActivity(), "id de la receta: ", Toast.LENGTH_SHORT).show()
-        arguments?.apply {
+            val call: Call<RecipeDetailDto> = repository.getRecipeDetail(recipeId)
+            call.enqueue(object: Callback<RecipeDetailDto> {
+                override fun onResponse(
+                    call: Call<RecipeDetailDto>,
+                    response: Response<RecipeDetailDto>
+                ) {
+                    binding.apply {
+                        recipeDetailTitle.text = response.body()?.title
 
+                        response.body()?.ingredients?.forEach {
+                            val ingredient = TextView(requireContext())
+                            ingredient.text = it
+                            recipeDetailIngredientsList.addView(ingredient)
+                        }
+
+                        response.body()?.process?.forEach {
+                            val process = TextView(requireContext())
+                            process.text = it
+                            recipeDetailProcessList.addView(process)
+                        }
+
+                        Glide.with(requireContext())
+                            .load(response.body()?.image)
+                            .into(binding.recipeDetailImage)
+
+                    }
+                }
+
+                override fun onFailure(call: Call<RecipeDetailDto>, t: Throwable) {
+                    Log.d("DETAIL", "error en detail")
+                }
+            })
         }
     }
 
