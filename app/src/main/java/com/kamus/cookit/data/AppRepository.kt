@@ -21,6 +21,8 @@ class AppRepository(private val recipeDao: RecipeDao, private val retrofit: Retr
     }
     suspend fun getRecipes(): List<RecipeEntity> = recipeDao.getRecipes()
 
+    suspend fun getRecipeByID(id: String?): RecipeEntity = recipeDao.getRecipeById(id)
+
     suspend fun updateRecipe(recipe: RecipeEntity){
         recipeDao.updateRecipe(recipe)
     }

@@ -54,7 +54,6 @@ class NewRecipeFragment(
                 try {
                     lifecycleScope.launch {
                         repository.insertRecipe(recipe)
-                        Toast.makeText(requireContext(), "ingredientes: ${recipe.ingredients}", Toast.LENGTH_SHORT).show()
                     }
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.fragmentContainer, AccountFragment.newInstance())

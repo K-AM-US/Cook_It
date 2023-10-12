@@ -18,7 +18,7 @@ interface RecipeDao {
     @Query("SELECT * FROM $DATABASE_RECIPE_TABLE")
     suspend fun getRecipes(): List<RecipeEntity>
     @Query("SELECT * FROM $DATABASE_RECIPE_TABLE WHERE recipe_id = :id")
-    suspend fun getRecipeById(id: String): RecipeEntity
+    suspend fun getRecipeById(id: String?): RecipeEntity
 
     /* UPDATE */
     @Update
