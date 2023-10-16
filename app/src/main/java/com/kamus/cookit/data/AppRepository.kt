@@ -41,6 +41,10 @@ class AppRepository(private val recipeDao: RecipeDao, private val favouriteRecip
     suspend fun getFavouriteRecipes(): List<FavouriteRecipeEntity> =
         favouriteRecipeDao.getFavouriteRecipes()
 
+    suspend fun deleteFavouriteRecipe(recipe: FavouriteRecipeEntity) {
+        favouriteRecipeDao.deleteRecipe(recipe)
+    }
+
 
     // Retrofit
     fun getCategories(): Call<List<CategoriesDto>> =
