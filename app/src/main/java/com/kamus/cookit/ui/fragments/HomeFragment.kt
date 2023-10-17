@@ -52,7 +52,7 @@ class HomeFragment : Fragment() {
 
         binding.btnAddRecipe.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, NewRecipeFragment.newInstance())
+                .replace(R.id.fragmentContainer, NewRecipeFragment.newInstance(recipeId = "", recipeTitle = "", recipeIngredients = ArrayList<String>(), recipeProcess = ArrayList<String>(), newRecipe = true))
                 .addToBackStack("NewRecipeFragment")
                 .commit()
         }

@@ -59,7 +59,7 @@ class AccountFragment : Fragment() {
         }
         binding.addBox.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, NewRecipeFragment.newInstance())
+                .replace(R.id.fragmentContainer, NewRecipeFragment.newInstance(recipeId = "", recipeTitle = "", recipeIngredients = ArrayList<String>(), recipeProcess = ArrayList<String>(), newRecipe = true))
                 .addToBackStack("NewRecipeFragment")
                 .commit()
         }
@@ -80,7 +80,6 @@ class AccountFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireActivity())
             adapter = recipeAdapter
         }
-
         updateUI()
     }
 

@@ -11,10 +11,17 @@ import androidx.lifecycle.lifecycleScope
 import com.kamus.cookit.R
 import com.kamus.cookit.application.CookItApp
 import com.kamus.cookit.data.AppRepository
+import com.kamus.cookit.data.db.model.FavouriteRecipeEntity
 import com.kamus.cookit.data.db.model.RecipeEntity
 import com.kamus.cookit.databinding.FragmentNewRecipeBinding
 import kotlinx.coroutines.launch
 import java.io.IOException
+
+private const val RECIPE_ID = "recipe_id"
+private const val RECIPE_TITLE = "recipe_title"
+private const val RECIPE_INGREDIENTS = "recipe_ingredients"
+private const val RECIPE_PROCESS = "recipe_process"
+private const val NEW_RECIPE = "new_recipe"
 
 class NewRecipeFragment(
     private val updateUI: () -> Unit
@@ -24,37 +31,80 @@ class NewRecipeFragment(
     private lateinit var repository: AppRepository
     private var recipe: RecipeEntity = RecipeEntity(
         id = 0,
-        title = "lala",
+        title = "",
         ingredients = ArrayList<String>(),
         process = ArrayList<String>()
     )
+
+    private lateinit var getRecipeId: String
+    private lateinit var getRecipeTitle: String
+    private lateinit var getRecipeIngredients: ArrayList<String>
+    private lateinit var getRecipeProcess: ArrayList<String>
+    private var getNewRecipe = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         repository = (requireActivity().application as CookItApp).repository
 
-        binding.btnCreate.setOnClickListener {
-            recipe.id = (1..100).random().toLong()
-            recipe.title = binding.recipeTitle.text.toString()
+        arguments.let {
+            getRecipeId = it?.getString(RECIPE_ID).toString()
+            getRecipeTitle = it?.getString(RECIPE_TITLE).toString()
+            getRecipeIngredients = it?.getStringArrayList(RECIPE_INGREDIENTS)!!
+            getRecipeProcess = it.getStringArrayList(RECIPE_PROCESS)!!
+            getNewRecipe = it.getBoolean(NEW_RECIPE)
+        }
 
+        if (!getNewRecipe){
+            binding.apply {
+                recipeTitle.setText(getRecipeTitle)
+                getRecipeIngredients.forEach {
+                    val ingredient = EditText(requireContext())
+                    ingredient.setText(it)
+                    linearLayoutIngredients.addView(ingredient)
+                }
+                getRecipeProcess.forEach {
+                    val process = EditText(requireContext())
+                    process.setText(it)
+                    linearLayoutProcess.addView(process)
+                }
+            }
+        }
+
+        binding.btnCreate.setOnClickListener {
+            recipe.title = binding.recipeTitle.text.toString()
             for(item in 0 until binding.linearLayoutIngredients.childCount){
                 val tmpEditText = binding.linearLayoutIngredients.getChildAt(item) as EditText
                 if(tmpEditText.text.toString() != "")
                     recipe.ingredients.add(tmpEditText.text.toString())
             }
-
             for(item in 0 until binding.linearLayoutProcess.childCount){
                 val tmpEditText = binding.linearLayoutProcess.getChildAt(item) as EditText
                 if(tmpEditText.text.toString() != "")
                     recipe.process.add(tmpEditText.text.toString())
             }
-
-            /* TODO: falta validar que no hayan cadenas vacías y que no estén vacios los arreglos */
             if(recipe.title.isNotEmpty()) {
                 try {
-                    lifecycleScope.launch {
-                        repository.insertRecipe(recipe)
+                    if (getNewRecipe) {
+                        recipe.id = (1..100).random().toLong()
+                        lifecycleScope.launch {
+                            repository.insertRecipe(recipe)
+                        }
                     }
+                    else{
+                        recipe.id = getRecipeId.toLong()
+                        lifecycleScope.launch {
+                            repository.updateRecipe(recipe)
+                            repository.updateFavouriteRecipe(
+                                FavouriteRecipeEntity(
+                                    recipe.id,
+                                    recipe.title,
+                                    recipe.ingredients,
+                                    recipe.process
+                                )
+                            )
+                        }
+                    }
+
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.fragmentContainer, AccountFragment.newInstance())
                         .commit()
@@ -66,6 +116,7 @@ class NewRecipeFragment(
             }else{
                 Toast.makeText(requireActivity(), "Faltan datos en la receta", Toast.LENGTH_SHORT).show()
             }
+            /* TODO: falta validar que no hayan cadenas vacías y que no estén vacios los arreglos */
         }
 
         binding.apply {
@@ -107,10 +158,17 @@ class NewRecipeFragment(
     }
 
     companion object {
-
         @JvmStatic
-        fun newInstance() = NewRecipeFragment(){
+        fun newInstance(recipeId: String, recipeTitle: String, recipeIngredients: ArrayList<String>, recipeProcess: ArrayList<String>, newRecipe: Boolean) = NewRecipeFragment(updateUI = {
 
+        }).apply {
+            arguments = Bundle().apply {
+                putString(RECIPE_ID, recipeId)
+                putString(RECIPE_TITLE, recipeTitle)
+                putStringArrayList(RECIPE_INGREDIENTS, recipeIngredients)
+                putStringArrayList(RECIPE_PROCESS, recipeProcess)
+                putBoolean(NEW_RECIPE, newRecipe)
+            }
         }
     }
 }

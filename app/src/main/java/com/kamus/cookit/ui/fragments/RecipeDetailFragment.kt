@@ -1,5 +1,8 @@
 package com.kamus.cookit.ui.fragments
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,6 +18,7 @@ import com.bumptech.glide.Glide
 import com.kamus.cookit.R
 import com.kamus.cookit.application.CookItApp
 import com.kamus.cookit.data.AppRepository
+import com.kamus.cookit.data.db.model.FavouriteRecipeEntity
 import com.kamus.cookit.data.db.model.RecipeEntity
 import com.kamus.cookit.data.remote.model.RecipeDetailDto
 import com.kamus.cookit.databinding.FragmentRecipeDetailBinding
@@ -32,6 +36,7 @@ class RecipeDetailFragment : Fragment() {
     private var recipeId: String? = null
     private lateinit var repository: AppRepository
     private lateinit var recipe: RecipeEntity
+    private lateinit var builder: AlertDialog.Builder
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,11 +52,16 @@ class RecipeDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        builder = AlertDialog.Builder(requireContext())
+
         arguments?.let {
             recipeId = it.getString(RECIPE_ID)
             repository = (requireActivity().application as CookItApp).repository
 
             if(recipeId?.length!! > 3){
+                binding.btnDelete.visibility = View.GONE
+                binding.btnEdit.visibility = View.GONE
                 val call: Call<RecipeDetailDto> = repository.getRecipeDetail(recipeId)
                 call.enqueue(object: Callback<RecipeDetailDto> {
                     override fun onResponse(
@@ -76,7 +86,6 @@ class RecipeDetailFragment : Fragment() {
                             Glide.with(requireContext())
                                 .load(response.body()?.image)
                                 .into(binding.recipeDetailImage)
-
                         }
                     }
 
@@ -100,11 +109,37 @@ class RecipeDetailFragment : Fragment() {
                             process.text = it
                             recipeDetailProcessList.addView(process)
                         }
+
+                        btnDelete.setOnClickListener {
+                            AlertDialog.Builder(requireContext())
+                                .setTitle("Confirmación")
+                                .setMessage("¿Realmente deseas eliminar la receta?")
+                                .setPositiveButton("aceptar", DialogInterface.OnClickListener { dialog, which ->
+                                    lifecycleScope.launch {
+                                        repository.deleteRecipe(recipe)
+                                        if (repository.getFavouriteRecipeById(recipe.id.toString()) != null)
+                                            repository.deleteFavouriteRecipe(FavouriteRecipeEntity(recipe.id, recipe.title, recipe.ingredients, recipe.process))
+                                        parentFragmentManager.beginTransaction()
+                                            .replace(R.id.fragmentContainer, AccountFragment.newInstance())
+                                            .addToBackStack(null)
+                                            .commit()
+                                    }
+                                }).setNegativeButton("cancelar", DialogInterface.OnClickListener { dialog, which ->
+                                    dialog.dismiss()
+                                })
+                                .create()
+                                .show()
+                        }
+
+                        btnEdit.setOnClickListener {
+                            parentFragmentManager.beginTransaction()
+                                .replace(R.id.fragmentContainer, NewRecipeFragment.newInstance(recipeId = recipe.id.toString(), recipeTitle = recipe.title, recipeIngredients = recipe.ingredients, recipeProcess = recipe.process, newRecipe = false))
+                                .addToBackStack(null)
+                                .commit()
+                        }
                     }
                 }
             }
-
-
         }
     }
 

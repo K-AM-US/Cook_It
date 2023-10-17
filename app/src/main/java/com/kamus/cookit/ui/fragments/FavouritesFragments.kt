@@ -24,7 +24,6 @@ class FavouritesFragments : Fragment() {
     private lateinit var repository: AppRepository
     private lateinit var recipeAdapter: FavouriteRecipesAdapter
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,7 +44,6 @@ class FavouritesFragments : Fragment() {
             updateUI()
         })
 
-
         binding.rvFavourites.apply {
             layoutManager = LinearLayoutManager(requireActivity())
             adapter = recipeAdapter
@@ -59,7 +57,6 @@ class FavouritesFragments : Fragment() {
             recipes = repository.getFavouriteRecipes()
             recipeAdapter.updateList(recipes)
         }
-
     }
 
     private fun favouriteRecipeClicked(recipe: FavouriteRecipeEntity){
@@ -67,7 +64,6 @@ class FavouritesFragments : Fragment() {
             .replace(R.id.fragmentContainer, RecipeDetailFragment.newInstance(recipe.id.toString()))
             .addToBackStack(null)
             .commit()
-
     }
 
     private fun deleteFavourite(recipe: FavouriteRecipeEntity) {
@@ -75,6 +71,7 @@ class FavouritesFragments : Fragment() {
             repository.deleteFavouriteRecipe(recipe)
         }
     }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
