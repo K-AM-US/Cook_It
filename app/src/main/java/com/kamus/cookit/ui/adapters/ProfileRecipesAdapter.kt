@@ -4,7 +4,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.kamus.cookit.data.AppRepository
 import com.kamus.cookit.data.db.model.RecipeEntity
 import com.kamus.cookit.databinding.ElementRecipeBinding
 
@@ -37,6 +36,7 @@ class ProfileRecipesAdapter(
     override fun getItemCount(): Int = recipes.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
         holder.bind(recipes[position])
 
         holder.itemView.setOnClickListener {

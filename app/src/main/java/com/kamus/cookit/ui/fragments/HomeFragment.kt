@@ -13,7 +13,6 @@ import com.kamus.cookit.R
 import com.kamus.cookit.application.CookItApp
 import com.kamus.cookit.data.AppRepository
 import com.kamus.cookit.data.db.model.FavouriteRecipeEntity
-import com.kamus.cookit.data.db.model.RecipeEntity
 import com.kamus.cookit.data.remote.model.RecipeDetailDto
 import com.kamus.cookit.data.remote.model.RecipeDto
 import com.kamus.cookit.databinding.FragmentHomeBinding
@@ -131,7 +130,12 @@ class HomeFragment : Fragment() {
                 ) {
                     lifecycleScope.launch {
                         response.body()?.let { FavouriteRecipeEntity(recipe.id.toLong(), response.body()!!.title, response.body()!!.ingredients, it.process) }
-                            ?.let { repository.insertFavouriteRecipe(it) }
+                            ?.let {
+                                lifecycleScope.launch {
+                                    if (repository.getFavouriteRecipeById(recipe.id) == null)
+                                        repository.insertFavouriteRecipe(it)
+                                }
+                            }
                     }
 
                 }

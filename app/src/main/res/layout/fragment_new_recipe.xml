@@ -39,17 +39,24 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.92" />
 
-        <EditText
-            android:id="@+id/recipeTitle"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/recipeTitleLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:hint="Título de la receta"
-            android:textSize="24dp"
             app:layout_constraintBottom_toTopOf="@id/recipeImage"
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
-            app:layout_constraintTop_toTopOf="@id/topGuideline" />
+            app:layout_constraintTop_toTopOf="@id/topGuideline"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/recipeTitle"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="@string/titleHint"
+                android:textSize="24sp"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
             android:id="@+id/recipeImage"
@@ -60,13 +67,14 @@
             app:layout_constraintBottom_toTopOf="@id/ingredients"
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
-            app:layout_constraintTop_toBottomOf="@id/recipeTitle" />
+            app:layout_constraintTop_toBottomOf="@id/recipeTitleLayout"
+            android:contentDescription="@string/recipeImgDesc" />
 
         <TextView
             android:id="@+id/ingredients"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="INGREDIENTES"
+            android:text="@string/ingredientsList"
             app:layout_constraintBottom_toTopOf="@id/linearLayoutIngredients"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
             app:layout_constraintTop_toBottomOf="@id/recipeImage" />
@@ -89,9 +97,9 @@
             android:id="@+id/addIngredient"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:backgroundTint="@color/addIngredient"
-            android:text="+"
+            android:text="@string/add"
             app:layout_constraintBottom_toTopOf="@id/process"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
             app:layout_constraintTop_toBottomOf="@id/linearLayoutIngredients" />
@@ -102,9 +110,9 @@
             android:id="@+id/removeIngredients"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
             android:backgroundTint="@color/removeIngredient"
-            android:text="-"
+            android:text="@string/remove"
             app:layout_constraintStart_toEndOf="@id/addIngredient"
             app:layout_constraintTop_toBottomOf="@id/linearLayoutIngredients" />
         <!--app:layout_constraintTop_toBottomOf="@id/ingredientsList"-->
@@ -114,7 +122,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="PROCESS"
+            android:text="@string/processList"
             app:layout_constraintBottom_toTopOf="@id/linearLayoutProcess"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
             app:layout_constraintTop_toBottomOf="@id/addIngredient" />
@@ -137,10 +145,10 @@
             android:id="@+id/addProcess"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginBottom="20dp"
             android:backgroundTint="@color/addIngredient"
-            android:text="+"
+            android:text="@string/add"
             app:layout_constraintBottom_toTopOf="@id/btnCreate"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
             app:layout_constraintTop_toBottomOf="@id/linearLayoutProcess" />
@@ -151,9 +159,9 @@
             android:id="@+id/removeProcess"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
             android:backgroundTint="@color/removeIngredient"
-            android:text="-"
+            android:text="@string/remove"
             app:layout_constraintStart_toEndOf="@id/addProcess"
             app:layout_constraintTop_toBottomOf="@id/linearLayoutProcess" />
 
@@ -162,7 +170,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="25dp"
-            android:text="Crear Receta"
+            android:text="@string/btnCreate"
             app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"

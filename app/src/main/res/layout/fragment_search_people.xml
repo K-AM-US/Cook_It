@@ -40,21 +40,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/searchBox"/>
+        app:layout_constraintTop_toBottomOf="@id/searchBoxLayout"/>
 
-    <EditText
-        android:id="@+id/searchBox"
-        android:layout_width="300dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/searchBoxLayout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
-        android:singleLine="true"
-        android:maxLines="1"
-        android:hint="@string/btnSearch"
-        android:drawableLeft="@drawable/ic_search"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:boxCornerRadiusBottomEnd="16dp"
+        app:boxCornerRadiusBottomStart="16dp"
+        app:boxCornerRadiusTopEnd="16dp"
+        app:boxCornerRadiusTopStart="16dp"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-        app:layout_constraintTop_toTopOf="@id/topGuideline" />
+        app:layout_constraintTop_toTopOf="@id/topGuideline">
+        <EditText
+            android:id="@+id/searchBox"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:hint="@string/btnSearch"
+            android:drawableStart="@drawable/ic_search"
+            android:autofillHints=""
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvUsers"

@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/searchFood"/>
+        app:layout_constraintTop_toBottomOf="@id/searchFoodLayout"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/rvDiv"
@@ -49,23 +49,37 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.33"/>
 
-    <EditText
-        android:id="@+id/searchFood"
-        android:layout_width="230dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/searchFoodLayout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/btnSearch"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:boxCornerRadiusBottomEnd="16dp"
+        app:boxCornerRadiusBottomStart="16dp"
+        app:boxCornerRadiusTopEnd="16dp"
+        app:boxCornerRadiusTopStart="16dp"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintTop_toTopOf="@id/topGuideline" />
+        app:layout_constraintTop_toTopOf="@id/topGuideline">
+        <EditText
+            android:id="@+id/searchFood"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/btnSearch"
+            android:autofillHints=""
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <ImageButton
         android:id="@+id/filterFood"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:src="@drawable/ic_filter"
-        app:layout_constraintStart_toEndOf="@id/searchFood"
-        app:layout_constraintTop_toTopOf="@id/topGuideline"/>
+        app:layout_constraintStart_toEndOf="@id/searchFoodLayout"
+        app:layout_constraintTop_toTopOf="@id/topGuideline"
+        app:layout_constraintBottom_toBottomOf="@id/searchFoodLayout"
+        android:contentDescription="@string/filterIcon" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCategories"

@@ -56,13 +56,14 @@
             android:layout_width="250dp"
             android:layout_height="200dp"
             android:src="@drawable/ic_account"
-            app:layout_constraintBottom_toTopOf="@id/usrEt"
+            android:contentDescription="@string/imgContentDescLogin"
+            app:layout_constraintBottom_toTopOf="@id/usrEtLayout"
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
             app:layout_constraintTop_toBottomOf="@id/loginHeader" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/usrEt"
+            android:id="@+id/usrEtLayout"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:hint="@string/usrEmail"
@@ -73,19 +74,19 @@
             app:boxCornerRadiusBottomStart="16dp"
             app:boxCornerRadiusTopEnd="16dp"
             app:boxCornerRadiusTopStart="16dp"
-            app:layout_constraintBottom_toTopOf="@id/passwordEt"
+            app:layout_constraintBottom_toTopOf="@id/passwordEtLayout"
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
             app:layout_constraintTop_toBottomOf="@id/loginImage" >
-
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/usrEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/passwordEt"
+            android:id="@+id/passwordEtLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
@@ -100,12 +101,11 @@
             app:layout_constraintBottom_toTopOf="@id/recoverPassword"
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
-            app:layout_constraintTop_toBottomOf="@id/usrEt" >
-
+            app:layout_constraintTop_toBottomOf="@id/usrEtLayout" >
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -117,7 +117,7 @@
             app:layout_constraintBottom_toTopOf="@id/btnLogin"
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
-            app:layout_constraintTop_toBottomOf="@id/passwordEt" />
+            app:layout_constraintTop_toBottomOf="@id/passwordEtLayout" />
 
         <Button
             android:id="@+id/btnLogin"

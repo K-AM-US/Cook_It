@@ -14,6 +14,7 @@
     <string name="btnLogin">Iniciar Sesión</string>
     <string name="btnSignUp">¿Eres nuevo?\nRegístrate</string>
     <string name="recoverPassword">¿Olvidaste tu contraseña?</string>
+    <string name="imgContentDescLogin">Imagen de perfil genérica</string>
 
     <!-- Sign Up fragment -->
     <string name="msg">Estás a punto de\ncompartir tus recetas, sólo\nnecesitamos algunos datos.</string>
@@ -24,10 +25,30 @@
     <string name="confirmPassword">Confirmar contraseña</string>
     <string name="signUp">Registrarse</string>
     <string name="googleSignUp">Iniciar sesión con Google</string>
+    <string name="contentDesc">Sign-up profile image</string>
 
     <!-- Account Settings -->
     <string name="phoneNumber">Teléfono</string>
 
     <!-- Search User -->
     <string name="fullName">%1s %2s</string>
+
+    <!-- New Recipe -->
+    <string name="titleHint">Título de la receta</string>
+    <string name="ingredientsList">Ingredientes</string>
+    <string name="add">+</string>
+    <string name="remove">-</string>
+    <string name="processList">Preparación</string>
+    <string name="btnCreate">Crear Receta</string>
+    <string name="recipeImgDesc">Imagen de la receta</string>
+
+    <!-- Favourites fragment -->
+    <string name="favouritesFragmentTitle">Tus recetas favoritas!</string>
+
+    <!-- Recipe Detail -->
+    <string name="btnDelete">Borrar</string>
+    <string name="btnUpdate">Editar</string>
+
+    <!-- Search Food -->
+    <string name="filterIcon">Filter icon</string>
 </resources>
