@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.kamus.cookit.R
 import com.kamus.cookit.application.CookItApp
 import com.kamus.cookit.data.AppRepository
 import com.kamus.cookit.data.remote.model.UserDto
@@ -54,6 +55,7 @@ class SearchPeopleFragment : Fragment() {
                     response.body()?.let { users ->
                         peopleListTemp = users
                         adapter.filteredUsers(peopleListTemp)
+                        Log.d("USERRECIPES", "users: $users")
                     }
                 }
 
@@ -79,11 +81,19 @@ class SearchPeopleFragment : Fragment() {
     }
 
     private fun initRecyclerView(){
-        adapter = UsersAdapter(peopleListTemp)
+        adapter = UsersAdapter(peopleListTemp){
+            onUserClick(it)
+        }
         binding.rvUsers.layoutManager = linearLayoutM
         binding.rvUsers.adapter = adapter
     }
 
+    private fun onUserClick(user: UserDto) {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, AccountFragment.newInstance(user.id, user.userName, user.img.trim(), user.recipes))
+            .addToBackStack(null)
+            .commit()
+    }
     companion object {
         @JvmStatic
         fun newInstance() =

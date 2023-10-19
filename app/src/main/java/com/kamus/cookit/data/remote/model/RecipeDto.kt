@@ -7,11 +7,7 @@ data class RecipeDto(
     val id: String,
     @SerializedName("title")
     var title: String,
-    /*@SerializedName("ingredients")
-    var ingredients: String,*/
-    /*@SerializedName("process")
-    var process: String,
-    @SerializedName("creator_id")
+    /*@SerializedName("creator_id")
     val creatorId: String*/
     @SerializedName("type")
     var type: String,

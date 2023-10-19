@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kamus.cookit.R
 import com.kamus.cookit.application.CookItApp
 import com.kamus.cookit.data.AppRepository
 import com.kamus.cookit.data.remote.model.UserDto
@@ -38,8 +37,6 @@ class FriendsFragment : Fragment() {
         initRecyclerView()
         return binding.root
     }
-
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -75,7 +72,9 @@ class FriendsFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        adapter = UsersAdapter(friendsTemp)
+        adapter = UsersAdapter(friendsTemp){
+
+        }
         binding.rvFriends.layoutManager = linearLayoutM
         binding.rvFriends.adapter = adapter
     }

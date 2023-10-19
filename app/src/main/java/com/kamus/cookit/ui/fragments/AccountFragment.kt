@@ -1,26 +1,37 @@
 package com.kamus.cookit.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.kamus.cookit.R
 import com.kamus.cookit.application.CookItApp
 import com.kamus.cookit.data.AppRepository
 import com.kamus.cookit.data.db.model.FavouriteRecipeEntity
 import com.kamus.cookit.data.db.model.RecipeEntity
+import com.kamus.cookit.data.remote.model.RecipeDto
 import com.kamus.cookit.databinding.FragmentAccountBinding
 import com.kamus.cookit.ui.adapters.ProfileRecipesAdapter
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 /* TODO: Funcionalidad
-*   1. Click en estrella, agregar receta a favoritos
-*   2. Click en comentarios, dialog con comentarios
-*   3. Click en share, copia link a la receta */
+*   1. Click en comentarios, dialog con comentarios
+*   2. Click en share, copia link a la receta */
+
+private const val USER = "user"
+private const val USER_IMG = "user_img"
+private const val USER_RECIPES = "user_recipes"
+private const val USER_ID = "user_id"
 
 class AccountFragment : Fragment() {
 
@@ -29,7 +40,10 @@ class AccountFragment : Fragment() {
     private var recipes: List<RecipeEntity> = emptyList()
     private lateinit var repository: AppRepository
     private lateinit var recipeAdapter: ProfileRecipesAdapter
-
+    private var userId: String? = ""
+    private var user: String? = ""
+    private var userImg: String? = ""
+    private var userRecipes: ArrayList<String> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,6 +63,23 @@ class AccountFragment : Fragment() {
         },favouriteOnClick = {
             favouriteOnClick(it)
         })
+
+        arguments.let {
+            userId = it?.getString(USER_ID)
+            user = it?.getString(USER)
+            userImg = it?.getString(USER_IMG)
+            userRecipes = it?.getStringArrayList(USER_RECIPES)!!
+            binding.apply {
+                profileUsername.text = user
+                if(userImg == "")
+                    profilePhoto.setImageResource(R.mipmap.ic_launcher)
+                else
+                    Glide.with(requireContext())
+                        .load(userImg)
+                        .into(profilePhoto)
+
+            }
+        }
 
         binding.settingIcon.setOnClickListener {
             parentFragmentManager.beginTransaction()
@@ -89,7 +120,34 @@ class AccountFragment : Fragment() {
 
     private fun updateUI(){
         lifecycleScope.launch {
-            recipes = repository.getRecipes()
+            if(userId?.toInt() == 0) {
+                Toast.makeText(requireActivity(), "Usuario propio: $userId", Toast.LENGTH_SHORT).show()
+                recipes = repository.getRecipes()
+            }
+            else{
+                val recipesTmp = ArrayList<RecipeEntity>()
+                val call: Call<List<RecipeDto>> = repository.getHomeRecipes()
+                call.enqueue(object: Callback<List<RecipeDto>>{
+                    override fun onResponse(
+                        call: Call<List<RecipeDto>>,
+                        response: Response<List<RecipeDto>>
+                    ) {
+                        response.body()?.forEach {
+                            if(userRecipes.contains(it.id))
+                                recipesTmp.add(RecipeEntity(it.id.toLong(), it.title, java.util.ArrayList<String>(), ArrayList<String>()))
+                            recipeAdapter.updateList(recipes)
+                        }
+
+                    }
+
+                    override fun onFailure(call: Call<List<RecipeDto>>, t: Throwable) {
+                        Log.d("error", "ERROR RECIBIENDO RECETAS DE USUARIO")
+                    }
+                })
+                recipes = recipesTmp
+
+            }
+
             if(recipes.isNotEmpty())
                 binding.noRecipesMessage.visibility = View.INVISIBLE
             else
@@ -114,6 +172,14 @@ class AccountFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() = AccountFragment()
+        fun newInstance(userId: String, user: String, userImg: String, userRecipes: ArrayList<String>) =
+            AccountFragment().apply {
+                arguments = Bundle().apply {
+                    putString(USER_ID, userId)
+                    putString(USER, user)
+                    putString(USER_IMG, userImg)
+                    putStringArrayList(USER_RECIPES, userRecipes)
+                }
+            }
     }
 }

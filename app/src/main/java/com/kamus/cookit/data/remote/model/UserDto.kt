@@ -11,8 +11,8 @@ data class UserDto(
     var firstName: String,
     @SerializedName("last_name")
     var lastName: String,
-    /*@SerializedName("recipes")
-    var recipes: ArrayList<RecipeDto>,*/
+    @SerializedName("recipes")
+    var recipes: ArrayList<String>,
     @SerializedName("image")
     var img: String,
     /*@SerializedName("friends")

@@ -1,7 +1,6 @@
 package com.kamus.cookit.ui.fragments
 
 import android.app.AlertDialog
-import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
@@ -9,10 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.view.forEach
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.kamus.cookit.R
@@ -26,6 +22,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.ArrayList
 
 private const val RECIPE_ID = "recipe_id"
 
@@ -120,7 +117,7 @@ class RecipeDetailFragment : Fragment() {
                                         if (repository.getFavouriteRecipeById(recipe.id.toString()) != null)
                                             repository.deleteFavouriteRecipe(FavouriteRecipeEntity(recipe.id, recipe.title, recipe.ingredients, recipe.process))
                                         parentFragmentManager.beginTransaction()
-                                            .replace(R.id.fragmentContainer, AccountFragment.newInstance())
+                                            .replace(R.id.fragmentContainer, AccountFragment.newInstance("0","","", ArrayList()))
                                             .addToBackStack(null)
                                             .commit()
                                     }

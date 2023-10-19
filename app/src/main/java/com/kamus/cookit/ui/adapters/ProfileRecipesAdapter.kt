@@ -58,8 +58,6 @@ class ProfileRecipesAdapter(
         holder.share.setOnClickListener {
             Log.d("LOGS", "click en share")
         }
-
-
     }
 
     fun updateList(list: List<RecipeEntity>){

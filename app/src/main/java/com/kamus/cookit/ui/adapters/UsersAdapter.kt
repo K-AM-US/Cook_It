@@ -10,7 +10,8 @@ import com.kamus.cookit.data.remote.model.UserDto
 import com.kamus.cookit.databinding.ElementUserBinding
 
 class UsersAdapter(
-    private var users: List<UserDto>
+    private var users: List<UserDto>,
+    private val onUserClick: (UserDto) -> Unit
 ): RecyclerView.Adapter<UsersAdapter.ViewHolder>(){
 
     class ViewHolder(private val binding: ElementUserBinding): RecyclerView.ViewHolder(binding.root) {
@@ -34,6 +35,9 @@ class UsersAdapter(
         Glide.with(holder.itemView.context)
             .load(users[position].img)
             .into(holder.profilePhoto)
+        holder.itemView.setOnClickListener {
+            onUserClick(users[position])
+        }
     }
 
     fun filteredUsers(users: List<UserDto>) {
