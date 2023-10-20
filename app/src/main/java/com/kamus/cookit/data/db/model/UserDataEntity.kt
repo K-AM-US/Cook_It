@@ -23,8 +23,8 @@ data class UserDataEntity(
     var email: String,
     @ColumnInfo(name = "user_phone")
     var phone: String,
-    @TypeConverters(ArrayListConverter::class)
     @ColumnInfo(name = "friends")
+    @TypeConverters(ArrayListConverter::class)
     var friends: ArrayList<String>
 )
 

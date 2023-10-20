@@ -6,13 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kamus.cookit.R
 import com.kamus.cookit.application.CookItApp
 import com.kamus.cookit.data.AppRepository
-import com.kamus.cookit.data.db.model.UserDataEntity
 import com.kamus.cookit.data.remote.model.UserDto
 import com.kamus.cookit.databinding.FragmentFriendsBinding
 import com.kamus.cookit.ui.adapters.UsersAdapter
