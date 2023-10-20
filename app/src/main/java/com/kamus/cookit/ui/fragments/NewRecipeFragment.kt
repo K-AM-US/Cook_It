@@ -33,7 +33,8 @@ class NewRecipeFragment(
         id = 0,
         title = "",
         ingredients = ArrayList<String>(),
-        process = ArrayList<String>()
+        process = ArrayList<String>(),
+        img = ""
     )
 
     private lateinit var getRecipeId: String

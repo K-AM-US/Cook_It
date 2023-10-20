@@ -57,13 +57,6 @@ class AccountFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        repository = (requireActivity().application as CookItApp).repository
-        recipeAdapter = ProfileRecipesAdapter(onClickedRecipe = {
-            onClickedRecipe(it)
-        },favouriteOnClick = {
-            favouriteOnClick(it)
-        })
-
         arguments.let {
             userId = it?.getString(USER_ID)
             user = it?.getString(USER)
@@ -81,7 +74,22 @@ class AccountFragment : Fragment() {
             }
         }
 
-        binding.settingIcon.setOnClickListener {
+        repository = (requireActivity().application as CookItApp).repository
+        recipeAdapter = ProfileRecipesAdapter(userId= userId, onClickedRecipe = {
+            onClickedRecipe(it)
+        },favouriteOnClick = {
+            favouriteOnClick(it)
+        })
+
+        if(userId!="0")
+            binding.apply {
+                settingsIcon.visibility = View.GONE
+                addBox.visibility = View.GONE
+                favourites.visibility = View.GONE
+                friends.visibility = View.GONE
+            }
+
+        binding.settingsIcon.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, AccountSettingsFragment.newInstance())
                 .addToBackStack("AccountSettingsFragment")
@@ -121,7 +129,6 @@ class AccountFragment : Fragment() {
     private fun updateUI(){
         lifecycleScope.launch {
             if(userId?.toInt() == 0) {
-                Toast.makeText(requireActivity(), "Usuario propio: $userId", Toast.LENGTH_SHORT).show()
                 recipes = repository.getRecipes()
             }
             else{
@@ -134,10 +141,9 @@ class AccountFragment : Fragment() {
                     ) {
                         response.body()?.forEach {
                             if(userRecipes.contains(it.id))
-                                recipesTmp.add(RecipeEntity(it.id.toLong(), it.title, java.util.ArrayList<String>(), ArrayList<String>()))
+                                recipesTmp.add(RecipeEntity(it.id.toLong(), it.title, java.util.ArrayList<String>(), ArrayList<String>(), it.img))
                             recipeAdapter.updateList(recipes)
                         }
-
                     }
 
                     override fun onFailure(call: Call<List<RecipeDto>>, t: Throwable) {
@@ -145,13 +151,13 @@ class AccountFragment : Fragment() {
                     }
                 })
                 recipes = recipesTmp
-
             }
 
             if(recipes.isNotEmpty())
                 binding.noRecipesMessage.visibility = View.INVISIBLE
             else
                 binding.noRecipesMessage.visibility = View.VISIBLE
+
             recipeAdapter.updateList(recipes)
         }
     }

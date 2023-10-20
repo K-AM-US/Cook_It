@@ -171,7 +171,7 @@
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"
             app:layout_constraintTop_toBottomOf="@id/emailLayout"
-            app:layout_constraintBottom_toTopOf="@id/confirmPassword">
+            app:layout_constraintBottom_toTopOf="@id/confirmPasswordLayout">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password"
                 android:layout_width="250dp"
@@ -184,7 +184,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/confirmPassword"
+            android:id="@+id/confirmPasswordLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -197,6 +197,7 @@
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
             app:layout_constraintTop_toBottomOf="@id/passwordLayout">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/confirmPassword"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/confirmPassword"
@@ -211,7 +212,7 @@
             android:text="@string/signUp"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-            app:layout_constraintTop_toBottomOf="@id/confirmPassword"
+            app:layout_constraintTop_toBottomOf="@id/confirmPasswordLayout"
             app:layout_constraintBottom_toTopOf="@id/googleSignUp"/>
 
         <Button

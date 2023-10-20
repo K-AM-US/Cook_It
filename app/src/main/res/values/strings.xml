@@ -29,6 +29,13 @@
 
     <!-- Account Settings -->
     <string name="phoneNumber">Teléfono</string>
+    <string name="settingsIconDesc">Settings button</string>
+    <string name="addButtonDesc">Add recipe button</string>
+    <string name="friendsButtonDesc">Friends button</string>
+    <string name="favouritesButtonDesc">Favourite recipes button</string>
+    <string name="empty">No hay recetas aquí,\ncrea una!</string>
+    <string name="updateButton">Actualizar</string>
+
 
     <!-- Search User -->
     <string name="fullName">%1s %2s</string>

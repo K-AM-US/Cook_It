@@ -1,15 +1,18 @@
 package com.kamus.cookit.ui.adapters
 
+import android.app.Activity
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.kamus.cookit.data.db.model.RecipeEntity
 import com.kamus.cookit.databinding.ElementRecipeBinding
 
 class ProfileRecipesAdapter(
     private val onClickedRecipe: (RecipeEntity) -> Unit,
-    private val favouriteOnClick: (RecipeEntity) -> Unit
+    private val favouriteOnClick: (RecipeEntity) -> Unit,
+    private val userId: String?
 ): RecyclerView.Adapter<ProfileRecipesAdapter.ViewHolder>() {
 
     private var recipes: List<RecipeEntity> = emptyList()
@@ -20,6 +23,7 @@ class ProfileRecipesAdapter(
         val comment = binding.btnComment
         val share = binding.btnShare
         val title = binding.cardRecipeTitle
+        val img = binding.recipeImage
 
         fun bind(recipe: RecipeEntity){
             binding.apply {
@@ -58,6 +62,11 @@ class ProfileRecipesAdapter(
         holder.share.setOnClickListener {
             Log.d("LOGS", "click en share")
         }
+
+        if(userId != "0")
+            Glide.with(holder.itemView.context)
+            .load(recipes[position].img)
+            .into(holder.img)
     }
 
     fun updateList(list: List<RecipeEntity>){

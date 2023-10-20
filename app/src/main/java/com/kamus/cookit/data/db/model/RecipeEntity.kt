@@ -22,12 +22,13 @@ data class RecipeEntity(
     @ColumnInfo(name = "recipe_process")
     @TypeConverters(ArrayListConverter::class)
     var process: ArrayList<String>,
+    @ColumnInfo(name = "img")
+    var img: String
     /*@ColumnInfo(name = "type")
     var type: String,
     @ColumnInfo(name = "tags")
     var tags: ArrayList<String>,
-    @ColumnInfo(name = "img")
-    var img: String
+
     @ColumnInfo(name = "favourite")
     var favourite: Boolean*/
 )
@@ -41,5 +42,4 @@ class ArrayListConverter{
 
     @TypeConverter
     fun fromArrayList(list: ArrayList<String>): String = Gson().toJson(list)
-
 }

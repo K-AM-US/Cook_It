@@ -59,12 +59,13 @@
         app:tint="@color/blue_1" />
 
     <ImageButton
-        android:id="@+id/settingIcon"
+        android:id="@+id/settingsIcon"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:background="@null"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_settings"
+        android:contentDescription="@string/settingsIconDesc"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintTop_toTopOf="@id/topGuideline"
         app:tint="@color/blue_1" />
@@ -73,11 +74,11 @@
         android:id="@+id/profileUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="USUARIO"
         app:layout_constraintBottom_toTopOf="@id/profileCrationDate"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintStart_toEndOf="@id/profilePhoto"
-        app:layout_constraintTop_toTopOf="@id/topGuideline" />
+        app:layout_constraintTop_toTopOf="@id/topGuideline"
+        tools:text="Usuario"/>
 
     <TextView
         android:id="@+id/profileCrationDate"
@@ -106,6 +107,7 @@
         android:background="@null"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_add_box"
+        android:contentDescription="@string/addButtonDesc"
         app:layout_constraintEnd_toStartOf="@id/friends"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintTop_toTopOf="@id/accountDiv"
@@ -118,6 +120,7 @@
         android:background="@null"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_people"
+        android:contentDescription="@string/friendsButtonDesc"
         app:layout_constraintEnd_toStartOf="@id/favourites"
         app:layout_constraintStart_toEndOf="@id/addBox"
         app:layout_constraintTop_toTopOf="@id/accountDiv"
@@ -130,6 +133,7 @@
         android:background="@null"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_star"
+        android:contentDescription="@string/favouritesButtonDesc"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintStart_toEndOf="@id/friends"
         app:layout_constraintTop_toTopOf="@id/accountDiv"
@@ -139,8 +143,8 @@
         android:id="@+id/noRecipesMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SIN REGISTROS, CREA UNA RECETA"
-        android:visibility="invisible"
+        android:text="@string/empty"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"

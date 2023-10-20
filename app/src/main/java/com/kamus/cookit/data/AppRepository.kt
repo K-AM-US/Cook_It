@@ -2,8 +2,10 @@ package com.kamus.cookit.data
 
 import com.kamus.cookit.data.db.FavouriteRecipeDao
 import com.kamus.cookit.data.db.RecipeDao
+import com.kamus.cookit.data.db.UserDataDao
 import com.kamus.cookit.data.db.model.FavouriteRecipeEntity
 import com.kamus.cookit.data.db.model.RecipeEntity
+import com.kamus.cookit.data.db.model.UserDataEntity
 import com.kamus.cookit.data.remote.model.CategoriesDto
 import com.kamus.cookit.data.remote.RecipeApi
 import com.kamus.cookit.data.remote.model.RecipeDetailDto
@@ -13,11 +15,12 @@ import retrofit2.Call
 import retrofit2.Retrofit
 
 /* TODO: add friend Dao */
-class AppRepository(private val recipeDao: RecipeDao, private val favouriteRecipeDao: FavouriteRecipeDao, private val retrofit: Retrofit) {
+class AppRepository(private val recipeDao: RecipeDao, private val favouriteRecipeDao: FavouriteRecipeDao, private val userDataDao: UserDataDao, private val retrofit: Retrofit) {
 
     private val recipeApi: RecipeApi = retrofit.create(RecipeApi::class.java)
 
     // Room
+    /* Recipes */
     suspend fun insertRecipe(recipe: RecipeEntity){
         recipeDao.insertRecipe(recipe)
     }
@@ -32,6 +35,9 @@ class AppRepository(private val recipeDao: RecipeDao, private val favouriteRecip
     suspend fun deleteRecipe(recipe: RecipeEntity){
         recipeDao.deleteRecipe(recipe)
     }
+
+
+
 
     /* Favourite Recipe */
     suspend fun insertFavouriteRecipe(recipe: FavouriteRecipeEntity){
@@ -51,6 +57,44 @@ class AppRepository(private val recipeDao: RecipeDao, private val favouriteRecip
     suspend fun updateFavouriteRecipe(recipe: FavouriteRecipeEntity) {
         favouriteRecipeDao.updateFavouriteRecipe(recipe)
     }
+
+
+
+
+    /* User Data */
+
+    suspend fun insertData(user: UserDataEntity){
+        userDataDao.insertData(user)
+    }
+
+    suspend fun getData(): UserDataEntity =
+        userDataDao.getData()
+
+    suspend fun updateData(user: UserDataEntity){
+        userDataDao.updateData(user)
+    }
+
+    suspend fun updateUsername(username: String){
+        userDataDao.updateUsername(username)
+    }
+
+    suspend fun updatePassword(password: String){
+        userDataDao.updatePassword(password)
+    }
+
+    suspend fun updateEmail(email: String){
+        userDataDao.updateEmail(email)
+    }
+
+    suspend fun updatePhone(phone: String){
+        userDataDao.updatePhone(phone)
+    }
+
+    suspend fun updateFriends(friends: ArrayList<String>){
+        userDataDao.updateFriends(friends)
+    }
+
+
 
     // Retrofit
     fun getCategories(): Call<List<CategoriesDto>> =

@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.kamus.cookit.R
 import com.kamus.cookit.application.CookItApp
 import com.kamus.cookit.data.AppRepository
+import com.kamus.cookit.data.db.model.UserDataEntity
 import com.kamus.cookit.data.remote.model.UserDto
 import com.kamus.cookit.databinding.FragmentFriendsBinding
 import com.kamus.cookit.ui.adapters.UsersAdapter
@@ -19,7 +21,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class FriendsFragment : Fragment() {
+class FriendsFragment: Fragment() {
 
     private var _binding: FragmentFriendsBinding? = null
     private val binding get() = _binding!!
@@ -43,6 +45,7 @@ class FriendsFragment : Fragment() {
         repository = (requireActivity().application as CookItApp).repository
 
         lifecycleScope.launch {
+            repository.updateFriends(arrayListOf("35517141"))
             val call: Call<List<UserDto>> = repository.getUsers()
             call.enqueue(object: Callback<List<UserDto>>{
                 override fun onResponse(
@@ -71,9 +74,16 @@ class FriendsFragment : Fragment() {
         }
     }
 
+    private fun onUserClick(user: UserDto) {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, AccountFragment.newInstance(user.id, user.userName, user.img.trim(), user.recipes))
+            .addToBackStack(null)
+            .commit()
+    }
+
     private fun initRecyclerView() {
         adapter = UsersAdapter(friendsTemp){
-
+            onUserClick(it)
         }
         binding.rvFriends.layoutManager = linearLayoutM
         binding.rvFriends.adapter = adapter
