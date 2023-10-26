@@ -14,11 +14,14 @@ import com.kamus.cookit.R
 import com.kamus.cookit.application.CookItApp
 import com.kamus.cookit.data.AppRepository
 import com.kamus.cookit.data.db.model.FavouriteRecipeEntity
+import com.kamus.cookit.data.db.model.FriendsEntity
 import com.kamus.cookit.data.db.model.RecipeEntity
 import com.kamus.cookit.data.remote.model.RecipeDto
 import com.kamus.cookit.databinding.FragmentAccountBinding
 import com.kamus.cookit.ui.adapters.ProfileRecipesAdapter
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -51,28 +54,6 @@ class AccountFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAccountBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        arguments.let {
-            userId = it?.getString(USER_ID)
-            user = it?.getString(USER)
-            userImg = it?.getString(USER_IMG)
-            userRecipes = it?.getStringArrayList(USER_RECIPES)!!
-            binding.apply {
-                profileUsername.text = user
-                if(userImg == "")
-                    profilePhoto.setImageResource(R.mipmap.ic_launcher)
-                else
-                    Glide.with(requireContext())
-                        .load(userImg)
-                        .into(profilePhoto)
-
-            }
-        }
 
         repository = (requireActivity().application as CookItApp).repository
         recipeAdapter = ProfileRecipesAdapter(userId= userId, onClickedRecipe = {
@@ -81,17 +62,52 @@ class AccountFragment : Fragment() {
             favouriteOnClick(it)
         })
 
-        if(userId!="0")
-            binding.apply {
+        arguments.let {
+            userId = it?.getString(USER_ID)
+            user = it?.getString(USER)
+            userImg = it?.getString(USER_IMG)
+            userRecipes = it?.getStringArrayList(USER_RECIPES)!!
+        }
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.apply {
+
+            if(userId != "0") {
                 settingsIcon.visibility = View.GONE
                 addBox.visibility = View.GONE
                 favourites.visibility = View.GONE
                 friends.visibility = View.GONE
+                
+                lifecycleScope.launch {
+                    if(repository.getFriend(userId!!) == null) {
+                        addFriend.isClickable = true
+                        removeFriend.isClickable = false
+                    } else{
+                        addFriend.isClickable = false
+                        removeFriend.isClickable = true
+                    }
+                }
+            }else {
+                addFriend.visibility = View.GONE
+                removeFriend.visibility = View.GONE
             }
 
+            profileUsername.text = user
+            if(userImg == "")
+                profilePhoto.setImageResource(R.mipmap.ic_launcher)
+            else
+                Glide.with(requireContext())
+                    .load(userImg)
+                    .into(profilePhoto)
+        }
+
+
         /* para evitar que se muestre un perfil cuando no se ha iniciado sesión*/
-        lifecycleScope.launch {
-            if (userId == "0" /*&& repository.getData() == null*/)
+        /*lifecycleScope.launch {
+            if (userId == "0" *//*&& repository.getData() == null*//*)
                 binding.apply {
                     settingsIcon.isClickable = false
                     addBox.isClickable = false
@@ -99,8 +115,7 @@ class AccountFragment : Fragment() {
                     friends.isClickable = false
                     rvRecipes.visibility = View.GONE
                 }
-        }
-
+        }*/
 
         binding.settingsIcon.setOnClickListener {
             parentFragmentManager.beginTransaction()
@@ -131,6 +146,35 @@ class AccountFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireActivity())
             adapter = recipeAdapter
         }
+
+        binding.apply {
+            addFriend.setOnClickListener {
+                addFriend.isClickable = false
+                removeFriend.isClickable = true
+                lifecycleScope.launch {
+                    userId?.let {
+                        if(repository.getFriend(it) == null)
+                            repository.insertFriend(FriendsEntity(it))
+                        else
+                            Toast.makeText(requireContext(), "Usuario ya es un amigo", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
+            removeFriend.setOnClickListener {
+                addFriend.isClickable = true
+                removeFriend.isClickable = false
+                lifecycleScope.launch {
+                    userId?.let {
+                        if(repository.getFriend(it) != null)
+                            repository.deleteFriend(FriendsEntity(it))
+                        else
+                            Toast.makeText(requireContext(), "Usuario ya se borró", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+
         updateUI()
     }
 

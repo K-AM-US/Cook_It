@@ -16,5 +16,5 @@ interface FriendsDao {
     suspend fun deleteFriend(friend: FriendsEntity)
 
     @Query("SELECT * FROM $DATABASE_FRIENDS WHERE friend_id = :friend")
-    suspend fun getFriend(friend: String): String
+    suspend fun getFriend(friend: String): FriendsEntity
 }

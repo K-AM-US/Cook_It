@@ -85,20 +85,40 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SE UNIÓ EL: XX/XX/XXXX"
-        app:layout_constraintBottom_toTopOf="@id/profileInterests"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintStart_toEndOf="@id/profilePhoto"
-        app:layout_constraintTop_toBottomOf="@id/profileUsername" />
+        app:layout_constraintTop_toBottomOf="@id/profileUsername"
+        app:layout_constraintBottom_toTopOf="@id/addFriend"/>
 
-    <TextView
-        android:id="@+id/profileInterests"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Intereses..."
-        app:layout_constraintBottom_toTopOf="@id/accountDiv"
-        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+    <ImageButton
+        android:id="@+id/addFriend"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_add_friend"
+        android:contentDescription="Add friend"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@id/removeFriend"
         app:layout_constraintStart_toEndOf="@id/profilePhoto"
-        app:layout_constraintTop_toBottomOf="@id/profileCrationDate" />
+        app:layout_constraintTop_toBottomOf="@id/profileCrationDate"
+        app:layout_constraintBottom_toBottomOf="@id/accountDiv"
+        app:tint="@color/blue_1" />
+
+    <ImageButton
+        android:id="@+id/removeFriend"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_remove_friend"
+        android:contentDescription="remove friend"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/profileCrationDate"
+        app:layout_constraintStart_toEndOf="@id/addFriend"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintBottom_toBottomOf="@id/accountDiv"
+        app:tint="@color/removeIngredient"/>
 
     <ImageButton
         android:id="@+id/addBox"
@@ -138,6 +158,7 @@
         app:layout_constraintStart_toEndOf="@id/friends"
         app:layout_constraintTop_toTopOf="@id/accountDiv"
         app:tint="@color/blue_1" />
+
 
     <TextView
         android:id="@+id/noRecipesMessage"
