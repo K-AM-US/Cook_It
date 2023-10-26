@@ -3,7 +3,6 @@ package com.kamus.cookit.data.db.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
 import com.kamus.cookit.utils.Constants
 
 @Entity(tableName = Constants.DATABASE_USER_DATA_TABLE)
@@ -24,8 +23,8 @@ data class UserDataEntity(
     @ColumnInfo(name = "user_phone")
     var phone: String,
     @ColumnInfo(name = "friends")
-    @TypeConverters(ArrayListConverter::class)
     var friends: ArrayList<String>
 )
+
 
 

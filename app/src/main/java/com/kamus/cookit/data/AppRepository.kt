@@ -1,9 +1,11 @@
 package com.kamus.cookit.data
 
 import com.kamus.cookit.data.db.FavouriteRecipeDao
+import com.kamus.cookit.data.db.FriendsDao
 import com.kamus.cookit.data.db.RecipeDao
 import com.kamus.cookit.data.db.UserDataDao
 import com.kamus.cookit.data.db.model.FavouriteRecipeEntity
+import com.kamus.cookit.data.db.model.FriendsEntity
 import com.kamus.cookit.data.db.model.RecipeEntity
 import com.kamus.cookit.data.db.model.UserDataEntity
 import com.kamus.cookit.data.remote.model.CategoriesDto
@@ -14,8 +16,7 @@ import com.kamus.cookit.data.remote.model.UserDto
 import retrofit2.Call
 import retrofit2.Retrofit
 
-/* TODO: add friend Dao */
-class AppRepository(private val recipeDao: RecipeDao, private val favouriteRecipeDao: FavouriteRecipeDao, private val userDataDao: UserDataDao, private val retrofit: Retrofit) {
+class AppRepository(private val recipeDao: RecipeDao, private val favouriteRecipeDao: FavouriteRecipeDao, private val userDataDao: UserDataDao, private val retrofit: Retrofit, private val friendsDao: FriendsDao) {
 
     private val recipeApi: RecipeApi = retrofit.create(RecipeApi::class.java)
 
@@ -90,10 +91,19 @@ class AppRepository(private val recipeDao: RecipeDao, private val favouriteRecip
         userDataDao.updatePhone(phone)
     }
 
-    suspend fun updateFriends(friends: ArrayList<String>){
-        userDataDao.updateFriends(friends)
+
+
+
+    /* Friend */
+    suspend fun insertFriend(friend: FriendsEntity){
+        friendsDao.insertFriend(friend)
+    }
+    suspend fun deleteFriend(friend: FriendsEntity){
+        friendsDao.deleteFriend(friend)
     }
 
+    suspend fun getFriend(friend: String) =
+        friendsDao.getFriend(friend)
 
 
     // Retrofit

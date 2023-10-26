@@ -28,7 +28,6 @@ data class RecipeEntity(
     var type: String,
     @ColumnInfo(name = "tags")
     var tags: ArrayList<String>,
-
     @ColumnInfo(name = "favourite")
     var favourite: Boolean*/
 )

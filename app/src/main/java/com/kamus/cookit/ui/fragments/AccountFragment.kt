@@ -89,6 +89,19 @@ class AccountFragment : Fragment() {
                 friends.visibility = View.GONE
             }
 
+        /* para evitar que se muestre un perfil cuando no se ha iniciado sesión*/
+        lifecycleScope.launch {
+            if (userId == "0" /*&& repository.getData() == null*/)
+                binding.apply {
+                    settingsIcon.isClickable = false
+                    addBox.isClickable = false
+                    favourites.isClickable = false
+                    friends.isClickable = false
+                    rvRecipes.visibility = View.GONE
+                }
+        }
+
+
         binding.settingsIcon.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, AccountSettingsFragment.newInstance())

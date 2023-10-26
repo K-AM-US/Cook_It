@@ -18,18 +18,15 @@ interface UserDataDao {
     @Update
     suspend fun updateData(user: UserDataEntity)
 
-    @Query("UPDATE user_data_table SET username = :username WHERE user_id = 0")
+    @Query("UPDATE user_data_table SET username = :username")
     suspend fun updateUsername(username: String)
 
-    @Query("UPDATE user_data_table SET user_password = :password WHERE user_id = 0")
+    @Query("UPDATE user_data_table SET user_password = :password ")
     suspend fun updatePassword(password: String)
 
-    @Query("UPDATE user_data_table SET user_email = :email WHERE user_id = 0")
+    @Query("UPDATE user_data_table SET user_email = :email")
     suspend fun updateEmail(email: String)
 
-    @Query("UPDATE user_data_table SET user_phone = :phone WHERE user_id = 0")
+    @Query("UPDATE user_data_table SET user_phone = :phone ")
     suspend fun updatePhone(phone: String)
-
-    @Query("UPDATE user_data_table SET friends = :friends where user_id = 0")
-    suspend fun updateFriends(friends: ArrayList<String>)
 }

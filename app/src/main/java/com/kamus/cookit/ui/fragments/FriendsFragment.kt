@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kamus.cookit.R
 import com.kamus.cookit.application.CookItApp
 import com.kamus.cookit.data.AppRepository
+import com.kamus.cookit.data.db.model.FriendsEntity
 import com.kamus.cookit.data.remote.model.UserDto
 import com.kamus.cookit.databinding.FragmentFriendsBinding
 import com.kamus.cookit.ui.adapters.UsersAdapter
@@ -45,15 +46,22 @@ class FriendsFragment: Fragment() {
         repository = (requireActivity().application as CookItApp).repository
 
         lifecycleScope.launch {
-            repository.updateFriends(arrayListOf("35517141"))
             val call: Call<List<UserDto>> = repository.getUsers()
             call.enqueue(object: Callback<List<UserDto>>{
                 override fun onResponse(
                     call: Call<List<UserDto>>,
                     response: Response<List<UserDto>>
                 ) {
+
                     response.body()?.let { users ->
-                        friendsTemp = users
+                        val friendsFilter = ArrayList<UserDto>()
+                        users.forEach {
+                            lifecycleScope.launch {
+                                if(repository.getFriend(it.id) != null)
+                                    friendsFilter.add(it)
+                            }
+                        }
+                        friendsTemp = friendsFilter
                         adapter.filteredUsers(friendsTemp)
                     }
                 }
