@@ -92,7 +92,6 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="15dp"
             android:hint="@string/userPassword"
-            android:inputType="textPassword"
             app:boxBackgroundMode="outline"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
@@ -105,7 +104,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordEt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView

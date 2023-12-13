@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
 import com.kamus.cookit.R
 import com.kamus.cookit.application.CookItApp
 import com.kamus.cookit.data.AppRepository
@@ -28,7 +29,6 @@ class SearchPeopleFragment : Fragment() {
     private var peopleListTemp: List<UserDto> = emptyList()
     private lateinit var adapter: UsersAdapter
     private lateinit var linearLayoutM: LinearLayoutManager
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,7 +44,6 @@ class SearchPeopleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         repository = (requireActivity().application as CookItApp).repository
-
         lifecycleScope.launch {
             val call: Call<List<UserDto>> = repository.getUsers()
             call.enqueue(object: Callback<List<UserDto>>{
@@ -90,7 +89,7 @@ class SearchPeopleFragment : Fragment() {
 
     private fun onUserClick(user: UserDto) {
         parentFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, AccountFragment.newInstance(user.id, user.userName, user.img.trim(), user.recipes))
+            .replace(R.id.fragmentContainer, AccountFragment.newInstance(user.id, user.userName, user.firstName + " " + user.lastName, user.img.trim(), user.recipes))
             .addToBackStack(null)
             .commit()
     }

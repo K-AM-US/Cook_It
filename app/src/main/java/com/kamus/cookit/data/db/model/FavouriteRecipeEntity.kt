@@ -7,7 +7,7 @@ import androidx.room.TypeConverters
 import com.kamus.cookit.utils.Constants
 
 @Entity(tableName = Constants.DATABASE_FAVOURITE_RECIPE_TABLE)
-data class FavouriteRecipeEntity(
+data class  FavouriteRecipeEntity(
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "recipe_id")
     val id: Long,

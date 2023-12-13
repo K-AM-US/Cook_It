@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
     id("kotlin-parcelize")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -45,6 +46,7 @@ android {
 }
 
 dependencies {
+
     val roomVersion: String = "2.6.0-beta01"
     val splashScreenVersion: String = "1.0.1"
     val lifecycleVersion: String = "2.6.2"
@@ -57,6 +59,9 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+
+    // Firebase
+    implementation("com.google.firebase:firebase-auth:22.3.0")
 
     // Splash Screen
     implementation("androidx.core:core-splashscreen:$splashScreenVersion")

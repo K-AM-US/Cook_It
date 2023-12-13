@@ -84,7 +84,7 @@ class FriendsFragment: Fragment() {
 
     private fun onUserClick(user: UserDto) {
         parentFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, AccountFragment.newInstance(user.id, user.userName, user.img.trim(), user.recipes))
+            .replace(R.id.fragmentContainer, AccountFragment.newInstance(user.id, user.userName, user.firstName + " " + user.lastName, user.img.trim(), user.recipes))
             .addToBackStack(null)
             .commit()
     }

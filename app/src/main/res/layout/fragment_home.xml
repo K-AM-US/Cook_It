@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    
+
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -79,15 +79,6 @@
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"
             app:layout_constraintTop_toTopOf="@id/topGuideline" />
 
-        <!--<androidx.recyclerview.widget.RecyclerView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/loginIconDiv"
-            app:layout_constraintBottom_toTopOf="@id/galleryDiv"/>-->
-
         <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
             android:id="@+id/rvCarousel"
             android:layout_width="0dp"
@@ -97,7 +88,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/loginIconDiv"
             app:layout_constraintBottom_toTopOf="@id/galleryDiv"/>
-        
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvHomeRecipes"
             android:layout_width="0dp"
@@ -109,7 +100,7 @@
             app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAddRecipe"
         android:layout_width="wrap_content"

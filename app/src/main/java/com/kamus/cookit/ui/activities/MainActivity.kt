@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.btnAccount ->{
-                    replaceFragment(AccountFragment.newInstance("0","", "", ArrayList()))
+                    replaceFragment(AccountFragment.newInstance("0","", "", "", ArrayList()))
                     true
                 }
                 else -> false

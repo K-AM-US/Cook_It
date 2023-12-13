@@ -107,7 +107,7 @@ class NewRecipeFragment(
                     }
 
                     parentFragmentManager.beginTransaction()
-                        .replace(R.id.fragmentContainer, AccountFragment.newInstance("0","","", ArrayList()))
+                        .replace(R.id.fragmentContainer, AccountFragment.newInstance("0","","", "", ArrayList()))
                         .commit()
                     updateUI()
                 } catch (e: IOException) {

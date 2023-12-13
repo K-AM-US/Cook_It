@@ -54,6 +54,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         app:riv_corner_radius="55dp"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintTop_toTopOf="@id/topGuideline"
         app:tint="@color/blue_1" />
@@ -65,6 +66,7 @@
         android:background="@null"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_settings"
+        android:layout_marginTop="-25dp"
         android:contentDescription="@string/settingsIconDesc"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintTop_toTopOf="@id/topGuideline"
@@ -72,19 +74,22 @@
 
     <TextView
         android:id="@+id/profileUsername"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/profileCrationDate"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintBottom_toTopOf="@id/profileName"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintStart_toEndOf="@id/profilePhoto"
         app:layout_constraintTop_toTopOf="@id/topGuideline"
         tools:text="Usuario"/>
 
     <TextView
-        android:id="@+id/profileCrationDate"
+        android:id="@+id/profileName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SE UNIÓ EL: XX/XX/XXXX"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintStart_toEndOf="@id/profilePhoto"
         app:layout_constraintTop_toBottomOf="@id/profileUsername"
@@ -101,7 +106,7 @@
         android:visibility="visible"
         app:layout_constraintEnd_toStartOf="@id/removeFriend"
         app:layout_constraintStart_toEndOf="@id/profilePhoto"
-        app:layout_constraintTop_toBottomOf="@id/profileCrationDate"
+        app:layout_constraintTop_toBottomOf="@id/profileName"
         app:layout_constraintBottom_toBottomOf="@id/accountDiv"
         app:tint="@color/blue_1" />
 
@@ -114,7 +119,7 @@
         android:src="@drawable/ic_remove_friend"
         android:contentDescription="remove friend"
         android:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@id/profileCrationDate"
+        app:layout_constraintTop_toBottomOf="@id/profileName"
         app:layout_constraintStart_toEndOf="@id/addFriend"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintBottom_toBottomOf="@id/accountDiv"
@@ -159,7 +164,6 @@
         app:layout_constraintTop_toTopOf="@id/accountDiv"
         app:tint="@color/blue_1" />
 
-
     <TextView
         android:id="@+id/noRecipesMessage"
         android:layout_width="wrap_content"
@@ -182,5 +186,40 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/buttonDiv" />
+
+    <TextView
+        android:id="@+id/loginMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="35sp"
+        android:text="Inicia Sesión para\n ver tus recetas"
+        android:textAlignment="center"
+        app:layout_constraintTop_toTopOf="@id/topGuideline"
+        app:layout_constraintBottom_toTopOf="@id/loginIcon"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"/>
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/loginIcon"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:riv_corner_radius="55dp"
+        android:src="@mipmap/ic_cookit_logo"
+        app:layout_constraintTop_toBottomOf="@id/loginMessage"
+        app:layout_constraintBottom_toTopOf="@id/loginBtn"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:tint="@color/blue_1" />
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Iniciar sesión"
+        app:layout_constraintTop_toBottomOf="@id/loginIcon"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

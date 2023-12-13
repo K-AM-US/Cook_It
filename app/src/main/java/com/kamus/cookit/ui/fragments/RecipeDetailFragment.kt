@@ -117,7 +117,7 @@ class RecipeDetailFragment : Fragment() {
                                         if (repository.getFavouriteRecipeById(recipe.id.toString()) != null)
                                             repository.deleteFavouriteRecipe(FavouriteRecipeEntity(recipe.id, recipe.title, recipe.ingredients, recipe.process))
                                         parentFragmentManager.beginTransaction()
-                                            .replace(R.id.fragmentContainer, AccountFragment.newInstance("0","","", ArrayList()))
+                                            .replace(R.id.fragmentContainer, AccountFragment.newInstance("0","","", "", ArrayList()))
                                             .addToBackStack(null)
                                             .commit()
                                     }
