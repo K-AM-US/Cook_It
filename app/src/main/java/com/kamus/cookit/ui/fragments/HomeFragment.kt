@@ -43,10 +43,16 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        repository = (requireActivity().application as CookItApp).repository
+        binding.apply {
+            connectionErrorButton.setOnClickListener {
+                load()
+            }
+            connectionErrorButton.performClick()
+        }
+
         firebaseAuth = FirebaseAuth.getInstance()
 
-        if(firebaseAuth?.uid == null) {
+        if (firebaseAuth?.uid == null) {
             binding.loginIcon.setOnClickListener {
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainer, LoginFragment.newInstance())
@@ -56,7 +62,6 @@ class HomeFragment : Fragment() {
         } else {
             binding.loginIcon.visibility = View.GONE
         }
-
 
         binding.btnAddRecipe.setOnClickListener {
             parentFragmentManager.beginTransaction()
@@ -72,62 +77,6 @@ class HomeFragment : Fragment() {
                 )
                 .addToBackStack("NewRecipeFragment")
                 .commit()
-        }
-
-        lifecycleScope.launch {
-            val call: Call<List<RecipeDto>> = repository.getHomeRecipes()
-            call.enqueue(object : Callback<List<RecipeDto>> {
-                override fun onResponse(
-                    call: Call<List<RecipeDto>>,
-                    response: Response<List<RecipeDto>>
-                ) {
-                    response.body()?.reversed().let { recipes ->
-                        binding.rvCarousel.apply {
-                            adapter = recipes?.let {
-                                HomeRecipesVerticalAdapter(it, onClickRecipe = {
-                                    onClickedRecipe(it)
-                                }, favouriteOnClick = {
-                                    favouriteOnClick(it)
-                                })
-                            }
-                            set3DItem(true)
-                            setAlpha(true)
-                            setInfinite(true)
-                        }
-                    }
-                }
-
-                override fun onFailure(call: Call<List<RecipeDto>>, t: Throwable) {
-                    Toast.makeText(requireActivity(), "error", Toast.LENGTH_SHORT).show()
-                }
-            })
-        }
-
-        lifecycleScope.launch {
-            val call: Call<List<RecipeDto>> = repository.getHomeRecipes()
-            call.enqueue(object : Callback<List<RecipeDto>> {
-                override fun onResponse(
-                    call: Call<List<RecipeDto>>,
-                    response: Response<List<RecipeDto>>
-                ) {
-                    Log.d("LOGS", "recipes: ${response.body()}")
-                    response.body()?.let { recipes ->
-                        binding.rvHomeRecipes.apply {
-                            layoutManager = LinearLayoutManager(requireContext())
-                            adapter = HomeRecipesVerticalAdapter(recipes, onClickRecipe = {
-                                onClickedRecipe(it)
-                            }, favouriteOnClick = {
-                                favouriteOnClick(it)
-                            })
-                            Log.d("LOGS", "Adapter: $adapter.")
-                        }
-                    }
-                }
-
-                override fun onFailure(call: Call<List<RecipeDto>>, t: Throwable) {
-                    Log.d("LOGS", "ERROOOOOOOOR")
-                }
-            })
         }
     }
 
@@ -157,6 +106,7 @@ class HomeFragment : Fragment() {
                             response.body()?.let {
                                 FavouriteRecipeEntity(
                                     recipe.id.toLong(),
+                                    firebaseAuth?.currentUser?.uid.toString(),
                                     response.body()!!.title,
                                     response.body()!!.ingredients,
                                     it.process
@@ -169,14 +119,89 @@ class HomeFragment : Fragment() {
                                     }
                                 }
                         }
-
                     }
 
                     override fun onFailure(call: Call<RecipeDetailDto>, t: Throwable) {
-                        Log.d("FAVOURITES", "error añadiendo favoritas")
+                        Toast.makeText(
+                            requireActivity(),
+                            "Error de conexión, intenta más tarde",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 })
             }
+        }
+    }
+
+    private fun load() {
+        binding.connectionErrorMessage.visibility = View.GONE
+        binding.connectionErrorButton.visibility = View.GONE
+        repository = (requireActivity().application as CookItApp).repository
+
+        lifecycleScope.launch {
+            val call: Call<List<RecipeDto>> = repository.getHomeRecipes()
+            call.enqueue(object : Callback<List<RecipeDto>> {
+                override fun onResponse(
+                    call: Call<List<RecipeDto>>,
+                    response: Response<List<RecipeDto>>
+                ) {
+                    response.body()?.reversed().let { recipes ->
+                        binding.rvCarousel.apply {
+                            adapter = recipes?.let {
+                                HomeRecipesVerticalAdapter(it, onClickRecipe = {
+                                    onClickedRecipe(it)
+                                }, favouriteOnClick = {
+                                    favouriteOnClick(it)
+                                })
+                            }
+                            set3DItem(true)
+                            setAlpha(true)
+                            setInfinite(true)
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<List<RecipeDto>>, t: Throwable) {
+                    binding.connectionErrorButton.visibility = View.VISIBLE
+                    binding.connectionErrorMessage.visibility = View.VISIBLE
+
+                    binding.connectionErrorButton.setOnClickListener {
+                        load()
+                    }
+                }
+            })
+        }
+
+        lifecycleScope.launch {
+            val call: Call<List<RecipeDto>> = repository.getHomeRecipes()
+            call.enqueue(object : Callback<List<RecipeDto>> {
+                override fun onResponse(
+                    call: Call<List<RecipeDto>>,
+                    response: Response<List<RecipeDto>>
+                ) {
+                    Log.d("LOGS", "recipes: ${response.body()}")
+                    response.body()?.let { recipes ->
+                        binding.rvHomeRecipes.apply {
+                            layoutManager = LinearLayoutManager(requireContext())
+                            adapter = HomeRecipesVerticalAdapter(recipes, onClickRecipe = {
+                                onClickedRecipe(it)
+                            }, favouriteOnClick = {
+                                favouriteOnClick(it)
+                            })
+                            Log.d("LOGS", "Adapter: $adapter.")
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<List<RecipeDto>>, t: Throwable) {
+                    binding.connectionErrorButton.visibility = View.VISIBLE
+                    binding.connectionErrorMessage.visibility = View.VISIBLE
+
+                    binding.connectionErrorButton.setOnClickListener {
+                        load()
+                    }
+                }
+            })
         }
     }
 

@@ -6,14 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
 import com.kamus.cookit.R
 import com.kamus.cookit.application.CookItApp
 import com.kamus.cookit.data.AppRepository
-import com.kamus.cookit.data.db.model.FriendsEntity
 import com.kamus.cookit.data.remote.model.UserDto
 import com.kamus.cookit.databinding.FragmentFriendsBinding
 import com.kamus.cookit.ui.adapters.UsersAdapter
@@ -22,11 +21,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class FriendsFragment: Fragment() {
+class FriendsFragment : Fragment() {
 
     private var _binding: FragmentFriendsBinding? = null
     private val binding get() = _binding!!
     private lateinit var repository: AppRepository
+    private var firebaseAuth: FirebaseAuth? = null
     private var friendsTemp: List<UserDto> = emptyList()
     private lateinit var adapter: UsersAdapter
     private lateinit var linearLayoutM: LinearLayoutManager
@@ -44,21 +44,34 @@ class FriendsFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         repository = (requireActivity().application as CookItApp).repository
+        firebaseAuth = FirebaseAuth.getInstance()
 
         lifecycleScope.launch {
             val call: Call<List<UserDto>> = repository.getUsers()
-            call.enqueue(object: Callback<List<UserDto>>{
+            call.enqueue(object : Callback<List<UserDto>> {
                 override fun onResponse(
                     call: Call<List<UserDto>>,
                     response: Response<List<UserDto>>
                 ) {
-
                     response.body()?.let { users ->
                         val friendsFilter = ArrayList<UserDto>()
                         users.forEach {
                             lifecycleScope.launch {
-                                if(repository.getFriend(it.id) != null)
+                                if (repository.getUserFriend(
+                                        it.id,
+                                        firebaseAuth?.currentUser?.uid.toString()
+                                    ) != null
+                                )
                                     friendsFilter.add(it)
+                                Log.d(
+                                    "NEWTEST",
+                                    "uid: ${firebaseAuth?.currentUser?.uid}\nAmigos almacenadas: ${repository.getFriends()} \nAmigo encontrado: ${
+                                        repository.getUserFriend(
+                                            "35517141",
+                                            firebaseAuth?.currentUser?.uid.toString()
+                                        )
+                                    }\nFriendsFilter: $friendsFilter"
+                                )
                             }
                         }
                         friendsTemp = friendsFilter
@@ -84,25 +97,34 @@ class FriendsFragment: Fragment() {
 
     private fun onUserClick(user: UserDto) {
         parentFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, AccountFragment.newInstance(user.id, user.userName, user.firstName + " " + user.lastName, user.img.trim(), user.recipes))
+            .replace(
+                R.id.fragmentContainer,
+                AccountFragment.newInstance(
+                    user.id,
+                    user.userName,
+                    user.firstName + " " + user.lastName,
+                    user.img.trim(),
+                    user.recipes
+                )
+            )
             .addToBackStack(null)
             .commit()
     }
 
     private fun initRecyclerView() {
-        adapter = UsersAdapter(friendsTemp){
+        adapter = UsersAdapter(friendsTemp) {
             onUserClick(it)
         }
         binding.rvFriends.layoutManager = linearLayoutM
         binding.rvFriends.adapter = adapter
     }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
 
     companion object {
-
         @JvmStatic
         fun newInstance() = FriendsFragment()
     }

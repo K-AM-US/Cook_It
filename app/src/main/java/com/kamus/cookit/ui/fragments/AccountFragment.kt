@@ -1,7 +1,6 @@
 package com.kamus.cookit.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -24,11 +23,6 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
-
-/* TODO: Funcionalidad
-*   1. Click en comentarios, dialog con comentarios
-*   2. Click en share, copia link a la receta */
 
 private const val USER = "user"
 private const val USER_IMG = "user_img"
@@ -78,8 +72,8 @@ class AccountFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             firebaseAuth = FirebaseAuth.getInstance()
-            Toast.makeText(requireActivity(), firebaseAuth?.currentUser?.displayName, Toast.LENGTH_SHORT).show()
-
+            binding.connectionErrorButton.visibility = View.GONE
+            binding.connectionErrorMessage.visibility = View.GONE
             if (firebaseAuth?.uid == null && userId == "0") {
                 binding.apply {
                     profilePhoto.visibility = View.GONE
@@ -117,7 +111,11 @@ class AccountFragment : Fragment() {
                         .into(profilePhoto)
 
                     lifecycleScope.launch {
-                        if (repository.getFriend(userId!!) == null) {
+                        if (repository.getUserFriend(
+                                userId!!,
+                                firebaseAuth?.currentUser?.uid.toString()
+                            ) == null
+                        ) {
                             addFriend.isClickable = true
                             removeFriend.isClickable = false
                         } else {
@@ -128,12 +126,13 @@ class AccountFragment : Fragment() {
                 } else {
                     addFriend.visibility = View.GONE
                     removeFriend.visibility = View.GONE
-                    val user = firebaseAuth?.currentUser
-                    val tmp = user?.email?.substringBefore('@')
-                    profileUsername.text = tmp
+                    lifecycleScope.launch {
+                        val usertmp = repository.getUser(firebaseAuth?.currentUser?.uid.toString())
+                        binding.profileUsername.text = usertmp.username
+                        binding.profileName.text = usertmp.fullname
+                    }
                     profilePhoto.setImageResource(R.mipmap.ic_launcher)
                 }
-
             }
 
             binding.settingsIcon.setOnClickListener {
@@ -185,8 +184,17 @@ class AccountFragment : Fragment() {
                         removeFriend.isClickable = true
                         lifecycleScope.launch {
                             userId?.let {
-                                if (repository.getFriend(it) == null)
-                                    repository.insertFriend(FriendsEntity(it))
+                                if (repository.getUserFriend(
+                                        it,
+                                        firebaseAuth?.currentUser?.uid.toString()
+                                    ) == null
+                                )
+                                    repository.insertFriend(
+                                        FriendsEntity(
+                                            it,
+                                            firebaseAuth?.currentUser?.uid.toString()
+                                        )
+                                    )
                                 else
                                     Toast.makeText(
                                         requireContext(),
@@ -202,8 +210,17 @@ class AccountFragment : Fragment() {
                         removeFriend.isClickable = false
                         lifecycleScope.launch {
                             userId?.let {
-                                if (repository.getFriend(it) != null)
-                                    repository.deleteFriend(FriendsEntity(it))
+                                if (repository.getUserFriend(
+                                        it,
+                                        firebaseAuth?.currentUser?.uid.toString()
+                                    ) != null
+                                )
+                                    repository.deleteFriend(
+                                        FriendsEntity(
+                                            it,
+                                            firebaseAuth?.currentUser?.uid.toString()
+                                        )
+                                    )
                                 else
                                     Toast.makeText(
                                         requireContext(),
@@ -227,35 +244,16 @@ class AccountFragment : Fragment() {
     private fun updateUI() {
         lifecycleScope.launch {
             if (userId?.toInt() == 0) {
-                recipes = repository.getRecipes()
+                recipes = repository.getUserRecipes(firebaseAuth?.currentUser?.uid.toString())
             } else {
-                val recipesTmp = ArrayList<RecipeEntity>()
-                val call: Call<List<RecipeDto>> = repository.getHomeRecipes()
-                call.enqueue(object : Callback<List<RecipeDto>> {
-                    override fun onResponse(
-                        call: Call<List<RecipeDto>>,
-                        response: Response<List<RecipeDto>>
-                    ) {
-                        response.body()?.forEach {
-                            if (userRecipes.contains(it.id))
-                                recipesTmp.add(
-                                    RecipeEntity(
-                                        it.id.toLong(),
-                                        it.title,
-                                        java.util.ArrayList<String>(),
-                                        ArrayList<String>(),
-                                        it.img
-                                    )
-                                )
-                            recipeAdapter.updateList(recipes)
-                        }
+                binding.apply {
+                    connectionErrorButton.setOnClickListener {
+                        load()
                     }
+                    connectionErrorButton.performClick()
+                }
 
-                    override fun onFailure(call: Call<List<RecipeDto>>, t: Throwable) {
-                        Log.d("error", "ERROR RECIBIENDO RECETAS DE USUARIO")
-                    }
-                })
-                recipes = recipesTmp
+
             }
 
             if (recipes.isNotEmpty())
@@ -275,7 +273,7 @@ class AccountFragment : Fragment() {
     }
 
     private fun favouriteOnClick(recipe: RecipeEntity) {
-        if(firebaseAuth?.uid == null) {
+        if (firebaseAuth?.uid == null) {
             Toast.makeText(
                 requireActivity(),
                 "Inicia sesión para agregar esta receta a tus favoritas",
@@ -287,6 +285,7 @@ class AccountFragment : Fragment() {
                     repository.insertFavouriteRecipe(
                         FavouriteRecipeEntity(
                             recipe.id,
+                            firebaseAuth?.currentUser?.uid.toString(),
                             recipe.title,
                             recipe.ingredients,
                             recipe.process
@@ -294,6 +293,43 @@ class AccountFragment : Fragment() {
                     )
             }
         }
+    }
+
+    private fun load() {
+        binding.connectionErrorButton.visibility = View.GONE
+        binding.connectionErrorMessage.visibility = View.GONE
+        val recipesTmp = ArrayList<RecipeEntity>()
+        val call: Call<List<RecipeDto>> = repository.getHomeRecipes()
+        call.enqueue(object : Callback<List<RecipeDto>> {
+            override fun onResponse(
+                call: Call<List<RecipeDto>>,
+                response: Response<List<RecipeDto>>
+            ) {
+                response.body()?.forEach {
+                    if (userRecipes.contains(it.id))
+                        recipesTmp.add(
+                            RecipeEntity(
+                                it.id.toLong(),
+                                firebaseAuth?.currentUser?.uid.toString(),
+                                it.title,
+                                java.util.ArrayList<String>(),
+                                ArrayList<String>(),
+                                it.img
+                            )
+                        )
+                    recipeAdapter.updateList(recipes)
+                }
+            }
+
+            override fun onFailure(call: Call<List<RecipeDto>>, t: Throwable) {
+                binding.connectionErrorButton.visibility = View.VISIBLE
+                binding.connectionErrorMessage.visibility = View.VISIBLE
+                binding.connectionErrorButton.setOnClickListener {
+                    load()
+                }
+            }
+        })
+        recipes = recipesTmp
     }
 
     companion object {

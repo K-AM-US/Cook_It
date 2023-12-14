@@ -102,7 +102,7 @@
         android:background="@null"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_add_friend"
-        android:contentDescription="Add friend"
+        android:contentDescription="@string/addDesc"
         android:visibility="visible"
         app:layout_constraintEnd_toStartOf="@id/removeFriend"
         app:layout_constraintStart_toEndOf="@id/profilePhoto"
@@ -117,7 +117,7 @@
         android:background="@null"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_remove_friend"
-        android:contentDescription="remove friend"
+        android:contentDescription="@string/removeDesc"
         android:visibility="visible"
         app:layout_constraintTop_toBottomOf="@id/profileName"
         app:layout_constraintStart_toEndOf="@id/addFriend"
@@ -192,7 +192,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="35sp"
-        android:text="Inicia Sesión para\n ver tus recetas"
+        android:text="@string/loginAccountMessage"
         android:textAlignment="center"
         app:layout_constraintTop_toTopOf="@id/topGuideline"
         app:layout_constraintBottom_toTopOf="@id/loginIcon"
@@ -215,11 +215,33 @@
         android:id="@+id/loginBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Iniciar sesión"
+        android:text="@string/btnLogin"
         app:layout_constraintTop_toBottomOf="@id/loginIcon"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"
         />
+
+    <TextView
+        android:id="@+id/connectionErrorMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:textAlignment="center"
+        android:text="@string/networkMessage"
+        app:layout_constraintTop_toTopOf="@id/accountDiv"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintBottom_toTopOf="@id/connectionErrorButton"/>
+
+    <Button
+        android:id="@+id/connectionErrorButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reload"
+        app:layout_constraintTop_toBottomOf="@id/connectionErrorMessage"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,11 +8,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitHelper {
 
-    val interceptor = HttpLoggingInterceptor().apply {
+    private val interceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
-    val client = OkHttpClient.Builder().apply {
+    private val client = OkHttpClient.Builder().apply {
         addInterceptor(interceptor)
     }.build()
 

@@ -48,7 +48,8 @@
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintTop_toTopOf="@id/topGuideline"
-        app:layout_constraintBottom_toTopOf="@id/searchFriends"/>
+        app:layout_constraintBottom_toTopOf="@id/searchFriends"
+        android:contentDescription="@string/foodSearchDesc"/>
 
     <ImageButton
         android:id="@+id/searchFriends"
@@ -63,6 +64,7 @@
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintTop_toBottomOf="@id/searchFood"
-        app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"/>
+        app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"
+        android:contentDescription="@string/peopleSearchDesc"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -49,51 +49,15 @@ class SearchFoodFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        repository = (requireActivity().application as CookItApp).repository
+
+        binding.apply {
+            connectionErrorButton.setOnClickListener {
+                load()
+            }
+            connectionErrorButton.performClick()
+        }
+
         firebaseAuth = FirebaseAuth.getInstance()
-
-        lifecycleScope.launch {
-            val call: Call<List<CategoriesDto>> = repository.getCategories()
-            call.enqueue(object: Callback<List<CategoriesDto>>{
-                override fun onResponse(
-                    call: Call<List<CategoriesDto>>,
-                    response: Response<List<CategoriesDto>>
-                ) {
-                    response.body()?.let { categories ->
-                        binding.rvCategories.apply {
-                            layoutManager = GridLayoutManager(requireContext(), 2)
-                            adapter = CategoryAdapter(categories){ category ->
-                                categoryFilterClick(category)
-                            }
-                        }
-                    }
-                }
-
-                override fun onFailure(call: Call<List<CategoriesDto>>, t: Throwable) {
-                    Log.d("test categorias", "Error en categorias")
-                }
-            })
-        }
-
-        lifecycleScope.launch {
-            val call: Call<List<RecipeDto>> = repository.getHomeRecipes()
-            call.enqueue(object: Callback<List<RecipeDto>>{
-                override fun onResponse(
-                    call: Call<List<RecipeDto>>,
-                    response: Response<List<RecipeDto>>
-                ) {
-                    Log.d("LOGS", "recipes: ${response.body()}")
-                    response.body()?.let { recipes ->
-                        recipesTemp = recipes
-                        recipesAdapter.filteredRecipes(recipesTemp)
-                    }
-                }
-
-                override fun onFailure(call: Call<List<RecipeDto>>, t: Throwable) {
-                    Log.d("LOGS", "ERROOOOOOOOR")
-                }
-            })
-        }
 
         binding.searchFood.addTextChangedListener { recipeFilter ->
             val filteredRecipes = recipesTemp.filter { recipe ->
@@ -105,7 +69,7 @@ class SearchFoodFragment : Fragment() {
         }
     }
 
-    private fun initRecyclerView(){
+    private fun initRecyclerView() {
         recipesAdapter = HomeRecipesVerticalAdapter(recipesTemp, onClickRecipe = {
             onClickedRecipe(it)
         }, favouriteOnClick = {
@@ -133,7 +97,7 @@ class SearchFoodFragment : Fragment() {
     }
 
     private fun favouriteOnClick(recipe: RecipeDto) {
-        if(firebaseAuth?.uid == null) {
+        if (firebaseAuth?.uid == null) {
             Toast.makeText(
                 requireActivity(),
                 "Inicia sesión para agregar esta receta a tus favoritas",
@@ -142,13 +106,21 @@ class SearchFoodFragment : Fragment() {
         } else {
             lifecycleScope.launch {
                 val call: Call<RecipeDetailDto> = repository.getRecipeDetail(recipe.id)
-                call.enqueue(object: Callback<RecipeDetailDto>{
+                call.enqueue(object : Callback<RecipeDetailDto> {
                     override fun onResponse(
                         call: Call<RecipeDetailDto>,
                         response: Response<RecipeDetailDto>
                     ) {
                         lifecycleScope.launch {
-                            response.body()?.let { FavouriteRecipeEntity(recipe.id.toLong(), response.body()!!.title, response.body()!!.ingredients, it.process) }
+                            response.body()?.let {
+                                FavouriteRecipeEntity(
+                                    recipe.id.toLong(),
+                                    firebaseAuth?.currentUser?.uid.toString(),
+                                    response.body()!!.title,
+                                    response.body()!!.ingredients,
+                                    it.process
+                                )
+                            }
                                 ?.let {
                                     if (repository.getFavouriteRecipeById(recipe.id) == null)
                                         repository.insertFavouriteRecipe(it)
@@ -165,11 +137,70 @@ class SearchFoodFragment : Fragment() {
     }
 
     private fun categoryFilterClick(category: CategoriesDto) {
-        val filteredRecipes = recipesTemp.filter { recipe ->
-            recipe.type.contains(category.category)
+        val filteredRecipes = if(category.category != "Todo") {
+            recipesTemp.filter { recipe ->
+                recipe.type.contains(category.category)
+            }
+        } else {
+            recipesTemp
+        }
+        recipesAdapter.filteredRecipes(filteredRecipes)
+    }
+
+    private fun load() {
+        repository = (requireActivity().application as CookItApp).repository
+        binding.connectionErrorButton.visibility = View.GONE
+        binding.connectionErrorMessage.visibility = View.GONE
+
+        lifecycleScope.launch {
+            val call: Call<List<CategoriesDto>> = repository.getCategories()
+            call.enqueue(object : Callback<List<CategoriesDto>> {
+                override fun onResponse(
+                    call: Call<List<CategoriesDto>>,
+                    response: Response<List<CategoriesDto>>
+                ) {
+                    response.body()?.let { categories ->
+                        binding.rvCategories.apply {
+                            layoutManager = GridLayoutManager(requireContext(), 2)
+                            adapter = CategoryAdapter(categories) { category ->
+                                categoryFilterClick(category)
+                            }
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<List<CategoriesDto>>, t: Throwable) {
+                    binding.connectionErrorButton.visibility = View.VISIBLE
+                    binding.connectionErrorMessage.visibility = View.VISIBLE
+                    binding.connectionErrorButton.setOnClickListener {
+                        load()
+                    }
+                }
+            })
         }
 
-        Log.d("categorias", "calor recibido: ${category.category} y recetas: ${recipesTemp[2].type}")
-        recipesAdapter.filteredRecipes(filteredRecipes)
+        lifecycleScope.launch {
+            val call: Call<List<RecipeDto>> = repository.getHomeRecipes()
+            call.enqueue(object : Callback<List<RecipeDto>> {
+                override fun onResponse(
+                    call: Call<List<RecipeDto>>,
+                    response: Response<List<RecipeDto>>
+                ) {
+                    Log.d("LOGS", "recipes: ${response.body()}")
+                    response.body()?.let { recipes ->
+                        recipesTemp = recipes
+                        recipesAdapter.filteredRecipes(recipesTemp)
+                    }
+                }
+
+                override fun onFailure(call: Call<List<RecipeDto>>, t: Throwable) {
+                    binding.connectionErrorButton.visibility = View.VISIBLE
+                    binding.connectionErrorMessage.visibility = View.VISIBLE
+                    binding.connectionErrorButton.setOnClickListener {
+                        load()
+                    }
+                }
+            })
+        }
     }
 }

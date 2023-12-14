@@ -5,13 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.lifecycleScope
 import com.google.firebase.auth.FirebaseAuth
 import com.kamus.cookit.R
 import com.kamus.cookit.application.CookItApp
 import com.kamus.cookit.data.AppRepository
 import com.kamus.cookit.databinding.FragmentAccountSettingsBinding
-import kotlinx.coroutines.launch
 
 class AccountSettingsFragment : Fragment() {
 
@@ -45,6 +43,7 @@ class AccountSettingsFragment : Fragment() {
         super.onDestroy()
         _binding = null
     }
+
     companion object {
         @JvmStatic
         fun newInstance() = AccountSettingsFragment()

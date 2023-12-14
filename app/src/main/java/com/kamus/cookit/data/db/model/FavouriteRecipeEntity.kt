@@ -11,6 +11,8 @@ data class  FavouriteRecipeEntity(
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "recipe_id")
     val id: Long,
+    @ColumnInfo(name = "user_id")
+    val userId: String,
     @ColumnInfo(name = "recipe_title")
     var title: String,
     @ColumnInfo(name = "recipe_ingredients")

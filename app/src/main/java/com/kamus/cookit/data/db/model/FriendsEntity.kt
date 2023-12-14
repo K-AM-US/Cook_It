@@ -9,5 +9,7 @@ import com.kamus.cookit.utils.Constants
 data class FriendsEntity(
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "friend_id")
-    val friendId: String
+    val friendId: String,
+    @ColumnInfo(name = "user_id")
+    val userId: String
 )

@@ -24,8 +24,19 @@
     <string name="email">Email</string>
     <string name="confirmPassword">Confirmar contraseña</string>
     <string name="signUp">Registrarse</string>
-    <string name="googleSignUp">Iniciar sesión con Google</string>
     <string name="contentDesc">Sign-up profile image</string>
+
+    <!-- Account -->
+    <string name="addDesc">Botón de agregar amigo</string>
+    <string name="removeDesc">Botón de borrar amigo</string>
+    <string name="loginAccountMessage">Inicia Sesión para\n ver tus receta</string>
+    <string name="networkMessage">Ocurrió un error, intenta otra vez</string>
+    <string name="reload">Reintentar</string>
+
+    <!-- Home -->
+    <string name="homeTitle">Recetas Populares</string>
+    <string name="loginDesc">Botón para iniciar sesión</string>
+    <string name="floatingbuttonDesc">Botón para crear recetas</string>
 
     <!-- Account Settings -->
     <string name="phoneNumber">Teléfono</string>
@@ -35,7 +46,12 @@
     <string name="favouritesButtonDesc">Favourite recipes button</string>
     <string name="empty">No hay recetas aquí,\ncrea una!</string>
     <string name="updateButton">Actualizar</string>
+    <string name="profilePhotoDesc">Foto de perfil</string>
+    <string name="logout">Salir</string>
 
+    <!-- Search -->
+    <string name="foodSearchDesc">Botón para buscar comida</string>
+    <string name="peopleSearchDesc">Botón para buscar personas</string>
 
     <!-- Search User -->
     <string name="fullName">%1s %2s</string>
@@ -58,4 +74,12 @@
 
     <!-- Search Food -->
     <string name="filterIcon">Filter icon</string>
+
+    <!-- Category Element -->
+    <string name="iconDesc">Ícono de la categoría</string>
+
+    <!-- Recipe Element -->
+    <string name="favDesc">Ícono de favorito</string>
+    <string name="commentDesc">Ícono de comentario</string>
+    <string name="shareDesc">Ícono de compartir</string>
 </resources>

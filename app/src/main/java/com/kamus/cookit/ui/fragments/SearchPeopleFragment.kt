@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.auth.FirebaseAuth
 import com.kamus.cookit.R
 import com.kamus.cookit.application.CookItApp
 import com.kamus.cookit.data.AppRepository
@@ -43,10 +42,52 @@ class SearchPeopleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.apply {
+            connectionErrorButton.setOnClickListener {
+                load()
+            }
+            connectionErrorButton.performClick()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
+    private fun initRecyclerView() {
+        adapter = UsersAdapter(peopleListTemp) {
+            onUserClick(it)
+        }
+        binding.rvUsers.layoutManager = linearLayoutM
+        binding.rvUsers.adapter = adapter
+    }
+
+    private fun onUserClick(user: UserDto) {
+        parentFragmentManager.beginTransaction()
+            .replace(
+                R.id.fragmentContainer,
+                AccountFragment.newInstance(
+                    user.id,
+                    user.userName,
+                    user.firstName + " " + user.lastName,
+                    user.img.trim(),
+                    user.recipes
+                )
+            )
+            .addToBackStack(null)
+            .commit()
+    }
+
+    private fun load() {
+
+        binding.connectionErrorButton.visibility = View.GONE
+        binding.connectionErrorMessage.visibility = View.GONE
+
         repository = (requireActivity().application as CookItApp).repository
         lifecycleScope.launch {
             val call: Call<List<UserDto>> = repository.getUsers()
-            call.enqueue(object: Callback<List<UserDto>>{
+            call.enqueue(object : Callback<List<UserDto>> {
                 override fun onResponse(
                     call: Call<List<UserDto>>,
                     response: Response<List<UserDto>>
@@ -59,7 +100,11 @@ class SearchPeopleFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<List<UserDto>>, t: Throwable) {
-                    Log.d("LOGS", "error en los usuarios")
+                    binding.connectionErrorButton.visibility = View.VISIBLE
+                    binding.connectionErrorMessage.visibility = View.VISIBLE
+                    binding.connectionErrorButton.setOnClickListener {
+                        load()
+                    }
                 }
             })
         }
@@ -74,25 +119,6 @@ class SearchPeopleFragment : Fragment() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
-
-    private fun initRecyclerView(){
-        adapter = UsersAdapter(peopleListTemp){
-            onUserClick(it)
-        }
-        binding.rvUsers.layoutManager = linearLayoutM
-        binding.rvUsers.adapter = adapter
-    }
-
-    private fun onUserClick(user: UserDto) {
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, AccountFragment.newInstance(user.id, user.userName, user.firstName + " " + user.lastName, user.img.trim(), user.recipes))
-            .addToBackStack(null)
-            .commit()
-    }
     companion object {
         @JvmStatic
         fun newInstance() =

@@ -133,8 +133,30 @@
             app:layout_constraintTop_toBottomOf="@id/recipeDetailProcess"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-            app:layout_constraintBottom_toBottomOf="@id/bottomGuideline">
+            app:layout_constraintBottom_toTopOf="@id/connectionErrorMessage">
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/connectionErrorMessage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="40sp"
+            android:textAlignment="center"
+            android:text="@string/networkMessage"
+            app:layout_constraintTop_toBottomOf="@id/recipeDetailProcessList"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintBottom_toTopOf="@id/connectionErrorButton"/>
+
+        <Button
+            android:id="@+id/connectionErrorButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reload"
+            app:layout_constraintTop_toBottomOf="@id/connectionErrorMessage"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -9,11 +9,12 @@ import com.kamus.cookit.databinding.ElementRecipeBinding
 class FavouriteRecipesAdapter(
     private val favouriteRecipeClicked: (FavouriteRecipeEntity) -> Unit,
     private val deleteFavouriteRecipe: (FavouriteRecipeEntity) -> Unit
-): RecyclerView.Adapter<FavouriteRecipesAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<FavouriteRecipesAdapter.ViewHolder>() {
 
     private var recipes: List<FavouriteRecipeEntity> = emptyList()
 
-    class ViewHolder(private val binding: ElementRecipeBinding): RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: ElementRecipeBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         val btnFavourite = binding.btnFavourite
 
@@ -25,7 +26,8 @@ class FavouriteRecipesAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ElementRecipeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ElementRecipeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -43,7 +45,7 @@ class FavouriteRecipesAdapter(
         }
     }
 
-    fun updateList(list: List<FavouriteRecipeEntity>){
+    fun updateList(list: List<FavouriteRecipeEntity>) {
         recipes = list
         notifyDataSetChanged()
     }

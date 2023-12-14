@@ -10,11 +10,11 @@ import com.kamus.cookit.databinding.ElementCategoryBinding
 class CategoryAdapter(
     private val categories: List<CategoriesDto>,
     private val categoryFilterClick: (CategoriesDto) -> Unit
-): RecyclerView.Adapter<CategoryAdapter.ViewHolder>(
+) : RecyclerView.Adapter<CategoryAdapter.ViewHolder>(
 
 ) {
-    class ViewHolder(private val binding: ElementCategoryBinding): RecyclerView.ViewHolder(binding.root) {
-
+    class ViewHolder(private val binding: ElementCategoryBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         val categoryIcon = binding.categoryImage
 
         fun bind(category: CategoriesDto) {
@@ -22,8 +22,10 @@ class CategoryAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
-        ElementCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+        ViewHolder(
+            ElementCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        )
 
     override fun getItemCount(): Int = categories.count()
 
@@ -35,7 +37,6 @@ class CategoryAdapter(
             .into(holder.categoryIcon)
 
         holder.itemView.setOnClickListener {
-            /*Log.d("category","${category.category}")*/
             categoryFilterClick(categories[position])
         }
     }

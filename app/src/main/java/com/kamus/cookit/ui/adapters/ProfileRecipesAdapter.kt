@@ -1,6 +1,5 @@
 package com.kamus.cookit.ui.adapters
 
-import android.app.Activity
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -13,11 +12,12 @@ class ProfileRecipesAdapter(
     private val onClickedRecipe: (RecipeEntity) -> Unit,
     private val favouriteOnClick: (RecipeEntity) -> Unit,
     private val userId: String?
-): RecyclerView.Adapter<ProfileRecipesAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<ProfileRecipesAdapter.ViewHolder>() {
 
     private var recipes: List<RecipeEntity> = emptyList()
 
-    class ViewHolder(private val binding: ElementRecipeBinding): RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: ElementRecipeBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         val star = binding.btnFavourite
         val comment = binding.btnComment
@@ -25,7 +25,7 @@ class ProfileRecipesAdapter(
         val title = binding.cardRecipeTitle
         val img = binding.recipeImage
 
-        fun bind(recipe: RecipeEntity){
+        fun bind(recipe: RecipeEntity) {
             binding.apply {
                 cardRecipeTitle.text = recipe.title
             }
@@ -33,7 +33,8 @@ class ProfileRecipesAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ElementRecipeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ElementRecipeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -63,13 +64,13 @@ class ProfileRecipesAdapter(
             Log.d("LOGS", "click en share")
         }
 
-        if(userId != "0")
+        if (userId != "0")
             Glide.with(holder.itemView.context)
-            .load(recipes[position].img)
-            .into(holder.img)
+                .load(recipes[position].img)
+                .into(holder.img)
     }
 
-    fun updateList(list: List<RecipeEntity>){
+    fun updateList(list: List<RecipeEntity>) {
         recipes = list
         notifyDataSetChanged()
     }

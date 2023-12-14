@@ -12,15 +12,17 @@ import com.kamus.cookit.databinding.ElementUserBinding
 class UsersAdapter(
     private var users: List<UserDto>,
     private val onUserClick: (UserDto) -> Unit
-): RecyclerView.Adapter<UsersAdapter.ViewHolder>(){
+) : RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
 
-    class ViewHolder(private val binding: ElementUserBinding): RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: ElementUserBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         val profilePhoto = binding.profilePhoto
         fun bind(userDto: UserDto, context: Context) {
             binding.apply {
                 username.text = userDto.userName
-                fullName.text = context.getString(R.string.fullName, userDto.firstName, userDto.lastName)
+                fullName.text =
+                    context.getString(R.string.fullName, userDto.firstName, userDto.lastName)
             }
         }
     }

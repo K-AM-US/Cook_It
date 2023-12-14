@@ -15,6 +15,9 @@ interface FriendsDao {
     @Delete
     suspend fun deleteFriend(friend: FriendsEntity)
 
-    @Query("SELECT * FROM $DATABASE_FRIENDS WHERE friend_id = :friend")
-    suspend fun getFriend(friend: String): FriendsEntity
+    @Query("SELECT * FROM $DATABASE_FRIENDS WHERE friend_id = :uidf AND user_id = :uid ")
+    suspend fun getUserFriends(uidf: String, uid: String): FriendsEntity
+
+    @Query("SELECT * FROM $DATABASE_FRIENDS")
+    suspend fun getFriends(): List<FriendsEntity>
 }

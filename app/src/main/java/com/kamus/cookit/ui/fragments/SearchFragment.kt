@@ -29,9 +29,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         }
     }
 
-
-
     companion object {
-        @JvmStatic fun newInstance() = SearchFragment()
+        @JvmStatic
+        fun newInstance() = SearchFragment()
     }
 }

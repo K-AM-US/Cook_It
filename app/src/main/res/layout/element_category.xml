@@ -19,7 +19,8 @@
             android:id="@+id/categoryImage"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:contentDescription="@string/iconDesc"/>
 
         <TextView
             android:id="@+id/category"

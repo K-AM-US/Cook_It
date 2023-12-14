@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import com.google.firebase.auth.FirebaseAuth
 import com.kamus.cookit.R
 import com.kamus.cookit.application.CookItApp
 import com.kamus.cookit.data.AppRepository
@@ -29,8 +30,10 @@ class NewRecipeFragment(
     private var _binding: FragmentNewRecipeBinding? = null
     private val binding get() = _binding!!
     private lateinit var repository: AppRepository
+    private var firebaseAuth: FirebaseAuth? = null
     private var recipe: RecipeEntity = RecipeEntity(
         id = 0,
+        creatorId = "",
         title = "",
         ingredients = ArrayList<String>(),
         process = ArrayList<String>(),
@@ -46,6 +49,7 @@ class NewRecipeFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         repository = (requireActivity().application as CookItApp).repository
+        firebaseAuth = FirebaseAuth.getInstance()
 
         arguments.let {
             getRecipeId = it?.getString(RECIPE_ID).toString()
@@ -87,6 +91,7 @@ class NewRecipeFragment(
                 try {
                     if (getNewRecipe) {
                         recipe.id = (1..100).random().toLong()
+                        recipe.creatorId = firebaseAuth?.currentUser?.uid.toString()
                         lifecycleScope.launch {
                             repository.insertRecipe(recipe)
                         }
@@ -98,6 +103,7 @@ class NewRecipeFragment(
                             repository.updateFavouriteRecipe(
                                 FavouriteRecipeEntity(
                                     recipe.id,
+                                    firebaseAuth?.currentUser?.uid.toString(),
                                     recipe.title,
                                     recipe.ingredients,
                                     recipe.process

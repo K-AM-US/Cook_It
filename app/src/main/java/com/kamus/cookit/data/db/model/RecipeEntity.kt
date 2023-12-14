@@ -14,6 +14,8 @@ data class RecipeEntity(
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "recipe_id")
     var id: Long,
+    @ColumnInfo(name = "creator_id")
+    var creatorId: String,
     @ColumnInfo(name = "recipe_title")
     var title: String,
     @ColumnInfo(name = "recipe_ingredients")
@@ -27,9 +29,7 @@ data class RecipeEntity(
     /*@ColumnInfo(name = "type")
     var type: String,
     @ColumnInfo(name = "tags")
-    var tags: ArrayList<String>,
-    @ColumnInfo(name = "favourite")
-    var favourite: Boolean*/
+    var tags: ArrayList<String>*/
 )
 
 class ArrayListConverter{

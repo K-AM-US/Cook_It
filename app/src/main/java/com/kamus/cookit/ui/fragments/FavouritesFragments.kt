@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
 import com.kamus.cookit.R
 import com.kamus.cookit.application.CookItApp
 import com.kamus.cookit.data.AppRepository
@@ -21,6 +22,7 @@ class FavouritesFragments : Fragment() {
     private var _binding: FragmentFavouritesFragmentsBinding? = null
     private val binding get() = _binding!!
     private var recipes: List<FavouriteRecipeEntity> = emptyList()
+    private var firebaseAuth: FirebaseAuth? = null
     private lateinit var repository: AppRepository
     private lateinit var recipeAdapter: FavouriteRecipesAdapter
 
@@ -35,8 +37,9 @@ class FavouritesFragments : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         repository = (requireActivity().application as CookItApp).repository
+        firebaseAuth = FirebaseAuth.getInstance()
+
         recipeAdapter = FavouriteRecipesAdapter(favouriteRecipeClicked = {
             favouriteRecipeClicked(it)
         }, deleteFavouriteRecipe = {
@@ -54,12 +57,12 @@ class FavouritesFragments : Fragment() {
 
     private fun updateUI() {
         lifecycleScope.launch {
-            recipes = repository.getFavouriteRecipes()
+            recipes = repository.getUserFavourites(firebaseAuth?.currentUser?.uid.toString())
             recipeAdapter.updateList(recipes)
         }
     }
 
-    private fun favouriteRecipeClicked(recipe: FavouriteRecipeEntity){
+    private fun favouriteRecipeClicked(recipe: FavouriteRecipeEntity) {
         parentFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, RecipeDetailFragment.newInstance(recipe.id.toString()))
             .addToBackStack(null)
@@ -76,6 +79,7 @@ class FavouritesFragments : Fragment() {
         super.onDestroy()
         _binding = null
     }
+
     companion object {
 
         @JvmStatic

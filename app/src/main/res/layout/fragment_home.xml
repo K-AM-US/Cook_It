@@ -5,10 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.fragments.HomeFragment">
@@ -58,11 +55,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Recetas populares"
+            android:text="@string/homeTitle"
             android:textStyle="bold"
-            android:textSize="25sp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
+            android:textSize="30sp"
             app:layout_constraintTop_toTopOf="@id/topGuideline"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
             />
@@ -77,7 +72,8 @@
             android:src="@drawable/ic_account"
             app:tint="@color/blue_1"
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-            app:layout_constraintTop_toTopOf="@id/topGuideline" />
+            app:layout_constraintTop_toTopOf="@id/topGuideline"
+            android:contentDescription="@string/loginDesc"/>
 
         <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
             android:id="@+id/rvCarousel"
@@ -99,6 +95,28 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"/>
 
+        <TextView
+            android:id="@+id/connectionErrorMessage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="40sp"
+            android:textAlignment="center"
+            android:text="@string/networkMessage"
+            app:layout_constraintTop_toTopOf="@id/topGuideline"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintBottom_toTopOf="@id/connectionErrorButton"/>
+
+        <Button
+            android:id="@+id/connectionErrorButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reload"
+            app:layout_constraintTop_toBottomOf="@id/connectionErrorMessage"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -112,6 +130,7 @@
         app:srcCompat="@drawable/ic_add"
         app:tint="@android:color/white"
         app:maxImageSize="60dp"
-        app:shapeAppearanceOverlay="@style/fab_square"/>
-    
+        app:shapeAppearanceOverlay="@style/fab_square"
+        android:contentDescription="@string/floatingbuttonDesc"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>   
