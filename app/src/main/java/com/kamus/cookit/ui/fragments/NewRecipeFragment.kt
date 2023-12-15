@@ -123,7 +123,6 @@ class NewRecipeFragment(
             }else{
                 Toast.makeText(requireActivity(), "Faltan datos en la receta", Toast.LENGTH_SHORT).show()
             }
-            /* TODO: falta validar que no hayan cadenas vacías y que no estén vacios los arreglos */
         }
 
         binding.apply {

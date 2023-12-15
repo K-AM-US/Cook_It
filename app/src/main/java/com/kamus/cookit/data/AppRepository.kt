@@ -89,6 +89,8 @@ class AppRepository(private val recipeDao: RecipeDao, private val favouriteRecip
         userDataDao.insertUser(user)
     suspend fun getUser(uid: String) =
         userDataDao.getUser(uid)
+    suspend fun updateUser(user: UserDataEntity) =
+        userDataDao.updateUser(user)
 
 
 

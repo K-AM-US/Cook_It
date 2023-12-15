@@ -32,6 +32,10 @@
     <string name="loginAccountMessage">Inicia Sesión para\n ver tus receta</string>
     <string name="networkMessage">Ocurrió un error, intenta otra vez</string>
     <string name="reload">Reintentar</string>
+    <string name="addButtonDesc">Add recipe button</string>
+    <string name="friendsButtonDesc">Friends button</string>
+    <string name="favouritesButtonDesc">Favourite recipes button</string>
+    <string name="empty">No hay recetas aquí,\ncrea una!</string>
 
     <!-- Home -->
     <string name="homeTitle">Recetas Populares</string>
@@ -41,10 +45,7 @@
     <!-- Account Settings -->
     <string name="phoneNumber">Teléfono</string>
     <string name="settingsIconDesc">Settings button</string>
-    <string name="addButtonDesc">Add recipe button</string>
-    <string name="friendsButtonDesc">Friends button</string>
-    <string name="favouritesButtonDesc">Favourite recipes button</string>
-    <string name="empty">No hay recetas aquí,\ncrea una!</string>
+    <string name="settingsName">Nombre</string>
     <string name="updateButton">Actualizar</string>
     <string name="profilePhotoDesc">Foto de perfil</string>
     <string name="logout">Salir</string>

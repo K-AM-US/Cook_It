@@ -63,6 +63,23 @@
             android:id="@+id/settingsName"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:hint="@string/settingsName"
+            android:drawableEnd="@drawable/ic_edit"
+            android:autofillHints=""
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/settingsUsernameLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@id/settingsNameLayout">
+        <EditText
+            android:id="@+id/settingsUsername"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
             android:hint="@string/userName"
             android:drawableEnd="@drawable/ic_edit"
             android:autofillHints=""
@@ -75,7 +92,7 @@
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@id/settingsNameLayout">
+        app:layout_constraintTop_toBottomOf="@id/settingsUsernameLayout">
         <EditText
             android:id="@+id/settingsPassword"
             android:layout_width="250dp"
@@ -84,40 +101,6 @@
             android:drawableEnd="@drawable/ic_edit"
             android:autofillHints=""
             android:inputType="textPassword" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/settingsPhoneLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@id/settingsPasswordLayout">
-        <EditText
-            android:id="@+id/settingsPhone"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/phoneNumber"
-            android:drawableEnd="@drawable/ic_edit"
-            android:autofillHints=""
-            android:inputType="phone" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/settingsEmailLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@id/settingsPhoneLayout">
-        <EditText
-            android:id="@+id/settingsEmail"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/email"
-            android:drawableEnd="@drawable/ic_edit"
-            android:autofillHints=""
-            android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -129,7 +112,7 @@
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@id/settingsEmailLayout"
+        app:layout_constraintTop_toBottomOf="@id/settingsPasswordLayout"
         app:layout_constraintVertical_bias="0.496" />
 
     <com.google.android.material.button.MaterialButton
