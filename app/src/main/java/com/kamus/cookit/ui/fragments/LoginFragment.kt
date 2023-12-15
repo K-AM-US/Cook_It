@@ -3,18 +3,24 @@ package com.kamus.cookit.ui.fragments
 import android.app.AlertDialog
 import android.os.Bundle
 import android.text.InputType
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.kamus.cookit.R
 import com.kamus.cookit.databinding.FragmentLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
+import com.kamus.cookit.application.CookItApp
+import com.kamus.cookit.data.AppRepository
+import com.kamus.cookit.data.db.model.UserDataEntity
+import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
 
@@ -23,6 +29,7 @@ class LoginFragment : Fragment() {
     private lateinit var firebaseAuth: FirebaseAuth
     private var email = ""
     private var password = ""
+    private lateinit var repository: AppRepository
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,9 +42,8 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        repository = (requireActivity().application as CookItApp).repository
         firebaseAuth = FirebaseAuth.getInstance()
-
         binding.btnLogin.setOnClickListener {
             if (!validateFields()) return@setOnClickListener
             authenticateUser(email, password)
@@ -80,6 +86,19 @@ class LoginFragment : Fragment() {
                 }
                 .create()
                 .show()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        firebaseAuth = FirebaseAuth.getInstance()
+        lifecycleScope.launch {
+            val usertmp = repository.getUser(firebaseAuth.currentUser?.uid.toString())
+            if(usertmp == null){
+                val tmp = UserDataEntity(firebaseAuth.currentUser?.uid.toString(), "", firebaseAuth.currentUser?.email!!.substringBefore('@'))
+                repository.insertUser(tmp)
+                Log.d("NEWTEST", "${repository.getUser(firebaseAuth.currentUser?.uid.toString())}")
+            }
         }
     }
 

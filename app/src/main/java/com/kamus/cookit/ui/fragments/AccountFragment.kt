@@ -129,14 +129,9 @@ class AccountFragment : Fragment() {
                     removeFriend.visibility = View.GONE
                     lifecycleScope.launch {
                         val usertmp = repository.getUser(firebaseAuth?.currentUser?.uid.toString())
-                        if(usertmp == null){
-                            binding.profileUsername.text = firebaseAuth?.currentUser?.email?.substringBefore('@')
-                            val tmp = UserDataEntity(firebaseAuth?.currentUser?.uid.toString(), "", "")
-                            repository.insertUser(tmp)
-                        } else {
-                            binding.profileUsername.text = usertmp.username
-                            binding.profileName.text = usertmp.fullname
-                        }
+
+                        binding.profileUsername.text = usertmp.username
+                        binding.profileName.text = usertmp.fullname
                     }
                     profilePhoto.setImageResource(R.mipmap.ic_launcher)
                 }

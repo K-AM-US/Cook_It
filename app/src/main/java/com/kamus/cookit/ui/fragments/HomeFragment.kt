@@ -52,7 +52,7 @@ class HomeFragment : Fragment() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        if (firebaseAuth?.uid == null) {
+        if (firebaseAuth?.currentUser?.uid == null) {
             binding.loginIcon.setOnClickListener {
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainer, LoginFragment.newInstance())
