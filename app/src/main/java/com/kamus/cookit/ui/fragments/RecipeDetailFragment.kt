@@ -2,12 +2,14 @@ package com.kamus.cookit.ui.fragments
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
@@ -54,10 +56,16 @@ class RecipeDetailFragment : Fragment() {
             repository = (requireActivity().application as CookItApp).repository
 
             if (recipeId?.length!! > 3) {
-                binding.connectionErrorButton.setOnClickListener {
-                    load()
+                binding.apply {
+                    connectionErrorButton.setOnClickListener {
+                        load()
+                    }
+                    connectionErrorButton.performClick()
                 }
+
             } else {
+                binding.connectionErrorButton.visibility = View.GONE
+                binding.connectionErrorMessage.visibility = View.GONE
                 lifecycleScope.launch {
                     recipe = repository.getRecipeByID(recipeId)
                     binding.apply {
@@ -66,11 +74,13 @@ class RecipeDetailFragment : Fragment() {
                         recipe.ingredients.forEach {
                             val ingredient = TextView(requireContext())
                             ingredient.text = it
+                            ingredient.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
                             recipeDetailIngredientsList.addView(ingredient)
                         }
                         recipe.process.forEach {
                             val process = TextView(requireContext())
                             process.text = it
+                            process.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
                             recipeDetailProcessList.addView(process)
                         }
 
@@ -154,12 +164,14 @@ class RecipeDetailFragment : Fragment() {
                     response.body()?.ingredients?.forEach {
                         val ingredient = TextView(requireContext())
                         ingredient.text = it
+                        ingredient.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
                         recipeDetailIngredientsList.addView(ingredient)
                     }
 
                     response.body()?.process?.forEach {
                         val process = TextView(requireContext())
                         process.text = it
+                        process.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
                         recipeDetailProcessList.addView(process)
                     }
 

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.kamus.cookit.R
 import com.kamus.cookit.data.db.model.RecipeEntity
 import com.kamus.cookit.databinding.ElementRecipeBinding
 
@@ -28,6 +29,7 @@ class ProfileRecipesAdapter(
         fun bind(recipe: RecipeEntity) {
             binding.apply {
                 cardRecipeTitle.text = recipe.title
+                img.setImageResource(R.mipmap.ic_cookit_logo)
             }
         }
     }

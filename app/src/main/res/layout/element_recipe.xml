@@ -30,6 +30,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/blue_3"
                 android:baselineAligned="false"
                 android:orientation="horizontal">
 
@@ -45,7 +46,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:hint="@string/titleHint"
-                        android:textAppearance="?attr/textAppearanceHeadline6" />
+                        android:textAppearance="?attr/textAppearanceHeadline6"
+                        android:textColor="@color/white" />
 
                 </LinearLayout>
 
@@ -61,38 +63,41 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_gravity="center_vertical"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/btnComment"
                         android:background="@null"
                         android:contentDescription="@string/favDesc"
-                        android:src="@drawable/ic_star" />
+                        android:src="@drawable/ic_star"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/btnComment"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/blue_1" />
 
                     <ImageButton
                         android:id="@+id/btnComment"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:background="@null"
-                        app:layout_constraintStart_toEndOf="@id/btnFavourite"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:contentDescription="@string/commentDesc"
+                        android:src="@drawable/ic_comment"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/btnShare"
-                        android:contentDescription="@string/commentDesc"
-                        android:src="@drawable/ic_comment" />
+                        app:layout_constraintStart_toEndOf="@id/btnFavourite"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/blue_1" />
 
                     <ImageButton
                         android:id="@+id/btnShare"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_gravity="center_vertical"
-                        app:layout_constraintStart_toEndOf="@id/btnComment"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
                         android:background="@null"
                         android:contentDescription="@string/shareDesc"
-                        android:src="@drawable/ic_share" />
+                        android:src="@drawable/ic_share"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/btnComment"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/blue_1" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

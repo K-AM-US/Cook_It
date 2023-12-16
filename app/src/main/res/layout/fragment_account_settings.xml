@@ -47,6 +47,7 @@
         android:layout_width="180dp"
         android:layout_height="180dp"
         android:src="@drawable/ic_account"
+        app:tint="@color/white"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintTop_toTopOf="@id/topGuideline"
@@ -57,14 +58,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:textColorHint="@color/white"
+        app:counterTextColor="@color/white"
+        app:boxStrokeColor="@color/white"
+        app:counterOverflowTextColor="@color/white"
+        app:hintTextColor="@color/white"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintTop_toTopOf="@id/photoDiv">
         <EditText
             android:id="@+id/settingsName"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:hint="@string/settingsName"
             android:drawableEnd="@drawable/ic_edit"
+            android:drawableTint="@color/blue_1"
             android:autofillHints=""
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -74,14 +82,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:textColorHint="@color/white"
+        app:counterTextColor="@color/white"
+        app:boxStrokeColor="@color/white"
+        app:counterOverflowTextColor="@color/white"
+        app:hintTextColor="@color/white"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintTop_toBottomOf="@id/settingsNameLayout">
         <EditText
             android:id="@+id/settingsUsername"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:hint="@string/userName"
             android:drawableEnd="@drawable/ic_edit"
+            android:drawableTint="@color/blue_1"
             android:autofillHints=""
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -91,14 +106,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:textColorHint="@color/white"
+        app:counterTextColor="@color/white"
+        app:boxStrokeColor="@color/white"
+        app:counterOverflowTextColor="@color/white"
+        app:hintTextColor="@color/white"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintTop_toBottomOf="@id/settingsUsernameLayout">
         <EditText
             android:id="@+id/settingsPassword"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:hint="@string/userPassword"
             android:drawableEnd="@drawable/ic_edit"
+            android:drawableTint="@color/blue_1"
             android:autofillHints=""
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>

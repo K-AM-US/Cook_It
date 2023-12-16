@@ -43,6 +43,11 @@
             android:id="@+id/recipeTitleLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColorHint="@color/white"
+            app:hintTextColor="@color/white"
+            app:counterTextColor="@color/white"
+            app:boxStrokeColor="@color/white"
+            app:counterOverflowTextColor="@color/white"
             app:layout_constraintBottom_toTopOf="@id/recipeImage"
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
@@ -51,6 +56,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/recipeTitle"
                 android:layout_width="250dp"
+                android:textColor="@color/white"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:hint="@string/titleHint"
@@ -75,6 +81,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ingredientsList"
+            android:textSize="20sp"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@id/linearLayoutIngredients"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
             app:layout_constraintTop_toBottomOf="@id/recipeImage" />
@@ -123,6 +131,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="@string/processList"
+            android:textColor="@color/white"
+            android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@id/linearLayoutProcess"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
             app:layout_constraintTop_toBottomOf="@id/addIngredient" />

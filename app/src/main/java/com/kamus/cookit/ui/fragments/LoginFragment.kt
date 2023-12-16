@@ -46,7 +46,19 @@ class LoginFragment : Fragment() {
         firebaseAuth = FirebaseAuth.getInstance()
         binding.btnLogin.setOnClickListener {
             if (!validateFields()) return@setOnClickListener
-            authenticateUser(email, password)
+            firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
+                lifecycleScope.launch {
+                    val usertmp = repository.getUser(firebaseAuth.currentUser?.uid.toString())
+                    if(usertmp == null){
+                        val tmp = UserDataEntity(firebaseAuth.currentUser?.uid.toString(), "", firebaseAuth.currentUser?.email!!.substringBefore('@'))
+                        repository.insertUser(tmp)
+                        Log.d("NEWTEST", "${repository.getUser(firebaseAuth.currentUser?.uid.toString())}")
+                    }
+                }
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, HomeFragment.newInstance())
+                    .commit()
+            }
         }
 
         binding.btnSignUp.setOnClickListener {
@@ -86,19 +98,6 @@ class LoginFragment : Fragment() {
                 }
                 .create()
                 .show()
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        firebaseAuth = FirebaseAuth.getInstance()
-        lifecycleScope.launch {
-            val usertmp = repository.getUser(firebaseAuth.currentUser?.uid.toString())
-            if(usertmp == null){
-                val tmp = UserDataEntity(firebaseAuth.currentUser?.uid.toString(), "", firebaseAuth.currentUser?.email!!.substringBefore('@'))
-                repository.insertUser(tmp)
-                Log.d("NEWTEST", "${repository.getUser(firebaseAuth.currentUser?.uid.toString())}")
-            }
         }
     }
 

@@ -86,7 +86,7 @@ class AccountFragment : Fragment() {
                     addBox.visibility = View.GONE
                     friends.visibility = View.GONE
                     favourites.visibility = View.GONE
-                    noRecipesMessage.visibility = View.GONE
+
                     rvRecipes.visibility = View.GONE
 
                     loginBtn.setOnClickListener {
@@ -190,14 +190,20 @@ class AccountFragment : Fragment() {
                                         it,
                                         firebaseAuth?.currentUser?.uid.toString()
                                     ) == null
-                                )
+                                ) {
                                     repository.insertFriend(
                                         FriendsEntity(
                                             it,
                                             firebaseAuth?.currentUser?.uid.toString()
                                         )
                                     )
-                                else
+                                    Toast.makeText(
+                                        requireActivity(),
+                                        "Amigo agregado",
+                                        Toast.LENGTH_SHORT
+                                    )
+                                        .show()
+                                } else
                                     Toast.makeText(
                                         requireContext(),
                                         "Usuario ya es un amigo",
@@ -216,14 +222,16 @@ class AccountFragment : Fragment() {
                                         it,
                                         firebaseAuth?.currentUser?.uid.toString()
                                     ) != null
-                                )
+                                ){
                                     repository.deleteFriend(
                                         FriendsEntity(
                                             it,
                                             firebaseAuth?.currentUser?.uid.toString()
                                         )
                                     )
-                                else
+                                    Toast.makeText(requireActivity(), "Amigo eliminado", Toast.LENGTH_SHORT)
+                                        .show()
+                                } else
                                     Toast.makeText(
                                         requireContext(),
                                         "Usuario ya se borró",
@@ -247,6 +255,15 @@ class AccountFragment : Fragment() {
         lifecycleScope.launch {
             if (userId?.toInt() == 0) {
                 recipes = repository.getUserRecipes(firebaseAuth?.currentUser?.uid.toString())
+                if (recipes.isNotEmpty()){
+                    binding.noRecipesMessage.visibility = View.GONE
+                    binding.rvRecipes.visibility = View.VISIBLE
+                } else {
+                    binding.noRecipesMessage.visibility = View.VISIBLE
+                    binding.rvRecipes.visibility = View.GONE
+                }
+                if(firebaseAuth?.currentUser?.uid == null)
+                    binding.noRecipesMessage.visibility = View.GONE
             } else {
                 binding.apply {
                     connectionErrorButton.setOnClickListener {
@@ -254,15 +271,7 @@ class AccountFragment : Fragment() {
                     }
                     connectionErrorButton.performClick()
                 }
-
-
             }
-
-            if (recipes.isNotEmpty())
-                binding.noRecipesMessage.visibility = View.INVISIBLE
-            else
-                binding.noRecipesMessage.visibility = View.VISIBLE
-
             recipeAdapter.updateList(recipes)
         }
     }
@@ -283,7 +292,7 @@ class AccountFragment : Fragment() {
             ).show()
         } else {
             lifecycleScope.launch {
-                if (repository.getFavouriteRecipeById(recipe.id.toString()) == null)
+                if (repository.getFavouriteRecipeById(recipe.id.toString()) == null) {
                     repository.insertFavouriteRecipe(
                         FavouriteRecipeEntity(
                             recipe.id,
@@ -293,6 +302,18 @@ class AccountFragment : Fragment() {
                             recipe.process
                         )
                     )
+                    Toast.makeText(
+                        requireActivity(),
+                        "Receta agregada a favoritas",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    Toast.makeText(
+                        requireActivity(),
+                        "Receta ya es favorita",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }

@@ -10,9 +10,9 @@
 
     <!-- App colors -->
     <color name="blue_1">#73A5FE</color>
-    <color name="blue_2">#A9BEE1</color>
-    <color name="blue_3">#638FDB</color>
-    <color name="blue_4">#454D5C</color>
+    <color name="blue_2">#767D8A</color>
+    <color name="blue_3">#404857</color>
+    <color name="blue_4">#1C2433</color>
     <color name="letter">#FFF0D4</color>
     <color name="addIngredient">#4CAF50</color>
     <color name="removeIngredient">#FF0000</color>

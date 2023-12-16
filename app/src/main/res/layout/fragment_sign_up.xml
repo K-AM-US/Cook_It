@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         tools:context=".ui.fragments.SignUpFragment">
 
         <androidx.constraintlayout.widget.Guideline
@@ -16,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.06"/>
+            app:layout_constraintGuide_percent="0.06" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/bottomGuideline"
@@ -43,14 +41,15 @@
             android:id="@+id/signUpLogo"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:src="@drawable/ic_account"
             android:layout_marginBottom="5dp"
             android:contentDescription="@string/contentDesc"
-            app:layout_constraintVertical_chainStyle="spread"
-            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            android:src="@drawable/ic_account"
+            app:layout_constraintBottom_toTopOf="@id/signUpMsg"
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
             app:layout_constraintTop_toTopOf="@id/topGuideline"
-            app:layout_constraintBottom_toTopOf="@id/signUpMsg" />
+            app:layout_constraintVertical_chainStyle="spread"
+            app:tint="@color/white" />
 
         <TextView
             android:id="@+id/signUpMsg"
@@ -58,135 +57,176 @@
             android:layout_height="wrap_content"
             android:text="@string/msg"
             android:textAlignment="center"
-            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/nameLayout"
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-            app:layout_constraintTop_toBottomOf="@id/signUpLogo"
-            app:layout_constraintBottom_toTopOf="@id/nameLayout"/>
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintTop_toBottomOf="@id/signUpLogo" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:hint="@string/name"
+            android:inputType="text"
+            android:textColorHint="@color/white"
+            app:counterTextColor="@color/white"
+            app:boxStrokeColor="@color/white"
+            app:counterOverflowTextColor="@color/white"
+            app:hintTextColor="@color/white"
             android:layout_marginTop="10dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
             app:boxCornerRadiusTopEnd="16dp"
             app:boxCornerRadiusTopStart="16dp"
-            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintBottom_toTopOf="@id/lastnameLayout"
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-            app:layout_constraintTop_toBottomOf="@id/signUpMsg"
-            app:layout_constraintBottom_toTopOf="@id/lastnameLayout">
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintTop_toBottomOf="@id/signUpMsg">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/name"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="@string/name"
                 android:layout_marginTop="10dp"
-                android:autofillHints="" />
+                android:autofillHints=""
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/lastnameLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:autofillHints=""
+            app:hintTextColor="@color/white"
+            android:textColorHint="@color/white"
+            app:counterTextColor="@color/white"
+            app:boxStrokeColor="@color/white"
+            app:counterOverflowTextColor="@color/white"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
             app:boxCornerRadiusTopEnd="16dp"
             app:boxCornerRadiusTopStart="16dp"
-            app:layout_constraintStart_toStartOf="@id/leftGuideline"
-            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-            app:layout_constraintTop_toBottomOf="@id/nameLayout"
             app:layout_constraintBottom_toTopOf="@id/usernameLayout"
-            android:autofillHints="">
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintTop_toBottomOf="@id/nameLayout">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/lastname"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
+                android:hint="@string/lastname"
                 android:inputType="text"
-                android:hint="@string/lastname" />
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/usernameLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:autofillHints=""
+            android:textColorHint="@color/white"
+            app:counterTextColor="@color/white"
+            app:boxStrokeColor="@color/white"
+            app:counterOverflowTextColor="@color/white"
+            app:hintTextColor="@color/white"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
             app:boxCornerRadiusTopEnd="16dp"
             app:boxCornerRadiusTopStart="16dp"
-            app:layout_constraintStart_toStartOf="@id/leftGuideline"
-            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-            app:layout_constraintTop_toBottomOf="@id/lastnameLayout"
             app:layout_constraintBottom_toTopOf="@id/emailLayout"
-            android:autofillHints="">
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintTop_toBottomOf="@id/lastnameLayout">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/username"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
+                android:hint="@string/userName"
                 android:inputType="text"
-                android:hint="@string/userName" />
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColorHint="@color/white"
             android:layout_marginTop="10dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:counterTextColor="@color/white"
+            app:boxStrokeColor="@color/white"
+            app:counterOverflowTextColor="@color/white"
+            app:hintTextColor="@color/white"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
             app:boxCornerRadiusTopEnd="16dp"
             app:boxCornerRadiusTopStart="16dp"
-            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintBottom_toTopOf="@id/passwordLayout"
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-            app:layout_constraintTop_toBottomOf="@id/usernameLayout"
-            app:layout_constraintBottom_toTopOf="@id/passwordLayout">
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintTop_toBottomOf="@id/usernameLayout">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
+                android:autofillHints=""
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
-                android:autofillHints=""
-                android:drawableStart="@drawable/ic_email"/>
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passwordLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:counterTextColor="@color/white"
+            app:boxStrokeColor="@color/white"
+            app:counterOverflowTextColor="@color/white"
+            android:textColorHint="@color/white"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
             app:boxCornerRadiusTopEnd="16dp"
             app:boxCornerRadiusTopStart="16dp"
-            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintBottom_toTopOf="@id/confirmPasswordLayout"
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-            app:layout_constraintTop_toBottomOf="@id/emailLayout"
-            app:layout_constraintBottom_toTopOf="@id/confirmPasswordLayout">
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintTop_toBottomOf="@id/emailLayout">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:hint="@string/userPassword"
                 android:layout_marginVertical="10dp"
-                android:inputType="textPassword"
                 android:autofillHints=""
-                android:drawableStart="@drawable/ic_password"/>
+                android:hint="@string/userPassword"
+                android:inputType="textPassword"
+                android:textColor="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/confirmPasswordLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:counterTextColor="@color/white"
+            app:boxStrokeColor="@color/white"
+            app:counterOverflowTextColor="@color/white"
+            android:textColorHint="@color/white"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
             app:boxCornerRadiusTopEnd="16dp"
@@ -195,13 +235,16 @@
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
             app:layout_constraintTop_toBottomOf="@id/passwordLayout">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/confirmPassword"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
+                android:autofillHints=""
                 android:hint="@string/confirmPassword"
                 android:inputType="textPassword"
-                android:autofillHints="" />
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -210,10 +253,10 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="25dp"
             android:text="@string/signUp"
-            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-            app:layout_constraintTop_toBottomOf="@id/confirmPasswordLayout"
-            app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"/>
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintTop_toBottomOf="@id/confirmPasswordLayout" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

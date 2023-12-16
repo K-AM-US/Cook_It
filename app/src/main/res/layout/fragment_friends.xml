@@ -39,9 +39,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/searchBox"/>
+        app:layout_constraintTop_toBottomOf="@id/searchBoxLayout"/>
 
-    <EditText
+    <!--<EditText
         android:id="@+id/searchBox"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
@@ -51,7 +51,37 @@
         app:layout_constraintTop_toTopOf="@id/topGuideline"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-        android:autofillHints="name"/>
+        android:autofillHints="name"/>-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/searchBoxLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:autofillHints=""
+        android:textColorHint="@color/white"
+        app:counterTextColor="@color/white"
+        app:boxStrokeColor="@color/white"
+        app:counterOverflowTextColor="@color/white"
+        app:hintTextColor="@color/white"
+        app:boxCornerRadiusBottomEnd="16dp"
+        app:boxCornerRadiusBottomStart="16dp"
+        app:boxCornerRadiusTopEnd="16dp"
+        app:boxCornerRadiusTopStart="16dp"
+        app:layout_constraintTop_toTopOf="@id/topGuideline"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@id/searchDiv">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/searchBox"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/userName"
+            android:inputType="text"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFriends"

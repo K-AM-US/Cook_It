@@ -114,8 +114,20 @@ class HomeFragment : Fragment() {
                             }
                                 ?.let {
                                     lifecycleScope.launch {
-                                        if (repository.getFavouriteRecipeById(recipe.id) == null)
+                                        if (repository.getFavouriteRecipeById(recipe.id) == null) {
                                             repository.insertFavouriteRecipe(it)
+                                            Toast.makeText(
+                                                requireActivity(),
+                                                "Receta agregada a favoritas",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        } else {
+                                            Toast.makeText(
+                                                requireActivity(),
+                                                "Receta ya es favorita",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
                                     }
                                 }
                         }

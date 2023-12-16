@@ -13,12 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:padding="15dp">
+        android:padding="15dp"
+        android:background="@color/blue_3">
 
         <ImageView
             android:id="@+id/categoryImage"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            app:tint="@color/blue_1"
             android:layout_gravity="center"
             android:contentDescription="@string/iconDesc"/>
 
@@ -28,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:textAlignment="center"
+            android:textColor="@color/white"
             tools:text="CATEGORIA"
             android:layout_gravity="center"/>
     </LinearLayout>
