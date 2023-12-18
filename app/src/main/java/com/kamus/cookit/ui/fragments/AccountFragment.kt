@@ -99,6 +99,7 @@ class AccountFragment : Fragment() {
                 binding.loginBtn.visibility = View.GONE
                 binding.loginIcon.visibility = View.GONE
                 binding.loginMessage.visibility = View.GONE
+                binding.progressBar.visibility = View.GONE
                 if (userId != "0") {
                     settingsIcon.visibility = View.GONE
                     addBox.visibility = View.GONE
@@ -319,6 +320,7 @@ class AccountFragment : Fragment() {
     }
 
     private fun load() {
+        binding.progressBar.visibility = View.VISIBLE
         binding.connectionErrorButton.visibility = View.GONE
         binding.connectionErrorMessage.visibility = View.GONE
         val recipesTmp = ArrayList<RecipeEntity>()
@@ -328,6 +330,7 @@ class AccountFragment : Fragment() {
                 call: Call<List<RecipeDto>>,
                 response: Response<List<RecipeDto>>
             ) {
+                binding.progressBar.visibility = View.GONE
                 response.body()?.forEach {
                     if (userRecipes.contains(it.id))
                         recipesTmp.add(
@@ -347,6 +350,7 @@ class AccountFragment : Fragment() {
             override fun onFailure(call: Call<List<RecipeDto>>, t: Throwable) {
                 binding.connectionErrorButton.visibility = View.VISIBLE
                 binding.connectionErrorMessage.visibility = View.VISIBLE
+                binding.progressBar.visibility = View.GONE
                 binding.connectionErrorButton.setOnClickListener {
                     load()
                 }
