@@ -1,10 +1,15 @@
 package com.kamus.cookit.ui.fragments
 
+import android.app.AlertDialog
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +25,7 @@ import com.kamus.cookit.data.db.model.UserDataEntity
 import com.kamus.cookit.data.remote.model.RecipeDto
 import com.kamus.cookit.databinding.FragmentAccountBinding
 import com.kamus.cookit.ui.adapters.ProfileRecipesAdapter
+import com.kamus.cookit.utils.Constants
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -57,6 +63,10 @@ class AccountFragment : Fragment() {
             onClickedRecipe(it)
         }, favouriteOnClick = {
             favouriteOnClick(it)
+        }, onCommentRecipe = {
+            onCommentRecipe()
+        }, onShareRecipe = {
+            onShareRecipe(it)
         })
 
         arguments.let {
@@ -73,8 +83,9 @@ class AccountFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             firebaseAuth = FirebaseAuth.getInstance()
-            binding.connectionErrorButton.visibility = View.GONE
-            binding.connectionErrorMessage.visibility = View.GONE
+            connectionErrorButton.visibility = View.GONE
+            connectionErrorMessage.visibility = View.GONE
+            emptyUserList.visibility = View.GONE
             if (firebaseAuth?.uid == null && userId == "0") {
                 binding.apply {
                     profilePhoto.visibility = View.GONE
@@ -200,7 +211,7 @@ class AccountFragment : Fragment() {
                                     )
                                     Toast.makeText(
                                         requireActivity(),
-                                        "Amigo agregado",
+                                        "Usuario agregado",
                                         Toast.LENGTH_SHORT
                                     )
                                         .show()
@@ -230,7 +241,7 @@ class AccountFragment : Fragment() {
                                             firebaseAuth?.currentUser?.uid.toString()
                                         )
                                     )
-                                    Toast.makeText(requireActivity(), "Amigo eliminado", Toast.LENGTH_SHORT)
+                                    Toast.makeText(requireActivity(), "Usuario eliminado", Toast.LENGTH_SHORT)
                                         .show()
                                 } else
                                     Toast.makeText(
@@ -255,6 +266,7 @@ class AccountFragment : Fragment() {
     private fun updateUI() {
         lifecycleScope.launch {
             if (userId?.toInt() == 0) {
+                binding.emptyUserList.visibility = View.GONE
                 recipes = repository.getUserRecipes(firebaseAuth?.currentUser?.uid.toString())
                 if (recipes.isNotEmpty()){
                     binding.noRecipesMessage.visibility = View.GONE
@@ -305,18 +317,37 @@ class AccountFragment : Fragment() {
                     )
                     Toast.makeText(
                         requireActivity(),
-                        "Receta agregada a favoritas",
+                        "Agregaste esta receta a tus favoritas",
                         Toast.LENGTH_SHORT
                     ).show()
                 } else {
-                    Toast.makeText(
-                        requireActivity(),
-                        "Receta ya es favorita",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    repository.deleteFavouriteRecipe(repository.getFavouriteRecipeById(recipe.id.toString()))
+                    Toast.makeText(requireActivity(), "Eliminaste esta receta de tus favoritas", Toast.LENGTH_SHORT).show()
                 }
             }
         }
+    }
+    
+    private fun onCommentRecipe() {
+        val comment = EditText(requireActivity())
+        val commentDialog = AlertDialog.Builder(requireActivity())
+            .setTitle("Comentario")
+            .setMessage("Deja un comentario para esta receta")
+            .setView(comment)
+            .setPositiveButton("Comentar") { _, _ ->
+
+            }.setNegativeButton("Cancelar") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+            .show()
+    }
+
+    private fun onShareRecipe(id: String) {
+        val clipboardManager = requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clipdata = ClipData.newPlainText("url", "${Constants.BASE_URL}recipe/$id")
+        clipboardManager.setPrimaryClip(clipdata)
+        Toast.makeText(requireActivity(), "Link copiado en portapapeles", Toast.LENGTH_SHORT).show()
     }
 
     private fun load() {
@@ -344,6 +375,10 @@ class AccountFragment : Fragment() {
                             )
                         )
                     recipeAdapter.updateList(recipes)
+                    if(recipes.isEmpty() && userId != "0")
+                        binding.emptyUserList.visibility = View.VISIBLE
+                    else
+                        binding.emptyUserList.visibility = View.GONE
                 }
             }
 

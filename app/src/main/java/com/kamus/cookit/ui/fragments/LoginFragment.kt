@@ -72,7 +72,7 @@ class LoginFragment : Fragment() {
             val resetMail = EditText(requireActivity())
             resetMail.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
 
-            val passwordResetDialog = AlertDialog.Builder(requireActivity())
+            AlertDialog.Builder(requireActivity())
                 .setTitle("Reestablecer contraseña")
                 .setMessage("Ingresa tu correo para recibir el enlace de restablecimiento")
                 .setView(resetMail)

@@ -8,7 +8,9 @@ import com.kamus.cookit.databinding.ElementRecipeBinding
 
 class FavouriteRecipesAdapter(
     private val favouriteRecipeClicked: (FavouriteRecipeEntity) -> Unit,
-    private val deleteFavouriteRecipe: (FavouriteRecipeEntity) -> Unit
+    private val deleteFavouriteRecipe: (FavouriteRecipeEntity) -> Unit,
+    private val onCommentRecipe: () -> Unit,
+    private val onShareRecipe: (String) -> Unit
 ) : RecyclerView.Adapter<FavouriteRecipesAdapter.ViewHolder>() {
 
     private var recipes: List<FavouriteRecipeEntity> = emptyList()
@@ -17,6 +19,8 @@ class FavouriteRecipesAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         val btnFavourite = binding.btnFavourite
+        val btnComment = binding.btnComment
+        val btnShare = binding.btnShare
 
         fun bind(recipe: FavouriteRecipeEntity) {
             binding.apply {
@@ -39,9 +43,14 @@ class FavouriteRecipesAdapter(
         holder.itemView.setOnClickListener {
             favouriteRecipeClicked(recipes[position])
         }
-
         holder.btnFavourite.setOnClickListener {
             deleteFavouriteRecipe(recipes[position])
+        }
+        holder.btnComment.setOnClickListener {
+            onCommentRecipe()
+        }
+        holder.btnShare.setOnClickListener {
+            onShareRecipe(recipes[position].id.toString())
         }
     }
 

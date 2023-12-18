@@ -1,5 +1,9 @@
 package com.kamus.cookit.ui.fragments
 
+import android.app.AlertDialog
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +11,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
@@ -23,6 +28,7 @@ import com.kamus.cookit.data.remote.model.RecipeDto
 import com.kamus.cookit.databinding.FragmentSearchFoodBinding
 import com.kamus.cookit.ui.adapters.CategoryAdapter
 import com.kamus.cookit.ui.adapters.HomeRecipesVerticalAdapter
+import com.kamus.cookit.utils.Constants
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -75,6 +81,10 @@ class SearchFoodFragment : Fragment() {
             onClickedRecipe(it)
         }, favouriteOnClick = {
             favouriteOnClick(it)
+        }, onCommentRecipe = {
+            onCommentRecipe()
+        }, onShareRecipe = {
+            onShareRecipe(it)
         })
         binding.rvRecipes.layoutManager = linearLayoutM
         binding.rvRecipes.adapter = recipesAdapter
@@ -132,11 +142,8 @@ class SearchFoodFragment : Fragment() {
                                             Toast.LENGTH_SHORT
                                         ).show()
                                     } else {
-                                        Toast.makeText(
-                                            requireActivity(),
-                                            "Receta ya es favorita",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
+                                        repository.deleteFavouriteRecipe(it)
+                                        Toast.makeText(requireActivity(), "Eliminaste esta receta de tus favoritas", Toast.LENGTH_SHORT).show()
                                     }
                                 }
                         }
@@ -160,6 +167,28 @@ class SearchFoodFragment : Fragment() {
             recipesTemp
         }
         recipesAdapter.filteredRecipes(filteredRecipes)
+    }
+
+    private fun onCommentRecipe() {
+        val comment = EditText(requireActivity())
+        AlertDialog.Builder(requireActivity())
+            .setTitle("Comentario")
+            .setMessage("Deja un comentario para esta receta")
+            .setView(comment)
+            .setPositiveButton("Comentar") { _, _ ->
+
+            }.setNegativeButton("Cancelar") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+            .show()
+    }
+
+    private fun onShareRecipe(id: String) {
+        val clipboardManager = requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clipdata = ClipData.newPlainText("url", "${Constants.BASE_URL}recipe/$id")
+        clipboardManager.setPrimaryClip(clipdata)
+        Toast.makeText(requireActivity(), "Link copiado en portapapeles", Toast.LENGTH_SHORT).show()
     }
 
     private fun load() {

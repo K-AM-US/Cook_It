@@ -260,4 +260,18 @@
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"/>
 
+    <TextView
+        android:id="@+id/emptyUserList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No hay\nrecetas!"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:textSize="35sp"
+        android:layout_marginTop="-80dp"
+        app:layout_constraintTop_toTopOf="@id/buttonDiv"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

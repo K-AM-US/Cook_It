@@ -12,7 +12,9 @@ import com.kamus.cookit.databinding.ElementRecipeBinding
 class ProfileRecipesAdapter(
     private val onClickedRecipe: (RecipeEntity) -> Unit,
     private val favouriteOnClick: (RecipeEntity) -> Unit,
-    private val userId: String?
+    private val userId: String?,
+    private val onCommentRecipe: () -> Unit,
+    private val onShareRecipe: (String) -> Unit
 ) : RecyclerView.Adapter<ProfileRecipesAdapter.ViewHolder>() {
 
     private var recipes: List<RecipeEntity> = emptyList()
@@ -59,11 +61,11 @@ class ProfileRecipesAdapter(
         }
 
         holder.comment.setOnClickListener {
-            Log.d("LOGS", "click en comment")
+            onCommentRecipe()
         }
 
         holder.share.setOnClickListener {
-            Log.d("LOGS", "click en share")
+            onShareRecipe(recipes[position].id.toString())
         }
 
         if (userId != "0")
