@@ -102,6 +102,8 @@
             android:layout_height="wrap_content"
             android:textSize="40sp"
             android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             android:text="@string/networkMessage"
             app:layout_constraintTop_toTopOf="@id/topGuideline"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
@@ -114,6 +116,15 @@
             android:layout_height="wrap_content"
             android:text="@string/reload"
             app:layout_constraintTop_toBottomOf="@id/connectionErrorMessage"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"/>
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/topGuideline"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"
             app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"/>

@@ -59,24 +59,24 @@ class HomeFragment : Fragment() {
                     .addToBackStack("LoginFragment")
                     .commit()
             }
+            binding.btnAddRecipe.visibility = View.GONE
         } else {
             binding.loginIcon.visibility = View.GONE
-        }
-
-        binding.btnAddRecipe.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(
-                    R.id.fragmentContainer,
-                    NewRecipeFragment.newInstance(
-                        recipeId = "",
-                        recipeTitle = "",
-                        recipeIngredients = ArrayList<String>(),
-                        recipeProcess = ArrayList<String>(),
-                        newRecipe = true
+            binding.btnAddRecipe.setOnClickListener {
+                parentFragmentManager.beginTransaction()
+                    .replace(
+                        R.id.fragmentContainer,
+                        NewRecipeFragment.newInstance(
+                            recipeId = "",
+                            recipeTitle = "",
+                            recipeIngredients = ArrayList<String>(),
+                            recipeProcess = ArrayList<String>(),
+                            newRecipe = true
+                        )
                     )
-                )
-                .addToBackStack("NewRecipeFragment")
-                .commit()
+                    .addToBackStack("NewRecipeFragment")
+                    .commit()
+            }
         }
     }
 
@@ -103,6 +103,7 @@ class HomeFragment : Fragment() {
                         response: Response<RecipeDetailDto>
                     ) {
                         lifecycleScope.launch {
+                            binding.progress.visibility = View.GONE
                             response.body()?.let {
                                 FavouriteRecipeEntity(
                                     recipe.id.toLong(),
@@ -139,6 +140,7 @@ class HomeFragment : Fragment() {
                             "Error de conexión, intenta más tarde",
                             Toast.LENGTH_SHORT
                         ).show()
+                        binding.progress.visibility = View.GONE
                     }
                 })
             }
@@ -148,6 +150,7 @@ class HomeFragment : Fragment() {
     private fun load() {
         binding.connectionErrorMessage.visibility = View.GONE
         binding.connectionErrorButton.visibility = View.GONE
+        binding.progress.visibility = View.VISIBLE
         repository = (requireActivity().application as CookItApp).repository
 
         lifecycleScope.launch {
@@ -157,6 +160,7 @@ class HomeFragment : Fragment() {
                     call: Call<List<RecipeDto>>,
                     response: Response<List<RecipeDto>>
                 ) {
+                    binding.progress.visibility = View.GONE
                     response.body()?.reversed().let { recipes ->
                         binding.rvCarousel.apply {
                             adapter = recipes?.let {
@@ -176,6 +180,7 @@ class HomeFragment : Fragment() {
                 override fun onFailure(call: Call<List<RecipeDto>>, t: Throwable) {
                     binding.connectionErrorButton.visibility = View.VISIBLE
                     binding.connectionErrorMessage.visibility = View.VISIBLE
+                    binding.progress.visibility = View.GONE
 
                     binding.connectionErrorButton.setOnClickListener {
                         load()
@@ -192,6 +197,7 @@ class HomeFragment : Fragment() {
                     response: Response<List<RecipeDto>>
                 ) {
                     Log.d("LOGS", "recipes: ${response.body()}")
+                    binding.progress.visibility = View.GONE
                     response.body()?.let { recipes ->
                         binding.rvHomeRecipes.apply {
                             layoutManager = LinearLayoutManager(requireContext())
@@ -208,6 +214,7 @@ class HomeFragment : Fragment() {
                 override fun onFailure(call: Call<List<RecipeDto>>, t: Throwable) {
                     binding.connectionErrorButton.visibility = View.VISIBLE
                     binding.connectionErrorMessage.visibility = View.VISIBLE
+                    binding.progress.visibility = View.GONE
 
                     binding.connectionErrorButton.setOnClickListener {
                         load()

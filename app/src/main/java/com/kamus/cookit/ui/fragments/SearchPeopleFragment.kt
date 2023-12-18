@@ -83,6 +83,7 @@ class SearchPeopleFragment : Fragment() {
 
         binding.connectionErrorButton.visibility = View.GONE
         binding.connectionErrorMessage.visibility = View.GONE
+        binding.progressBar.visibility = View.VISIBLE
 
         repository = (requireActivity().application as CookItApp).repository
         lifecycleScope.launch {
@@ -92,6 +93,7 @@ class SearchPeopleFragment : Fragment() {
                     call: Call<List<UserDto>>,
                     response: Response<List<UserDto>>
                 ) {
+                    binding.progressBar.visibility = View.GONE
                     response.body()?.let { users ->
                         peopleListTemp = users
                         adapter.filteredUsers(peopleListTemp)
@@ -102,6 +104,7 @@ class SearchPeopleFragment : Fragment() {
                 override fun onFailure(call: Call<List<UserDto>>, t: Throwable) {
                     binding.connectionErrorButton.visibility = View.VISIBLE
                     binding.connectionErrorMessage.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
                     binding.connectionErrorButton.setOnClickListener {
                         load()
                     }

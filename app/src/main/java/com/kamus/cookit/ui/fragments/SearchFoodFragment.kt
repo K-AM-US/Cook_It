@@ -1,5 +1,6 @@
 package com.kamus.cookit.ui.fragments
 
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -111,6 +112,7 @@ class SearchFoodFragment : Fragment() {
                         call: Call<RecipeDetailDto>,
                         response: Response<RecipeDetailDto>
                     ) {
+                        binding.progressBar.visibility = View.GONE
                         lifecycleScope.launch {
                             response.body()?.let {
                                 FavouriteRecipeEntity(
@@ -141,6 +143,7 @@ class SearchFoodFragment : Fragment() {
                     }
 
                     override fun onFailure(call: Call<RecipeDetailDto>, t: Throwable) {
+                        binding.progressBar.visibility = View.GONE
                         Log.d("FAVOURITES", "error añadiendo favoritas")
                     }
                 })
@@ -163,6 +166,7 @@ class SearchFoodFragment : Fragment() {
         repository = (requireActivity().application as CookItApp).repository
         binding.connectionErrorButton.visibility = View.GONE
         binding.connectionErrorMessage.visibility = View.GONE
+        binding.progressBar.visibility = View.VISIBLE
 
         lifecycleScope.launch {
             val call: Call<List<CategoriesDto>> = repository.getCategories()
@@ -171,6 +175,7 @@ class SearchFoodFragment : Fragment() {
                     call: Call<List<CategoriesDto>>,
                     response: Response<List<CategoriesDto>>
                 ) {
+                    binding.progressBar.visibility = View.GONE
                     response.body()?.let { categories ->
                         binding.rvCategories.apply {
                             layoutManager = GridLayoutManager(requireContext(), 2)
@@ -182,6 +187,7 @@ class SearchFoodFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<List<CategoriesDto>>, t: Throwable) {
+                    binding.progressBar.visibility = View.GONE
                     binding.connectionErrorButton.visibility = View.VISIBLE
                     binding.connectionErrorMessage.visibility = View.VISIBLE
                     binding.connectionErrorButton.setOnClickListener {

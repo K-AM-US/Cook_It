@@ -66,6 +66,7 @@ class RecipeDetailFragment : Fragment() {
             } else {
                 binding.connectionErrorButton.visibility = View.GONE
                 binding.connectionErrorMessage.visibility = View.GONE
+                binding.progressBar.visibility = View.GONE
                 lifecycleScope.launch {
                     recipe = repository.getRecipeByID(recipeId)
                     binding.apply {
@@ -152,12 +153,15 @@ class RecipeDetailFragment : Fragment() {
         binding.connectionErrorMessage.visibility = View.GONE
         binding.btnDelete.visibility = View.GONE
         binding.btnEdit.visibility = View.GONE
+        binding.progressBar.visibility = View.VISIBLE
+
         val call: Call<RecipeDetailDto> = repository.getRecipeDetail(recipeId)
         call.enqueue(object : Callback<RecipeDetailDto> {
             override fun onResponse(
                 call: Call<RecipeDetailDto>,
                 response: Response<RecipeDetailDto>
             ) {
+                binding.progressBar.visibility = View.GONE
                 binding.apply {
                     recipeDetailTitle.text = response.body()?.title
 
@@ -184,6 +188,7 @@ class RecipeDetailFragment : Fragment() {
             override fun onFailure(call: Call<RecipeDetailDto>, t: Throwable) {
                 binding.connectionErrorButton.visibility = View.VISIBLE
                 binding.connectionErrorMessage.visibility = View.VISIBLE
+                binding.progressBar.visibility = View.GONE
                 binding.connectionErrorButton.setOnClickListener {
                     load()
                 }

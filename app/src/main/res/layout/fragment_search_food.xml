@@ -122,4 +122,13 @@
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"/>
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/topGuideline"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+        app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
