@@ -38,3 +38,7 @@
   </ul>
 </div>
 
+<div>
+  <img src="https://github.com/K-AM-US/Cook_It/assets/90545602/d0b38aaf-3df3-4f4d-83a6-9148530b1d5e"/>
+</div>
+
