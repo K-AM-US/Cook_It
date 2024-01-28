@@ -34,7 +34,7 @@
 <div>
   <h2>Prerequisites</h2>
   <ul>
-    <li>Minimum android versión: 7.0 Nougat</li>
+    <li>Minimum Android versión: 7.0 Nougat</li>
   </ul>
 </div>
 
